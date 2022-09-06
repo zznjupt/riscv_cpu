@@ -1,17 +1,22 @@
 # Makefile
 
-export DESIGN=onoff
-export SIM=sim_main.cpp
-export WAVE=wave
+DESIGN = onoff
+SIM = sim_main.cpp
+WAVE = wave
+
+VERILATOR = verilator --Wall --cc --exe build --trace \
+            ./csrc/$(SIM) \
+			./vsrc/$(DESIGN).v
 
 all:
 	@echo "Write this Makefile by your self."
 
-sim:
+com:
 	$(call git_commit, "sim RTL") # DO NOT REMOVE THIS LINE!!!
 	@echo "Write this Makefile by your self."
-	@verilator -Wall --cc --exe -build --trace ./csrc/$(SIM) vsrc/$(DESIGN).v
-	@./obj_dir/V$(DESIGN)
+	@$(VERILATOR)
+run:
+	$(shell ./obj_dir/V$(DESIGN))
 
 wave:
 	gitwave ./obj_dir/$(WAVE).vcd

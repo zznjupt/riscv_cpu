@@ -4,6 +4,7 @@
 #include <verilated.h>
 #include <verilated_vcd_c.h> // for .vcd
 #include <Vonoff.h> // V{module_name}.h
+#include <nvborad.h>
 
 vluint64_t main_time = 0; // initial sim time
 
