@@ -4,7 +4,7 @@ DESIGN = onoff
 SIM = sim_main.cpp
 WAVE = wave
 
-VERILATOR = verilator --Wall --cc --exe build --trace \
+VERILATOR = verilator --Wall --cc --exe -build --trace \
             ./csrc/$(SIM) \
 			./vsrc/$(DESIGN).v
 
