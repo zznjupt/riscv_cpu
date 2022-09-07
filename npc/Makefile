@@ -1,6 +1,6 @@
 # Makefile
 
-DESIGN = onoff
+DESIGN = mux
 SIM = mux.cpp
 WAVE = mux
 
