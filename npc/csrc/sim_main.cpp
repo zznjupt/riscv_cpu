@@ -33,11 +33,10 @@ int main(int argc, char** argv) {
                     top->a = a;
                     top->b = b;
                     top->s = s;
-                    int s_= (s==0)?a:b;
                     top->eval();
                     tfp->dump(main_time); // dump_wave
                     printf("a = %d, b = %d, s = %d, y = %d, s_ = %d\n", a, b, s, top->y);
-                    assert(top->y == s_);
+                    assert(top->y == (s==0)?a:b);
                     main_time++;
             }
         }
