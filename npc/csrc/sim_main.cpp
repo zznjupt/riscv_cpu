@@ -3,7 +3,7 @@
 #include <assert.h>
 #include <verilated.h>
 #include <verilated_vcd_c.h> // for .vcd
-#include <Vonoff.h> // V{module_name}.h
+#include <Vmux.h> // V{module_name}.h
 
 vluint64_t main_time = 0; // initial sim time
 
@@ -18,7 +18,7 @@ int main(int argc, char** argv) {
 
     // initail 
 	Verilated::commandArgs(argc, argv);
-    Vonoff* top = new Vonoff("top");
+    Vmux* top = new Vmux("top");
 
     // .vcd dependency
     Verilated::traceEverOn(true);
@@ -27,19 +27,20 @@ int main(int argc, char** argv) {
     tfp->open("wave.vcd");
 
     // simulate
-    while(sc_time_stamp() < 20 && !Verilated::gotFinish()) {
-        printf("time = %d, ",sc_time_stamp());
-        int a = rand() & 1;
-        int b = rand() & 1;
-        top->a = a;
-        top->b = b;
-        top->eval();
-        tfp->dump(main_time); // dump_wave
-        printf("a = %d, b = %d, f = %d\n", a, b, top->f);
-        assert(top->f == a ^ b);
-        main_time++;
+    for(int a = 0; a <= 1; a++) {
+        for(int b = 0; b<= 1; b++) {
+            for(int s = 0; s<= 1; s++) {
+                    top->a = a;
+                    top->b = b;
+                    top->s = s;
+                    top->eval();
+                    tfp->dump(main_time); // dump_wave
+                    printf("a = %d, b = %d, s = %d, y = %d\n", a, b, s, top->y);
+                    assert(top->y == s?a:b);
+                    main_time++;
+            }
+        }
     }
-
     top->final();
     tfp->close();
     delete top;

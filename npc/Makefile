@@ -1,78 +1,58 @@
-# # Makefile
-
-# DESIGN = mux
-# SIM = mux.cpp
-# WAVE = mux
-
-# # VERILATOR = verilator --Wall --cc --exe -build --trace \
-# #             ./csrc/experiment/$(SIM) \
-# # 			./vsrc/experiment/1.mux/$(DESIGN).v
-
-# VERILATOR = verilator
-# VERILATOR_FLAGS += -cc
-# VERILATOR_FLAGS += -0s -x-assign 0
-# VERILATOR_FLAGS += Wall
-
-# TOP_VERILATOR_FLAGS = $(VERILATOR_FLAGS) --trace
-
-# default: com
-
-# all:
-# 	@echo "Write this Makefile by your self."
-
-# com:
-# 	$(call git_commit, "sim RTL") # DO NOT REMOVE THIS LINE!!!
-# 	@echo "Write this Makefile by your self."
-# 	@echo "-- Verilator $(DESIGN) example --"
-# 	@echo "-- VERILATE MuxKeyInternal module --"
-# 	@echo "---------------------------------"
-# 	$(VERILATOR) $(VERILATOR_FLAGS) --protect-lib MuxKeyInternal -Mdir obj_dir_MuxKeyInternal/ MuxKeyInternal.v
-# 	@echo "-- COMPILE protected library --"
-# 	$(MAKE) -j 20 -C obj_dir_MuxKeyInternal
-# 	@echo "-- VERILATE MuxKey module --"
-# 	$(VERILATOR) $(TOP_VERILATOR_FLAGS) --exe 
-# 	@echo 
-
-# run:
-# 	./obj_dir/V$(DESIGN)
-
-# wave:
-# 	gitwave ./obj_dir/$(WAVE).vcd
-
-# clean:
-# 	@rm -rf obj_dir
-# 	@rm -rf wave.vcd
-
-# include ../Makefile
-
 # Makefile
 
-DESIGN = mux
-SIM = mux.cpp
-WAVE = wave
+TOPNAME = mux
+# NXDC_FILES = constr/top.nxdc
+# INC_PATH ?=
 
-VERILATOR = verilator --Wall --cc --exe -build --trace \
-            ./csrc/$(SIM) \
-			./vsrc/$(DESIGN).v
+VERILATOR = verilator
+VERILATOR_CFLAGS += -cc --Wall -build --trace
+
+BUILD_DIR = ./build
+OBJ_DIR = $(BUILD_DIR)/obj_dir
+BIN = $(BUILD_DIR)/$(TOPNAME)
+
+default: $(BIN)
+
+$(shell mkdir -p $(BUILD_DIR))
+
+# # constraint file
+# SRC_AUTO_BIND = $(abspath $(BUILD_DIR)/auto_bind.cpp)
+# $(SRC_AUTO_BIND): $(NXDC_FILES)
+# 	python3 $(NVBOARD_HOME)/scripts/auto_pin_bind.py $^ $@
+
+# project source
+VSRCS = $(shell find $(abspath ./vsrc) -name "*.v")
+CSRCS = $(shell find $(abspath ./csrc) -name "*.c" -or -name "*.cc" -or -name "*.cpp")
+# CSRCS += $(SRC_AUTO_BIND)
+
+# rules for NVBoard
+# include $(NVBOARD_HOME)/scripts/nvboard.mk
+
+# rules for verilator
+INCFLAGS = $(addprefix -I, $(INC_PATH))
+CFLAGS += $(INCFLAGS) -DTOP_NAME="\"V$(TOPNAME)\""
+# LDFLAGS += -lSDL2 -lSDL2_image
+
+$(BIN): $(VSRCS) $(CSRCS) # $(NVBOARD_ARCHIVE)
+	
+	@rm -rf $(OBJ_DIR) wave.vcd
+	$(VERILATOR) $(VERILATOR_CFLAGS) \
+		--top-module $(TOPNAME) $^ \
+		$(addprefix -CFLAGS , $(CFLAGS)) $(addprefix -LDFLAGS , $(LDFLAGS)) \
+		--Mdir $(OBJ_DIR) --exe -o $(abspath $(BIN))
+
 
 all:
 	@echo "Write this Makefile by your self."
-
-com:
 	$(call git_commit, "sim RTL") # DO NOT REMOVE THIS LINE!!!
-	@echo "Write this Makefile by your self."
-	verilator --Wall --cc  ./vsrc/experiment/1.mux/MuxKeyInternal.v
-	make -j20 -C obj_dir -f VMuxKeyInternal.mk
-	verilator --Wall --cc  ./vsrc/experiment/1.mux/MuxKey.v
-	verilator --Wall --cc --exe -build ./csrc/experiment/mux.cpp 	./vsrc/experiment/1.mux/mux.v
-run:
-	./obj_dir/V$(DESIGN)
-
+	
+run: $(BIN)
+	@$^
+	
 wave:
-	gitwave ./obj_dir/$(WAVE).vcd
+	gitwave wave.vcd
 
 clean:
-	@rm -rf obj_dir*
-	@rm -rf wave.vcd
+	rm -rf $(BUILD_DIR) wave.vcd
 
-include ../Makefile
+.PHONY: default all clean run
