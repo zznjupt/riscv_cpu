@@ -66,10 +66,10 @@ $(BIN): $(VSRCS) $(CSRCS) # $(NVBOARD_ARCHIVE)
 all:
 	@echo "Write this Makefile by your self."
 
-sim:
+sim: $(BIN)
 	$(call git_commit, "sim RTL") # DO NOT REMOVE THIS LINE!!!
 	@echo "Write this Makefile by your self."
-	@$(BIN)
+	@$^
 run:
 	./obj_dir/V$(DESIGN)
 
