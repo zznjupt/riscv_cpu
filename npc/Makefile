@@ -71,7 +71,7 @@ wave:
 	gitwave ./obj_dir/$(WAVE).vcd
 
 clean:
-	@rm -rf obj_dir
+	@rm -rf obj_dir*
 	@rm -rf wave.vcd
 
 include ../Makefile
