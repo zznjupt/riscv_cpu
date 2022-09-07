@@ -1,5 +1,5 @@
 # Makefile
-TOPNAME = onoff
+TOPNAME = mux
 # NXDC_FILES = constr/top.nxdc
 # INC_PATH ?=
 

@@ -1,16 +1,16 @@
 // Verilated -*- C++ -*-
 // DESCRIPTION: Verilator output: Symbol table implementation internals
 
-#include "Vonoff__Syms.h"
-#include "Vonoff.h"
-#include "Vonoff___024root.h"
+#include "Vmux__Syms.h"
+#include "Vmux.h"
+#include "Vmux___024root.h"
 
 // FUNCTIONS
-Vonoff__Syms::~Vonoff__Syms()
+Vmux__Syms::~Vmux__Syms()
 {
 }
 
-Vonoff__Syms::Vonoff__Syms(VerilatedContext* contextp, const char* namep,Vonoff* modelp)
+Vmux__Syms::Vmux__Syms(VerilatedContext* contextp, const char* namep,Vmux* modelp)
     : VerilatedSyms{contextp}
     // Setup internal state of the Syms class
     , __Vm_modelp(modelp)
