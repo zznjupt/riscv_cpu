@@ -1,4 +1,4 @@
-`include "mux_tmp.v"
+`include "/home/admin1/ZZworkspace/git/ysyx-workbench/npc/vsrc/expriment/1.mux/mux_tmp.v"
 
 module mux(a,b,s,y);
   input   a,b,s;
