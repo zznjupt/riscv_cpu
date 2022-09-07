@@ -5,8 +5,8 @@ SIM = sim_main.cpp
 WAVE = wave
 
 VERILATOR = verilator --Wall --cc --exe -build --trace \
-            ./csrc/$(SIM) \
-			./vsrc/$(DESIGN).v
+            ./csrc/experiment/$(SIM) \
+			./vsrc/experiment/$(DESIGN).v
 
 all:
 	@echo "Write this Makefile by your self."
