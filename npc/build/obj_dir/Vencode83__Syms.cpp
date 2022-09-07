@@ -1,16 +1,16 @@
 // Verilated -*- C++ -*-
 // DESCRIPTION: Verilator output: Symbol table implementation internals
 
-#include "Vmux__Syms.h"
-#include "Vmux.h"
-#include "Vmux___024root.h"
+#include "Vencode83__Syms.h"
+#include "Vencode83.h"
+#include "Vencode83___024root.h"
 
 // FUNCTIONS
-Vmux__Syms::~Vmux__Syms()
+Vencode83__Syms::~Vencode83__Syms()
 {
 }
 
-Vmux__Syms::Vmux__Syms(VerilatedContext* contextp, const char* namep,Vmux* modelp)
+Vencode83__Syms::Vencode83__Syms(VerilatedContext* contextp, const char* namep,Vencode83* modelp)
     : VerilatedSyms{contextp}
     // Setup internal state of the Syms class
     , __Vm_modelp(modelp)

@@ -2,9 +2,9 @@
 # DESCRIPTION: Verilator output: Makefile for building Verilated archive or executable
 #
 # Execute this makefile from the object directory:
-#    make -f Vmux.mk
+#    make -f Vencode83.mk
 
-default: /home/admin1/ZZworkspace/git/ysyx-workbench/npc/build/mux
+default: /home/admin1/ZZworkspace/git/ysyx-workbench/npc/build/encode83
 
 ### Constants...
 # Perl executable (from $PERL)
@@ -30,12 +30,12 @@ VM_SC_TARGET_ARCH = linux
 
 ### Vars...
 # Design prefix (from --prefix)
-VM_PREFIX = Vmux
+VM_PREFIX = Vencode83
 # Module prefix (from --prefix)
-VM_MODPREFIX = Vmux
+VM_MODPREFIX = Vencode83
 # User CFLAGS (from -CFLAGS on Verilator command line)
 VM_USER_CFLAGS = \
-	-DTOP_NAME="Vmux" \
+	-DTOP_NAME="Vencode83" \
 
 # User LDLIBS (from -LDFLAGS on Verilator command line)
 VM_USER_LDLIBS = \
@@ -51,7 +51,7 @@ VM_USER_DIR = \
 
 ### Default rules...
 # Include list of all generated classes
-include Vmux_classes.mk
+include Vencode83_classes.mk
 # Include global rules
 include $(VERILATOR_ROOT)/include/verilated.mk
 
@@ -62,7 +62,7 @@ sim_main.o: /home/admin1/ZZworkspace/git/ysyx-workbench/npc/csrc/sim_main.cpp
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
 
 ### Link rules... (from --exe)
-/home/admin1/ZZworkspace/git/ysyx-workbench/npc/build/mux: $(VK_USER_OBJS) $(VK_GLOBAL_OBJS) $(VM_PREFIX)__ALL.a $(VM_HIER_LIBS)
+/home/admin1/ZZworkspace/git/ysyx-workbench/npc/build/encode83: $(VK_USER_OBJS) $(VK_GLOBAL_OBJS) $(VM_PREFIX)__ALL.a $(VM_HIER_LIBS)
 	$(LINK) $(LDFLAGS) $^ $(LOADLIBES) $(LDLIBS) $(LIBS) $(SC_LIBS) -o $@
 
 

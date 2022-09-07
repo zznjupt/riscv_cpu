@@ -1,5 +1,5 @@
 # Makefile
-TOPNAME = mux
+TOPNAME = encode83
 # NXDC_FILES = constr/top.nxdc
 # INC_PATH ?=
 
@@ -49,7 +49,7 @@ sim: $(BIN)
 	@$^
 
 wave:
-	gitwave ./obj_dir/$(WAVE).vcd
+	gitwave $(WAVE).vcd
 
 clean:
 	@rm -rf $(BUILD_DIR)
