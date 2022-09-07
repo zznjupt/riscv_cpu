@@ -61,9 +61,9 @@ all:
 com:
 	$(call git_commit, "sim RTL") # DO NOT REMOVE THIS LINE!!!
 	@echo "Write this Makefile by your self."
-	verilator --Wall --cc  ./vsrc/experiment/1.mux/MuxKeyInternal.v
-	verilator --Wall --cc  ./vsrc/experiment/1.mux/MuxKey.v
-	verilator --Wall --cc --exe -build ./csrc/experiment/mux.cpp 	./vsrc/experiment/1.mux/mux.v
+	verilator --Wall --cc  ./vsrc/experiment/1.mux/*.v 
+	# verilator --Wall --cc  ./vsrc/experiment/1.mux/MuxKey.v
+	# verilator --Wall --cc --exe -build ./csrc/experiment/mux.cpp 	./vsrc/experiment/1.mux/mux.v
 run:
 	./obj_dir/V$(DESIGN)
 
