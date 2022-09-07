@@ -5,32 +5,34 @@
 // The class here is then constructed to instantiate the design.
 // See the Verilator manual for examples.
 
-#ifndef VERILATED_VENCODE83_H_
-#define VERILATED_VENCODE83_H_  // guard
+#ifndef VERILATED_VALU_H_
+#define VERILATED_VALU_H_  // guard
 
 #include "verilated_heavy.h"
 
-class Vencode83__Syms;
-class Vencode83___024root;
+class VALU__Syms;
+class VALU___024root;
 class VerilatedVcdC;
-class Vencode83_VerilatedVcd;
+class VALU_VerilatedVcd;
 
 
 // This class is the main interface to the Verilated model
-class Vencode83 VL_NOT_FINAL {
+class VALU VL_NOT_FINAL {
   private:
     // Symbol table holding complete model state (owned by this class)
-    Vencode83__Syms* const vlSymsp;
+    VALU__Syms* const vlSymsp;
 
   public:
 
     // PORTS
     // The application code writes and reads these signals to
     // propagate new values into/out from the Verilated model.
-    VL_IN8(&X,7,0);
-    VL_IN8(&en,0,0);
-    VL_OUT8(&Y,2,0);
-    VL_OUT8(&flag,0,0);
+    VL_IN8(&op,2,0);
+    VL_IN8(&A,3,0);
+    VL_IN8(&B,3,0);
+    VL_OUT8(&alu_result,3,0);
+    VL_OUT8(&overflow,0,0);
+    VL_OUT8(&zero,0,0);
 
     // CELLS
     // Public to allow access to /* verilator public */ items.
@@ -38,19 +40,19 @@ class Vencode83 VL_NOT_FINAL {
 
     // Root instance pointer to allow access to model internals,
     // including inlined /* verilator public_flat_* */ items.
-    Vencode83___024root* const rootp;
+    VALU___024root* const rootp;
 
     // CONSTRUCTORS
     /// Construct the model; called by application code
     /// If contextp is null, then the model will use the default global context
     /// If name is "", then makes a wrapper with a
     /// single model invisible with respect to DPI scope names.
-    explicit Vencode83(VerilatedContext* contextp, const char* name = "TOP");
-    explicit Vencode83(const char* name = "TOP");
+    explicit VALU(VerilatedContext* contextp, const char* name = "TOP");
+    explicit VALU(const char* name = "TOP");
     /// Destroy the model; called (often implicitly) by application code
-    virtual ~Vencode83();
+    virtual ~VALU();
   private:
-    VL_UNCOPYABLE(Vencode83);  ///< Copying not allowed
+    VL_UNCOPYABLE(VALU);  ///< Copying not allowed
 
   public:
     // API METHODS

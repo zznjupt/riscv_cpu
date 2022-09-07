@@ -1,5 +1,5 @@
 # Makefile
-TOPNAME = encode83
+TOPNAME = ALU
 # NXDC_FILES = constr/top.nxdc
 # INC_PATH ?=
 

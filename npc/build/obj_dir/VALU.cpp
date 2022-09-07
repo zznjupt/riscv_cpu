@@ -1,79 +1,81 @@
 // Verilated -*- C++ -*-
 // DESCRIPTION: Verilator output: Model implementation (design independent parts)
 
-#include "Vencode83.h"
-#include "Vencode83__Syms.h"
+#include "VALU.h"
+#include "VALU__Syms.h"
 #include "verilated_vcd_c.h"
 
 //============================================================
 // Constructors
 
-Vencode83::Vencode83(VerilatedContext* _vcontextp__, const char* _vcname__)
-    : vlSymsp{new Vencode83__Syms(_vcontextp__, _vcname__, this)}
-    , X{vlSymsp->TOP.X}
-    , en{vlSymsp->TOP.en}
-    , Y{vlSymsp->TOP.Y}
-    , flag{vlSymsp->TOP.flag}
+VALU::VALU(VerilatedContext* _vcontextp__, const char* _vcname__)
+    : vlSymsp{new VALU__Syms(_vcontextp__, _vcname__, this)}
+    , op{vlSymsp->TOP.op}
+    , A{vlSymsp->TOP.A}
+    , B{vlSymsp->TOP.B}
+    , alu_result{vlSymsp->TOP.alu_result}
+    , overflow{vlSymsp->TOP.overflow}
+    , zero{vlSymsp->TOP.zero}
     , rootp{&(vlSymsp->TOP)}
 {
 }
 
-Vencode83::Vencode83(const char* _vcname__)
-    : Vencode83(nullptr, _vcname__)
+VALU::VALU(const char* _vcname__)
+    : VALU(nullptr, _vcname__)
 {
 }
 
 //============================================================
 // Destructor
 
-Vencode83::~Vencode83() {
+VALU::~VALU() {
     delete vlSymsp;
 }
 
 //============================================================
 // Evaluation loop
 
-void Vencode83___024root___eval_initial(Vencode83___024root* vlSelf);
-void Vencode83___024root___eval_settle(Vencode83___024root* vlSelf);
-void Vencode83___024root___eval(Vencode83___024root* vlSelf);
-QData Vencode83___024root___change_request(Vencode83___024root* vlSelf);
+void VALU___024root___eval_initial(VALU___024root* vlSelf);
+void VALU___024root___eval_settle(VALU___024root* vlSelf);
+void VALU___024root___eval(VALU___024root* vlSelf);
+QData VALU___024root___change_request(VALU___024root* vlSelf);
 #ifdef VL_DEBUG
-void Vencode83___024root___eval_debug_assertions(Vencode83___024root* vlSelf);
+void VALU___024root___eval_debug_assertions(VALU___024root* vlSelf);
 #endif  // VL_DEBUG
-void Vencode83___024root___final(Vencode83___024root* vlSelf);
+void VALU___024root___final(VALU___024root* vlSelf);
 
-static void _eval_initial_loop(Vencode83__Syms* __restrict vlSymsp) {
+static void _eval_initial_loop(VALU__Syms* __restrict vlSymsp) {
     vlSymsp->__Vm_didInit = true;
-    Vencode83___024root___eval_initial(&(vlSymsp->TOP));
+    VALU___024root___eval_initial(&(vlSymsp->TOP));
     // Evaluate till stable
     int __VclockLoop = 0;
     QData __Vchange = 1;
     vlSymsp->__Vm_activity = true;
     do {
         VL_DEBUG_IF(VL_DBG_MSGF("+ Initial loop\n"););
-        Vencode83___024root___eval_settle(&(vlSymsp->TOP));
-        Vencode83___024root___eval(&(vlSymsp->TOP));
+        VALU___024root___eval_settle(&(vlSymsp->TOP));
+        VALU___024root___eval(&(vlSymsp->TOP));
         if (VL_UNLIKELY(++__VclockLoop > 100)) {
             // About to fail, so enable debug to see what's not settling.
             // Note you must run make with OPT=-DVL_DEBUG for debug prints.
             int __Vsaved_debug = Verilated::debug();
             Verilated::debug(1);
-            __Vchange = Vencode83___024root___change_request(&(vlSymsp->TOP));
+            __Vchange = VALU___024root___change_request(&(vlSymsp->TOP));
             Verilated::debug(__Vsaved_debug);
-            VL_FATAL_MT("/home/admin1/ZZworkspace/git/ysyx-workbench/npc/vsrc/encode83.v", 1, "",
+            VL_FATAL_MT("/home/admin1/ZZworkspace/git/ysyx-workbench/npc/vsrc/ALU.v", 10, "",
                 "Verilated model didn't DC converge\n"
                 "- See https://verilator.org/warn/DIDNOTCONVERGE");
         } else {
-            __Vchange = Vencode83___024root___change_request(&(vlSymsp->TOP));
+            __Vchange = VALU___024root___change_request(&(vlSymsp->TOP));
         }
     } while (VL_UNLIKELY(__Vchange));
 }
 
-void Vencode83::eval_step() {
-    VL_DEBUG_IF(VL_DBG_MSGF("+++++TOP Evaluate Vencode83::eval_step\n"); );
+void VALU::eval_step() {
+    VL_DEBUG_IF(VL_DBG_MSGF("+++++TOP Evaluate VALU::eval_step\n"); );
 #ifdef VL_DEBUG
     // Debug assertions
-    Vencode83___024root___eval_debug_assertions(&(vlSymsp->TOP));
+    VALU___024root___eval_debug_assertions(&(vlSymsp->TOP));
 #endif  // VL_DEBUG
     // Initialize
     if (VL_UNLIKELY(!vlSymsp->__Vm_didInit)) _eval_initial_loop(vlSymsp);
@@ -83,19 +85,19 @@ void Vencode83::eval_step() {
     vlSymsp->__Vm_activity = true;
     do {
         VL_DEBUG_IF(VL_DBG_MSGF("+ Clock loop\n"););
-        Vencode83___024root___eval(&(vlSymsp->TOP));
+        VALU___024root___eval(&(vlSymsp->TOP));
         if (VL_UNLIKELY(++__VclockLoop > 100)) {
             // About to fail, so enable debug to see what's not settling.
             // Note you must run make with OPT=-DVL_DEBUG for debug prints.
             int __Vsaved_debug = Verilated::debug();
             Verilated::debug(1);
-            __Vchange = Vencode83___024root___change_request(&(vlSymsp->TOP));
+            __Vchange = VALU___024root___change_request(&(vlSymsp->TOP));
             Verilated::debug(__Vsaved_debug);
-            VL_FATAL_MT("/home/admin1/ZZworkspace/git/ysyx-workbench/npc/vsrc/encode83.v", 1, "",
+            VL_FATAL_MT("/home/admin1/ZZworkspace/git/ysyx-workbench/npc/vsrc/ALU.v", 10, "",
                 "Verilated model didn't converge\n"
                 "- See https://verilator.org/warn/DIDNOTCONVERGE");
         } else {
-            __Vchange = Vencode83___024root___change_request(&(vlSymsp->TOP));
+            __Vchange = VALU___024root___change_request(&(vlSymsp->TOP));
         }
     } while (VL_UNLIKELY(__Vchange));
 }
@@ -103,30 +105,30 @@ void Vencode83::eval_step() {
 //============================================================
 // Invoke final blocks
 
-void Vencode83::final() {
-    Vencode83___024root___final(&(vlSymsp->TOP));
+void VALU::final() {
+    VALU___024root___final(&(vlSymsp->TOP));
 }
 
 //============================================================
 // Utilities
 
-VerilatedContext* Vencode83::contextp() const {
+VerilatedContext* VALU::contextp() const {
     return vlSymsp->_vm_contextp__;
 }
 
-const char* Vencode83::name() const {
+const char* VALU::name() const {
     return vlSymsp->name();
 }
 
 //============================================================
 // Trace configuration
 
-void Vencode83___024root__traceInitTop(Vencode83___024root* vlSelf, VerilatedVcd* tracep);
+void VALU___024root__traceInitTop(VALU___024root* vlSelf, VerilatedVcd* tracep);
 
 static void traceInit(void* voidSelf, VerilatedVcd* tracep, uint32_t code) {
     // Callback from tracep->open()
-    Vencode83___024root* const __restrict vlSelf VL_ATTR_UNUSED = static_cast<Vencode83___024root*>(voidSelf);
-    Vencode83__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
+    VALU___024root* const __restrict vlSelf VL_ATTR_UNUSED = static_cast<VALU___024root*>(voidSelf);
+    VALU__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     if (!vlSymsp->_vm_contextp__->calcUnusedSigs()) {
         VL_FATAL_MT(__FILE__, __LINE__, __FILE__,
             "Turning on wave traces requires Verilated::traceEverOn(true) call before time 0.");
@@ -134,13 +136,13 @@ static void traceInit(void* voidSelf, VerilatedVcd* tracep, uint32_t code) {
     vlSymsp->__Vm_baseCode = code;
     tracep->module(vlSymsp->name());
     tracep->scopeEscape(' ');
-    Vencode83___024root__traceInitTop(vlSelf, tracep);
+    VALU___024root__traceInitTop(vlSelf, tracep);
     tracep->scopeEscape('.');
 }
 
-void Vencode83___024root__traceRegister(Vencode83___024root* vlSelf, VerilatedVcd* tracep);
+void VALU___024root__traceRegister(VALU___024root* vlSelf, VerilatedVcd* tracep);
 
-void Vencode83::trace(VerilatedVcdC* tfp, int, int) {
+void VALU::trace(VerilatedVcdC* tfp, int, int) {
     tfp->spTrace()->addInitCb(&traceInit, &(vlSymsp->TOP));
-    Vencode83___024root__traceRegister(&(vlSymsp->TOP), tfp->spTrace());
+    VALU___024root__traceRegister(&(vlSymsp->TOP), tfp->spTrace());
 }
