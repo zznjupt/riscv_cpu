@@ -4,7 +4,7 @@
 #include <verilated.h>
 #include <verilated_vcd_c.h> // for .vcd
 #include <Vmux.h> // V{module_name}.h
-#include <Vmux_tmp.h>
+
 
 vluint64_t main_time = 0; // initial sim time
 

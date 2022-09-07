@@ -24,8 +24,14 @@
 # 	$(call git_commit, "sim RTL") # DO NOT REMOVE THIS LINE!!!
 # 	@echo "Write this Makefile by your self."
 # 	@echo "-- Verilator $(DESIGN) example --"
-# 	@echo "-- VERILATE MuxKeyInternal module"
-# 	$()
+# 	@echo "-- VERILATE MuxKeyInternal module --"
+# 	@echo "---------------------------------"
+# 	$(VERILATOR) $(VERILATOR_FLAGS) --protect-lib MuxKeyInternal -Mdir obj_dir_MuxKeyInternal/ MuxKeyInternal.v
+# 	@echo "-- COMPILE protected library --"
+# 	$(MAKE) -j 20 -C obj_dir_MuxKeyInternal
+# 	@echo "-- VERILATE MuxKey module --"
+# 	$(VERILATOR) $(TOP_VERILATOR_FLAGS) --exe 
+# 	@echo 
 
 # run:
 # 	./obj_dir/V$(DESIGN)
@@ -38,6 +44,7 @@
 # 	@rm -rf wave.vcd
 
 # include ../Makefile
+
 # Makefile
 
 DESIGN = mux
@@ -45,8 +52,8 @@ SIM = mux.cpp
 WAVE = wave
 
 VERILATOR = verilator --Wall --cc --exe -build --trace \
-            ./csrc/experiment/$(SIM) \
-			./vsrc/experiment/1.mux/$(DESIGN).v
+            ./csrc/$(SIM) \
+			./vsrc/$(DESIGN).v
 
 all:
 	@echo "Write this Makefile by your self."
@@ -54,7 +61,9 @@ all:
 com:
 	$(call git_commit, "sim RTL") # DO NOT REMOVE THIS LINE!!!
 	@echo "Write this Makefile by your self."
-	@$(VERILATOR)
+	verilator --Wall --cc -Mdir obj_dir_MuxKeyInternal/ MuxKeyInternal.v
+	verilator --Wall --cc -Mdir obj_dir MuxKey/ MuxKey.v
+	verilator --Wall --cc --exe -build ./csrc/experiment/mux.cpp 	./vsrc/mux.v
 run:
 	./obj_dir/V$(DESIGN)
 
