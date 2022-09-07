@@ -1,4 +1,4 @@
-`include "mux_tmp"
+`include "mux_tmp.v"
 
 module mux(a,b,s,y);
   input   a,b,s;
