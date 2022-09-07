@@ -1,58 +1,86 @@
+# # Makefile
+# TOPNAME = mux
+# # NXDC_FILES = constr/top.nxdc
+# # INC_PATH ?=
+
+# VERILATOR = verilator
+# VERILATOR_CFLAGS += -cc --Wall -build --trace
+
+# BUILD_DIR = ./build
+# OBJ_DIR = $(BUILD_DIR)/obj_dir
+# BIN = $(BUILD_DIR)/$(TOPNAME)
+
+# default: $(BIN)
+
+# $(shell mkdir -p $(BUILD_DIR))
+
+# # # constraint file
+# # SRC_AUTO_BIND = $(abspath $(BUILD_DIR)/auto_bind.cpp)
+# # $(SRC_AUTO_BIND): $(NXDC_FILES)
+# # 	python3 $(NVBOARD_HOME)/scripts/auto_pin_bind.py $^ $@
+
+# # project source
+# VSRCS = $(shell find $(abspath ./vsrc) -name "*.v")
+# CSRCS = $(shell find $(abspath ./csrc) -name "*.c" -or -name "*.cc" -or -name "*.cpp")
+# # CSRCS += $(SRC_AUTO_BIND)
+
+# # rules for NVBoard
+# # include $(NVBOARD_HOME)/scripts/nvboard.mk
+
+# # rules for verilator
+# INCFLAGS = $(addprefix -I, $(INC_PATH))
+# CFLAGS += $(INCFLAGS) -DTOP_NAME="\"V$(TOPNAME)\""
+# # LDFLAGS += -lSDL2 -lSDL2_image
+
+# $(BIN): $(VSRCS) $(CSRCS) # $(NVBOARD_ARCHIVE)
+# 	$(call git_commit, "sim RTL") # DO NOT REMOVE THIS LINE!!!
+# 	@echo "Write this Makefile by your self."	
+# 	@rm -rf $(OBJ_DIR) wave.vcd
+# 	$(VERILATOR) $(VERILATOR_CFLAGS) \
+# 		--top-module $(TOPNAME) $^ \
+# 		$(addprefix -CFLAGS , $(CFLAGS)) $(addprefix -LDFLAGS , $(LDFLAGS)) \
+# 		--Mdir $(OBJ_DIR) --exe -o $(abspath $(BIN))
+
+
+# all:
+# 	@echo "Write this Makefile by your self."
+
+
+# run: $(BIN)
+# 	@$^
+	
+# wave:
+# 	gitwave wave.vcd
+
+# clean:
+# 	rm -rf $(BUILD_DIR) wave.vcd
+
+# .PHONY: default all clean run
 # Makefile
 
-TOPNAME = mux
-# NXDC_FILES = constr/top.nxdc
-# INC_PATH ?=
+DESIGN = onoff
+SIM = sim_main.cpp
+WAVE = wave
 
-VERILATOR = verilator
-VERILATOR_CFLAGS += -cc --Wall -build --trace
-
-BUILD_DIR = ./build
-OBJ_DIR = $(BUILD_DIR)/obj_dir
-BIN = $(BUILD_DIR)/$(TOPNAME)
-
-default: $(BIN)
-
-$(shell mkdir -p $(BUILD_DIR))
-
-# # constraint file
-# SRC_AUTO_BIND = $(abspath $(BUILD_DIR)/auto_bind.cpp)
-# $(SRC_AUTO_BIND): $(NXDC_FILES)
-# 	python3 $(NVBOARD_HOME)/scripts/auto_pin_bind.py $^ $@
-
-# project source
-VSRCS = $(shell find $(abspath ./vsrc) -name "*.v")
-CSRCS = $(shell find $(abspath ./csrc) -name "*.c" -or -name "*.cc" -or -name "*.cpp")
-# CSRCS += $(SRC_AUTO_BIND)
-
-# rules for NVBoard
-# include $(NVBOARD_HOME)/scripts/nvboard.mk
-
-# rules for verilator
-INCFLAGS = $(addprefix -I, $(INC_PATH))
-CFLAGS += $(INCFLAGS) -DTOP_NAME="\"V$(TOPNAME)\""
-# LDFLAGS += -lSDL2 -lSDL2_image
-
-$(BIN): $(VSRCS) $(CSRCS) # $(NVBOARD_ARCHIVE)
-	
-	@rm -rf $(OBJ_DIR) wave.vcd
-	$(VERILATOR) $(VERILATOR_CFLAGS) \
-		--top-module $(TOPNAME) $^ \
-		$(addprefix -CFLAGS , $(CFLAGS)) $(addprefix -LDFLAGS , $(LDFLAGS)) \
-		--Mdir $(OBJ_DIR) --exe -o $(abspath $(BIN))
-
+VERILATOR = verilator --Wall --cc --exe -build --trace \
+            ./csrc/$(SIM) \
+			./vsrc/$(DESIGN).v
 
 all:
 	@echo "Write this Makefile by your self."
+
+com:
 	$(call git_commit, "sim RTL") # DO NOT REMOVE THIS LINE!!!
-	
-run: $(BIN)
-	@$^
-	
+	@echo "Write this Makefile by your self."
+	@$(VERILATOR)
+run:
+	./obj_dir/V$(DESIGN)
+
 wave:
-	gitwave wave.vcd
+	gitwave ./obj_dir/$(WAVE).vcd
 
 clean:
-	rm -rf $(BUILD_DIR) wave.vcd
+	@rm -rf obj_dir
+	@rm -rf wave.vcd
 
-.PHONY: default all clean run
+include ../Makefile
