@@ -27,10 +27,12 @@ class Vmux VL_NOT_FINAL {
     // PORTS
     // The application code writes and reads these signals to
     // propagate new values into/out from the Verilated model.
-    VL_IN8(&a,0,0);
-    VL_IN8(&b,0,0);
-    VL_IN8(&s,0,0);
-    VL_OUT8(&y,0,0);
+    VL_IN8(&a,1,0);
+    VL_IN8(&b,1,0);
+    VL_IN8(&c,1,0);
+    VL_IN8(&d,1,0);
+    VL_IN8(&s,1,0);
+    VL_OUT8(&y,1,0);
 
     // CELLS
     // Public to allow access to /* verilator public */ items.

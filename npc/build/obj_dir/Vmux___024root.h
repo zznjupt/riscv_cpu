@@ -19,20 +19,22 @@ VL_MODULE(Vmux___024root) {
   public:
 
     // PORTS
-    VL_IN8(a,0,0);
-    VL_IN8(b,0,0);
-    VL_IN8(s,0,0);
-    VL_OUT8(y,0,0);
+    VL_IN8(a,1,0);
+    VL_IN8(b,1,0);
+    VL_IN8(c,1,0);
+    VL_IN8(d,1,0);
+    VL_IN8(s,1,0);
+    VL_OUT8(y,1,0);
 
     // LOCAL SIGNALS
-    CData/*0:0*/ mux__DOT__i0__DOT__i0__DOT__lut_out;
+    CData/*1:0*/ mux__DOT__i0__DOT__i0__DOT__lut_out;
     CData/*0:0*/ mux__DOT__i0__DOT__i0__DOT__hit;
-    VlUnpacked<CData/*1:0*/, 2> mux__DOT__i0__DOT__i0__DOT__pair_list;
-    VlUnpacked<CData/*0:0*/, 2> mux__DOT__i0__DOT__i0__DOT__key_list;
-    VlUnpacked<CData/*0:0*/, 2> mux__DOT__i0__DOT__i0__DOT__data_list;
+    VlUnpacked<CData/*3:0*/, 4> mux__DOT__i0__DOT__i0__DOT__pair_list;
+    VlUnpacked<CData/*1:0*/, 4> mux__DOT__i0__DOT__i0__DOT__key_list;
+    VlUnpacked<CData/*1:0*/, 4> mux__DOT__i0__DOT__i0__DOT__data_list;
 
     // LOCAL VARIABLES
-    CData/*3:0*/ mux__DOT____Vcellinp__i0____pinNumber3;
+    SData/*15:0*/ mux__DOT____Vcellinp__i0____pinNumber3;
     VlUnpacked<CData/*0:0*/, 2> __Vm_traceActivity;
 
     // INTERNAL VARIABLES

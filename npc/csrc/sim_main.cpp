@@ -27,17 +27,23 @@ int main(int argc, char** argv) {
     tfp->open("wave.vcd");
 
     // simulate
-    for(int a = 0; a <= 1; a++) {
-        for(int b = 0; b<= 1; b++) {
-            for(int s = 0; s<= 1; s++) {
-                    top->a = a;
-                    top->b = b;
-                    top->s = s;
-                    top->eval();
-                    tfp->dump(main_time); // dump_wave
-                    printf("a = %d, b = %d, s = %d, y = %d\n", a, b, s, top->y);
-                    assert(top->y == ((s==0)?a:b));
-                    main_time++;
+    for(int a = 0; a <= 3; a++) {
+        for(int b = 0; b <= 3; b++) {
+            for(int c = 0; c <= 3; c++) {
+                for(int d = 0; c <= 3; c++) {
+                    for(int s = 0; s<= 3; s++) {
+                            top->a = a;
+                            top->b = b;
+                            top->c = c;
+                            top->d = d;
+                            top->s = s;
+                            top->eval();
+                            tfp->dump(main_time); // dump_wave
+                            printf("a = %d, b = %d, c = %d, d = %d,s = %d, y = %d\n", a, b,c, d, s, top->y);
+                            //assert(top->y == ((s==0)?a:b));
+                            main_time++;
+                    }
+                }
             }
         }
     }
