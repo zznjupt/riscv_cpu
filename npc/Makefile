@@ -1,5 +1,5 @@
 # # Makefile
-# TOPNAME = mux
+# TOPNAME = onoff
 # # NXDC_FILES = constr/top.nxdc
 # # INC_PATH ?=
 
@@ -33,7 +33,6 @@
 # # LDFLAGS += -lSDL2 -lSDL2_image
 
 # $(BIN): $(VSRCS) $(CSRCS) # $(NVBOARD_ARCHIVE)
-# 	$(call git_commit, "sim RTL") # DO NOT REMOVE THIS LINE!!!
 # 	@echo "Write this Makefile by your self."	
 # 	@rm -rf $(OBJ_DIR) wave.vcd
 # 	$(VERILATOR) $(VERILATOR_CFLAGS) \
@@ -53,9 +52,11 @@
 # 	gitwave wave.vcd
 
 # clean:
+# 	$(call git_commit, "sim RTL") # DO NOT REMOVE THIS LINE!!!
 # 	rm -rf $(BUILD_DIR) wave.vcd
 
 # .PHONY: default all clean run
+
 # Makefile
 
 DESIGN = onoff
