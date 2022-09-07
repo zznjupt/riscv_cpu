@@ -1,12 +1,12 @@
 # Makefile
 
 DESIGN = onoff
-SIM = sim_main.cpp
-WAVE = wave
+SIM = mux.cpp
+WAVE = mux
 
 VERILATOR = verilator --Wall --cc --exe -build --trace \
             ./csrc/experiment/$(SIM) \
-			./vsrc/experiment/$(DESIGN).v
+			./vsrc/experiment/1.mux/$(DESIGN).v
 
 all:
 	@echo "Write this Makefile by your self."
