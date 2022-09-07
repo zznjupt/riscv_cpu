@@ -22,18 +22,18 @@ void Vmux___024root__traceInitSub0(Vmux___024root* vlSelf, VerilatedVcd* tracep)
     if (false && tracep && c) {}  // Prevent unused
     // Body
     {
-        tracep->declBus(c+16,"a", false,-1, 1,0);
-        tracep->declBus(c+17,"b", false,-1, 1,0);
-        tracep->declBus(c+18,"c", false,-1, 1,0);
-        tracep->declBus(c+19,"d", false,-1, 1,0);
-        tracep->declBus(c+20,"s", false,-1, 1,0);
-        tracep->declBus(c+21,"y", false,-1, 1,0);
-        tracep->declBus(c+16,"mux a", false,-1, 1,0);
-        tracep->declBus(c+17,"mux b", false,-1, 1,0);
-        tracep->declBus(c+18,"mux c", false,-1, 1,0);
-        tracep->declBus(c+19,"mux d", false,-1, 1,0);
-        tracep->declBus(c+20,"mux s", false,-1, 1,0);
-        tracep->declBus(c+21,"mux y", false,-1, 1,0);
+        tracep->declBus(c+16,"X0", false,-1, 1,0);
+        tracep->declBus(c+17,"X1", false,-1, 1,0);
+        tracep->declBus(c+18,"X2", false,-1, 1,0);
+        tracep->declBus(c+19,"X3", false,-1, 1,0);
+        tracep->declBus(c+20,"Y", false,-1, 1,0);
+        tracep->declBus(c+21,"F", false,-1, 1,0);
+        tracep->declBus(c+16,"mux X0", false,-1, 1,0);
+        tracep->declBus(c+17,"mux X1", false,-1, 1,0);
+        tracep->declBus(c+18,"mux X2", false,-1, 1,0);
+        tracep->declBus(c+19,"mux X3", false,-1, 1,0);
+        tracep->declBus(c+20,"mux Y", false,-1, 1,0);
+        tracep->declBus(c+21,"mux F", false,-1, 1,0);
         tracep->declBus(c+22,"mux i0 NR_KEY", false,-1, 31,0);
         tracep->declBus(c+23,"mux i0 KEY_LEN", false,-1, 31,0);
         tracep->declBus(c+23,"mux i0 DATA_LEN", false,-1, 31,0);
@@ -109,12 +109,12 @@ void Vmux___024root__traceFullSub0(Vmux___024root* vlSelf, VerilatedVcd* tracep)
         tracep->fullCData(oldp+13,(vlSelf->mux__DOT__i0__DOT__i0__DOT__data_list[3]),2);
         tracep->fullCData(oldp+14,(vlSelf->mux__DOT__i0__DOT__i0__DOT__lut_out),2);
         tracep->fullBit(oldp+15,(vlSelf->mux__DOT__i0__DOT__i0__DOT__hit));
-        tracep->fullCData(oldp+16,(vlSelf->a),2);
-        tracep->fullCData(oldp+17,(vlSelf->b),2);
-        tracep->fullCData(oldp+18,(vlSelf->c),2);
-        tracep->fullCData(oldp+19,(vlSelf->d),2);
-        tracep->fullCData(oldp+20,(vlSelf->s),2);
-        tracep->fullCData(oldp+21,(vlSelf->y),2);
+        tracep->fullCData(oldp+16,(vlSelf->X0),2);
+        tracep->fullCData(oldp+17,(vlSelf->X1),2);
+        tracep->fullCData(oldp+18,(vlSelf->X2),2);
+        tracep->fullCData(oldp+19,(vlSelf->X3),2);
+        tracep->fullCData(oldp+20,(vlSelf->Y),2);
+        tracep->fullCData(oldp+21,(vlSelf->F),2);
         tracep->fullIData(oldp+22,(4U),32);
         tracep->fullIData(oldp+23,(2U),32);
         tracep->fullIData(oldp+24,(0U),32);

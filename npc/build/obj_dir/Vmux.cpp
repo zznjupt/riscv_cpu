@@ -10,12 +10,12 @@
 
 Vmux::Vmux(VerilatedContext* _vcontextp__, const char* _vcname__)
     : vlSymsp{new Vmux__Syms(_vcontextp__, _vcname__, this)}
-    , a{vlSymsp->TOP.a}
-    , b{vlSymsp->TOP.b}
-    , c{vlSymsp->TOP.c}
-    , d{vlSymsp->TOP.d}
-    , s{vlSymsp->TOP.s}
-    , y{vlSymsp->TOP.y}
+    , X0{vlSymsp->TOP.X0}
+    , X1{vlSymsp->TOP.X1}
+    , X2{vlSymsp->TOP.X2}
+    , X3{vlSymsp->TOP.X3}
+    , Y{vlSymsp->TOP.Y}
+    , F{vlSymsp->TOP.F}
     , rootp{&(vlSymsp->TOP)}
 {
 }

@@ -40,12 +40,12 @@ void Vmux___024root__traceChgSub0(Vmux___024root* vlSelf, VerilatedVcd* tracep) 
             tracep->chgCData(oldp+13,(vlSelf->mux__DOT__i0__DOT__i0__DOT__lut_out),2);
             tracep->chgBit(oldp+14,(vlSelf->mux__DOT__i0__DOT__i0__DOT__hit));
         }
-        tracep->chgCData(oldp+15,(vlSelf->a),2);
-        tracep->chgCData(oldp+16,(vlSelf->b),2);
-        tracep->chgCData(oldp+17,(vlSelf->c),2);
-        tracep->chgCData(oldp+18,(vlSelf->d),2);
-        tracep->chgCData(oldp+19,(vlSelf->s),2);
-        tracep->chgCData(oldp+20,(vlSelf->y),2);
+        tracep->chgCData(oldp+15,(vlSelf->X0),2);
+        tracep->chgCData(oldp+16,(vlSelf->X1),2);
+        tracep->chgCData(oldp+17,(vlSelf->X2),2);
+        tracep->chgCData(oldp+18,(vlSelf->X3),2);
+        tracep->chgCData(oldp+19,(vlSelf->Y),2);
+        tracep->chgCData(oldp+20,(vlSelf->F),2);
     }
 }
 

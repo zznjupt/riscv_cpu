@@ -13,9 +13,10 @@ VL_INLINE_OPT void Vmux___024root___combo__TOP__1(Vmux___024root* vlSelf) {
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vmux___024root___combo__TOP__1\n"); );
     // Body
     vlSelf->mux__DOT____Vcellinp__i0____pinNumber3 
-        = (0x48cU | (((IData)(vlSelf->a) << 0xcU) | 
-                     (((IData)(vlSelf->b) << 8U) | 
-                      (((IData)(vlSelf->c) << 4U) | (IData)(vlSelf->d)))));
+        = (0x48cU | (((IData)(vlSelf->X0) << 0xcU) 
+                     | (((IData)(vlSelf->X1) << 8U) 
+                        | (((IData)(vlSelf->X2) << 4U) 
+                           | (IData)(vlSelf->X3)))));
     vlSelf->mux__DOT__i0__DOT__i0__DOT__pair_list[0U] 
         = (0xfU & (IData)(vlSelf->mux__DOT____Vcellinp__i0____pinNumber3));
     vlSelf->mux__DOT__i0__DOT__i0__DOT__pair_list[1U] 
@@ -51,27 +52,27 @@ VL_INLINE_OPT void Vmux___024root___combo__TOP__1(Vmux___024root* vlSelf) {
     vlSelf->mux__DOT__i0__DOT__i0__DOT__key_list[3U] 
         = (3U & (vlSelf->mux__DOT__i0__DOT__i0__DOT__pair_list
                  [3U] >> 2U));
-    vlSelf->mux__DOT__i0__DOT__i0__DOT__hit = ((IData)(vlSelf->s) 
+    vlSelf->mux__DOT__i0__DOT__i0__DOT__hit = ((IData)(vlSelf->Y) 
                                                == vlSelf->mux__DOT__i0__DOT__i0__DOT__key_list
                                                [0U]);
     vlSelf->mux__DOT__i0__DOT__i0__DOT__hit = ((IData)(vlSelf->mux__DOT__i0__DOT__i0__DOT__hit) 
-                                               | ((IData)(vlSelf->s) 
+                                               | ((IData)(vlSelf->Y) 
                                                   == 
                                                   vlSelf->mux__DOT__i0__DOT__i0__DOT__key_list
                                                   [1U]));
     vlSelf->mux__DOT__i0__DOT__i0__DOT__hit = ((IData)(vlSelf->mux__DOT__i0__DOT__i0__DOT__hit) 
-                                               | ((IData)(vlSelf->s) 
+                                               | ((IData)(vlSelf->Y) 
                                                   == 
                                                   vlSelf->mux__DOT__i0__DOT__i0__DOT__key_list
                                                   [2U]));
     vlSelf->mux__DOT__i0__DOT__i0__DOT__hit = ((IData)(vlSelf->mux__DOT__i0__DOT__i0__DOT__hit) 
-                                               | ((IData)(vlSelf->s) 
+                                               | ((IData)(vlSelf->Y) 
                                                   == 
                                                   vlSelf->mux__DOT__i0__DOT__i0__DOT__key_list
                                                   [3U]));
     vlSelf->mux__DOT__i0__DOT__i0__DOT__lut_out = (
                                                    (- (IData)(
-                                                              ((IData)(vlSelf->s) 
+                                                              ((IData)(vlSelf->Y) 
                                                                == 
                                                                vlSelf->mux__DOT__i0__DOT__i0__DOT__key_list
                                                                [0U]))) 
@@ -79,7 +80,7 @@ VL_INLINE_OPT void Vmux___024root___combo__TOP__1(Vmux___024root* vlSelf) {
                                                    [0U]);
     vlSelf->mux__DOT__i0__DOT__i0__DOT__lut_out = ((IData)(vlSelf->mux__DOT__i0__DOT__i0__DOT__lut_out) 
                                                    | ((- (IData)(
-                                                                 ((IData)(vlSelf->s) 
+                                                                 ((IData)(vlSelf->Y) 
                                                                   == 
                                                                   vlSelf->mux__DOT__i0__DOT__i0__DOT__key_list
                                                                   [1U]))) 
@@ -87,7 +88,7 @@ VL_INLINE_OPT void Vmux___024root___combo__TOP__1(Vmux___024root* vlSelf) {
                                                       [1U]));
     vlSelf->mux__DOT__i0__DOT__i0__DOT__lut_out = ((IData)(vlSelf->mux__DOT__i0__DOT__i0__DOT__lut_out) 
                                                    | ((- (IData)(
-                                                                 ((IData)(vlSelf->s) 
+                                                                 ((IData)(vlSelf->Y) 
                                                                   == 
                                                                   vlSelf->mux__DOT__i0__DOT__i0__DOT__key_list
                                                                   [2U]))) 
@@ -95,13 +96,13 @@ VL_INLINE_OPT void Vmux___024root___combo__TOP__1(Vmux___024root* vlSelf) {
                                                       [2U]));
     vlSelf->mux__DOT__i0__DOT__i0__DOT__lut_out = ((IData)(vlSelf->mux__DOT__i0__DOT__i0__DOT__lut_out) 
                                                    | ((- (IData)(
-                                                                 ((IData)(vlSelf->s) 
+                                                                 ((IData)(vlSelf->Y) 
                                                                   == 
                                                                   vlSelf->mux__DOT__i0__DOT__i0__DOT__key_list
                                                                   [3U]))) 
                                                       & vlSelf->mux__DOT__i0__DOT__i0__DOT__data_list
                                                       [3U]));
-    vlSelf->y = vlSelf->mux__DOT__i0__DOT__i0__DOT__lut_out;
+    vlSelf->F = vlSelf->mux__DOT__i0__DOT__i0__DOT__lut_out;
 }
 
 void Vmux___024root___eval(Vmux___024root* vlSelf) {
@@ -139,15 +140,15 @@ void Vmux___024root___eval_debug_assertions(Vmux___024root* vlSelf) {
     Vmux__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vmux___024root___eval_debug_assertions\n"); );
     // Body
-    if (VL_UNLIKELY((vlSelf->a & 0xfcU))) {
-        Verilated::overWidthError("a");}
-    if (VL_UNLIKELY((vlSelf->b & 0xfcU))) {
-        Verilated::overWidthError("b");}
-    if (VL_UNLIKELY((vlSelf->c & 0xfcU))) {
-        Verilated::overWidthError("c");}
-    if (VL_UNLIKELY((vlSelf->d & 0xfcU))) {
-        Verilated::overWidthError("d");}
-    if (VL_UNLIKELY((vlSelf->s & 0xfcU))) {
-        Verilated::overWidthError("s");}
+    if (VL_UNLIKELY((vlSelf->X0 & 0xfcU))) {
+        Verilated::overWidthError("X0");}
+    if (VL_UNLIKELY((vlSelf->X1 & 0xfcU))) {
+        Verilated::overWidthError("X1");}
+    if (VL_UNLIKELY((vlSelf->X2 & 0xfcU))) {
+        Verilated::overWidthError("X2");}
+    if (VL_UNLIKELY((vlSelf->X3 & 0xfcU))) {
+        Verilated::overWidthError("X3");}
+    if (VL_UNLIKELY((vlSelf->Y & 0xfcU))) {
+        Verilated::overWidthError("Y");}
 }
 #endif  // VL_DEBUG
