@@ -66,7 +66,7 @@ $(BIN): $(VSRCS) $(CSRCS) # $(NVBOARD_ARCHIVE)
 all:
 	@echo "Write this Makefile by your self."
 
-com:
+sim:
 	$(call git_commit, "sim RTL") # DO NOT REMOVE THIS LINE!!!
 	@echo "Write this Makefile by your self."
 	@$(BIN)
@@ -77,7 +77,7 @@ wave:
 	gitwave ./obj_dir/$(WAVE).vcd
 
 clean:
-	@rm -rf obj_dir
+	@rm -rf ./build
 	@rm -rf wave.vcd
 
 include ../Makefile
