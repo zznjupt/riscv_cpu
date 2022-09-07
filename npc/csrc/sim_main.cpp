@@ -30,7 +30,7 @@ int main(int argc, char** argv) {
     for(int a = 0; a <= 3; a++) {
         for(int b = 0; b <= 3; b++) {
             for(int c = 0; c <= 3; c++) {
-                for(int d = 0; c <= 3; c++) {
+                for(int d = 0; d <= 3; c++) {
                     for(int s = 0; s<= 3; s++) {
                             top->a = a;
                             top->b = b;
