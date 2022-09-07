@@ -39,29 +39,6 @@ $(BIN): $(VSRCS) $(CSRCS) # $(NVBOARD_ARCHIVE)
 		--top-module $(TOPNAME) $^ \
 		$(addprefix -CFLAGS , $(CFLAGS)) $(addprefix -LDFLAGS , $(LDFLAGS)) \
 		--Mdir $(OBJ_DIR) --exe -o $(abspath $(BIN))
-# all:
-# 	@echo "Write this Makefile by your self."
-
-# run: $(BIN)
-# 	@$^
-	
-# wave:
-# 	gitwave wave.vcd
-
-# clean:
-# 	rm -rf $(BUILD_DIR) wave.vcd
-
-# include ../Makefile
-
-# Makefile
-
-# DESIGN = onoff
-# SIM = sim_main.cpp
-# WAVE = wave
-
-# VERILATOR = verilator --Wall --cc --exe -build --trace \
-#             ./csrc/$(SIM) \
-# 			./vsrc/$(DESIGN).v
 
 all:
 	@echo "Write this Makefile by your self."
