@@ -56,5 +56,4 @@ void Vencode83___024root___ctor_var_reset(Vencode83___024root* vlSelf) {
     vlSelf->en = VL_RAND_RESET_I(1);
     vlSelf->Y = VL_RAND_RESET_I(3);
     vlSelf->flag = VL_RAND_RESET_I(1);
-    vlSelf->encode83__DOT__i = VL_RAND_RESET_I(32);
 }

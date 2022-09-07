@@ -27,7 +27,6 @@ void Vencode83___024root__traceChgSub0(Vencode83___024root* vlSelf, VerilatedVcd
         tracep->chgBit(oldp+1,(vlSelf->en));
         tracep->chgCData(oldp+2,(vlSelf->Y),3);
         tracep->chgBit(oldp+3,(vlSelf->flag));
-        tracep->chgIData(oldp+4,(vlSelf->encode83__DOT__i),32);
     }
 }
 

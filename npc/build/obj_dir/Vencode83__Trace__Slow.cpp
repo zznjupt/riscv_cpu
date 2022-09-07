@@ -30,7 +30,6 @@ void Vencode83___024root__traceInitSub0(Vencode83___024root* vlSelf, VerilatedVc
         tracep->declBit(c+2,"encode83 en", false,-1);
         tracep->declBus(c+3,"encode83 Y", false,-1, 2,0);
         tracep->declBit(c+4,"encode83 flag", false,-1);
-        tracep->declBus(c+5,"encode83 i", false,-1, 31,0);
     }
 }
 
@@ -71,6 +70,5 @@ void Vencode83___024root__traceFullSub0(Vencode83___024root* vlSelf, VerilatedVc
         tracep->fullBit(oldp+2,(vlSelf->en));
         tracep->fullCData(oldp+3,(vlSelf->Y),3);
         tracep->fullBit(oldp+4,(vlSelf->flag));
-        tracep->fullIData(oldp+5,(vlSelf->encode83__DOT__i),32);
     }
 }
