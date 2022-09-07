@@ -45,8 +45,8 @@ SIM = mux.cpp
 WAVE = wave
 
 VERILATOR = verilator --Wall --cc --exe -build --trace \
-            ./csrc/$(SIM) \
-			./vsrc/$(DESIGN).v
+            ./csrc/experiment/$(SIM) \
+			./vsrc/experiment/1.mux/$(DESIGN).v
 
 all:
 	@echo "Write this Makefile by your self."
