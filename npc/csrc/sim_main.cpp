@@ -36,7 +36,7 @@ int main(int argc, char** argv) {
                     top->eval();
                     tfp->dump(main_time); // dump_wave
                     printf("a = %d, b = %d, s = %d, y = %d\n", a, b, s, top->y);
-                    assert(top->y == s?a:b);
+                    assert(top->y == s?(int)a:(int)b);
                     main_time++;
             }
         }
