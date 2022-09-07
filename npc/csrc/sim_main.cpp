@@ -27,7 +27,7 @@ int main(int argc, char** argv) {
     tfp->open("wave.vcd");
 
     // simulate
-    int A = 5;
+    int A = 6;
     int B = -2;
     int op = 0;
     top->A = A;
