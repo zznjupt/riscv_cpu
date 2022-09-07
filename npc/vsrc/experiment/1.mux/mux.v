@@ -1,5 +1,3 @@
-`include "mux_tmp.v"
-
 module mux(a,b,s,y);
   input   a,b,s;
   output  y;
