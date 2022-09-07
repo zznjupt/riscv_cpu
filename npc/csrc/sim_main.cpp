@@ -28,7 +28,7 @@ int main(int argc, char** argv) {
 
     // simulate
     int A = -3;
-    int B = -5;
+    int B = -7;
     int op = 0;
     top->A = A;
     top->B = B;
