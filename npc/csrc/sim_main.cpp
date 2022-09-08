@@ -34,7 +34,7 @@ int main(int argc, char** argv) {
                 top->A = A;
                 top->B = B;
 
-                int op = 2;
+                int op = 6;
                 top->op = op;
                 top->eval();
                 tfp->dump(main_time); // dump_wave
