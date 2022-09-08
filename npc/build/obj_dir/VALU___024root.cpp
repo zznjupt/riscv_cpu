@@ -20,42 +20,43 @@ VL_INLINE_OPT void VALU___024root___combo__TOP__1(VALU___024root* vlSelf) {
     if ((4U & (IData)(vlSelf->op))) {
         vlSelf->ALU__DOT__alu_reg = ((2U & (IData)(vlSelf->op))
                                       ? ((1U & (IData)(vlSelf->op))
-                                          ? 0U : ((
-                                                   (1U 
-                                                    & ((IData)(vlSelf->A) 
-                                                       >> 3U)) 
-                                                   == 
-                                                   (1U 
-                                                    & ((IData)(vlSelf->B) 
-                                                       >> 3U)))
-                                                   ? 
-                                                  ((8U 
-                                                    & (IData)(vlSelf->A))
-                                                    ? 
-                                                   (((0xfU 
-                                                      & ((IData)(1U) 
-                                                         + 
-                                                         (~ (IData)(vlSelf->A)))) 
-                                                     > 
-                                                     (0xfU 
-                                                      & ((IData)(1U) 
-                                                         + 
-                                                         (~ (IData)(vlSelf->B)))))
-                                                     ? 1U
-                                                     : 0U)
-                                                    : 
-                                                   (((7U 
-                                                      & (IData)(vlSelf->A)) 
-                                                     < 
-                                                     (7U 
-                                                      & (IData)(vlSelf->B)))
-                                                     ? 1U
-                                                     : 0U))
-                                                   : 
-                                                  ((8U 
-                                                    & (IData)(vlSelf->A))
-                                                    ? 1U
-                                                    : 0U)))
+                                          ? ((0U == 
+                                              (0xfU 
+                                               & ((IData)(vlSelf->A) 
+                                                  - (IData)(vlSelf->B))))
+                                              ? 1U : 0U)
+                                          : (((1U & 
+                                               ((IData)(vlSelf->A) 
+                                                >> 3U)) 
+                                              == (1U 
+                                                  & ((IData)(vlSelf->B) 
+                                                     >> 3U)))
+                                              ? ((8U 
+                                                  & (IData)(vlSelf->A))
+                                                  ? 
+                                                 (((0xfU 
+                                                    & ((IData)(1U) 
+                                                       + 
+                                                       (~ (IData)(vlSelf->A)))) 
+                                                   > 
+                                                   (0xfU 
+                                                    & ((IData)(1U) 
+                                                       + 
+                                                       (~ (IData)(vlSelf->B)))))
+                                                   ? 1U
+                                                   : 0U)
+                                                  : 
+                                                 (((7U 
+                                                    & (IData)(vlSelf->A)) 
+                                                   < 
+                                                   (7U 
+                                                    & (IData)(vlSelf->B)))
+                                                   ? 1U
+                                                   : 0U))
+                                              : ((8U 
+                                                  & (IData)(vlSelf->A))
+                                                  ? 1U
+                                                  : 0U)))
                                       : ((1U & (IData)(vlSelf->op))
                                           ? ((IData)(vlSelf->ALU__DOT__A_) 
                                              ^ (IData)(vlSelf->ALU__DOT__B_))

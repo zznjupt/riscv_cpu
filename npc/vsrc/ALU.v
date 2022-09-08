@@ -5,7 +5,7 @@
 `define OR  3'b100
 `define XOR 3'b101
 `define COMPARE 3'b110
-`define equal 3'b111
+`define EQUAL 3'b111
 
 module ALU (
     input  [2:0] op,
@@ -50,7 +50,7 @@ module ALU (
                       ((A[3] == 1'b0)?((A[2:0]<B[2:0])?5'b00001:5'b00000):
                       ((~A+1'b1 > ~B+1'b1)?5'b00001:5'b0000)):
                       ((A[3] == 1'b1)?5'b00001:5'b00000);
-                
+            `EQUAL:   alu_reg = (A-B == 4'b0000)?5'b00001:5'b00000;
                     
             default: alu_reg = 0;
         endcase
