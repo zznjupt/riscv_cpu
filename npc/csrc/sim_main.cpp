@@ -34,14 +34,14 @@ int main(int argc, char** argv) {
                 top->A = A;
                 top->B = B;
 
-                int op = 6;
+                int op = 0;
                 top->op = op;
                 top->eval();
                 tfp->dump(main_time); // dump_wave
                 int result = top->alu_result;
                 if(result>=8) result -= 16;
                 printf("A = %d, B = %d, result = %d, overflow = %d, zero = %d\n", A, B, result, top->overflow, top->zero);
-                assert(result == (A<B));
+                assert(result == (A+B));
                 
                 main_time++;
 
