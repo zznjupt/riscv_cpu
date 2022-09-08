@@ -41,7 +41,16 @@ module ALU (
                     overflow = 1;
                 end
             end
-            `NOT: alu_reg = A_ ^ 5'b11111;
+            `NOT:     alu_reg = A_ ^ 5'b11111;
+            `AND:     alu_reg = A_ & B_;
+            `OR:      alu_reg = A_ | B_;
+            `XOR:     alu_reg = A_ ^ B_;
+            `COMPARE:
+alu_reg = (A[3] == B[3])?
+((A[3] == 1'b0)?((A[2:0]<B[2:0])?5'b00001:5'b00000):((A[2:0]<=B[2:0])?5'b00000:5'b00001)):
+((A[3] == 1'b1)?5'b00000:5'b00001);
+                
+                    
             default: alu_reg = 0;
         endcase
     end

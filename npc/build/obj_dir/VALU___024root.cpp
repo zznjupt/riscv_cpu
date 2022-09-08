@@ -17,14 +17,52 @@ VL_INLINE_OPT void VALU___024root___combo__TOP__1(VALU___024root* vlSelf) {
     vlSelf->ALU__DOT__B_ = ((0x10U & ((IData)(vlSelf->B) 
                                       << 1U)) | (IData)(vlSelf->B));
     vlSelf->overflow = 0U;
-    if ((0U == (IData)(vlSelf->op))) {
-        vlSelf->ALU__DOT__alu_reg = (0x1fU & ((IData)(vlSelf->ALU__DOT__A_) 
-                                              + (IData)(vlSelf->ALU__DOT__B_)));
-        if ((1U & VL_REDXOR_32((0x18U & (IData)(vlSelf->ALU__DOT__alu_reg))))) {
-            vlSelf->ALU__DOT__alu_reg = 0U;
-            vlSelf->overflow = 1U;
-        }
-    } else if ((1U == (IData)(vlSelf->op))) {
+    if ((4U & (IData)(vlSelf->op))) {
+        vlSelf->ALU__DOT__alu_reg = ((2U & (IData)(vlSelf->op))
+                                      ? ((1U & (IData)(vlSelf->op))
+                                          ? 0U : ((
+                                                   (1U 
+                                                    & ((IData)(vlSelf->A) 
+                                                       >> 3U)) 
+                                                   == 
+                                                   (1U 
+                                                    & ((IData)(vlSelf->B) 
+                                                       >> 3U)))
+                                                   ? 
+                                                  ((8U 
+                                                    & (IData)(vlSelf->A))
+                                                    ? 
+                                                   (((7U 
+                                                      & (IData)(vlSelf->A)) 
+                                                     <= 
+                                                     (7U 
+                                                      & (IData)(vlSelf->B)))
+                                                     ? 0U
+                                                     : 1U)
+                                                    : 
+                                                   (((7U 
+                                                      & (IData)(vlSelf->A)) 
+                                                     < 
+                                                     (7U 
+                                                      & (IData)(vlSelf->B)))
+                                                     ? 1U
+                                                     : 0U))
+                                                   : 
+                                                  ((8U 
+                                                    & (IData)(vlSelf->A))
+                                                    ? 0U
+                                                    : 1U)))
+                                      : ((1U & (IData)(vlSelf->op))
+                                          ? ((IData)(vlSelf->ALU__DOT__A_) 
+                                             ^ (IData)(vlSelf->ALU__DOT__B_))
+                                          : ((IData)(vlSelf->ALU__DOT__A_) 
+                                             | (IData)(vlSelf->ALU__DOT__B_))));
+    } else if ((2U & (IData)(vlSelf->op))) {
+        vlSelf->ALU__DOT__alu_reg = (0x1fU & ((1U & (IData)(vlSelf->op))
+                                               ? ((IData)(vlSelf->ALU__DOT__A_) 
+                                                  & (IData)(vlSelf->ALU__DOT__B_))
+                                               : (~ (IData)(vlSelf->ALU__DOT__A_))));
+    } else if ((1U & (IData)(vlSelf->op))) {
         vlSelf->ALU__DOT__alu_reg = (0x1fU & ((IData)(1U) 
                                               + ((IData)(vlSelf->ALU__DOT__A_) 
                                                  + 
@@ -34,9 +72,12 @@ VL_INLINE_OPT void VALU___024root___combo__TOP__1(VALU___024root* vlSelf) {
             vlSelf->overflow = 1U;
         }
     } else {
-        vlSelf->ALU__DOT__alu_reg = ((2U == (IData)(vlSelf->op))
-                                      ? (0x1fU & (~ (IData)(vlSelf->ALU__DOT__A_)))
-                                      : 0U);
+        vlSelf->ALU__DOT__alu_reg = (0x1fU & ((IData)(vlSelf->ALU__DOT__A_) 
+                                              + (IData)(vlSelf->ALU__DOT__B_)));
+        if ((1U & VL_REDXOR_32((0x18U & (IData)(vlSelf->ALU__DOT__alu_reg))))) {
+            vlSelf->ALU__DOT__alu_reg = 0U;
+            vlSelf->overflow = 1U;
+        }
     }
     vlSelf->alu_result = (0xfU & (IData)(vlSelf->ALU__DOT__alu_reg));
     vlSelf->zero = (1U & (~ (0U != (IData)(vlSelf->ALU__DOT__alu_reg))));
