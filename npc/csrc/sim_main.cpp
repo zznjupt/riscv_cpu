@@ -42,7 +42,7 @@ int main(int argc, char** argv) {
                 if(result>=8) result -= 16;
                 printf("A = %d, B = %d, result = %d, overflow = %d, zero = %d\n", A, B, result, top->overflow, top->zero);
                 printf("A&B = %d\n", A&B);
-                //assert(result == A&B);
+                assert(result == A&B);
 
                 
                 main_time++;
