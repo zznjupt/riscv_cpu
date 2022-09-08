@@ -41,7 +41,7 @@ int main(int argc, char** argv) {
                 int result = top->alu_result;
                 if(result>=8) result -= 16;
                 printf("A = %d, B = %d, result = %d, overflow = %d, zero = %d\n", A, B, result, top->overflow, top->zero);
-                printf("A&B = \n", A&B);
+                printf("A&B = %d\n", A&B);
                 //assert(result == A&B);
 
                 
