@@ -53,18 +53,35 @@ int main(int argc, char** argv) {
     
     main_time++;
 
-    A = 4;
-    B = -4;
-    op = 0;
-    top->A = A;
-    top->B = B;
-    top->op = op;
-    top->eval();
-    tfp->dump(main_time); // dump_wave
-    printf("A = %d, B = %d, A+B = %d, overflow = %d, zero = %d\n", A, B, top->alu_result, top->overflow, top->zero);
-    //assert(top->y == ((s==0)?a:b));
-    
-    main_time++;
+    for(int A = -8; A <= 7; A++) {
+        for(int B = -8; B <= 7; B++) {
+                A = 4;
+                B = -4;
+                op = 0;
+                top->A = A;
+                top->B = B;
+                top->op = op;
+                top->eval();
+                tfp->dump(main_time); // dump_wave
+                printf("A = %d, B = %d, A+B = %d, overflow = %d, zero = %d\n", A, B, top->alu_result, top->overflow, top->zero);
+                //assert(top->y == ((s==0)?a:b));
+                
+                main_time++;
+
+                op = 1;
+                top->op = op;
+                top->eval();
+                tfp->dump(main_time); // dump_wave
+                printf("A = %d, B = %d, A+B = %d, overflow = %d, zero = %d\n", A, B, top->alu_result, top->overflow, top->zero);
+                //assert(top->y == ((s==0)?a:b));
+                
+                main_time++;
+                
+
+        }
+    }
+
+
 
     top->final();
     tfp->close();
