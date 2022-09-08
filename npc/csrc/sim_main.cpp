@@ -39,7 +39,7 @@ int main(int argc, char** argv) {
                 top->eval();
                 tfp->dump(main_time); // dump_wave
                 int result = top->alu_result;
-                if(result>=8) result -= 16;
+                //if(result>=8) result -= 16;
                 printf("A = %d, B = %d, result = %d, overflow = %d, zero = %d\n", A, B, result, top->overflow, top->zero);
                 assert(result == A&B);
                 
