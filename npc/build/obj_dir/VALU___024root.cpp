@@ -54,8 +54,8 @@ VL_INLINE_OPT void VALU___024root___combo__TOP__1(VALU___024root* vlSelf) {
                                                    : 
                                                   ((8U 
                                                     & (IData)(vlSelf->A))
-                                                    ? 0U
-                                                    : 1U)))
+                                                    ? 1U
+                                                    : 0U)))
                                       : ((1U & (IData)(vlSelf->op))
                                           ? ((IData)(vlSelf->ALU__DOT__A_) 
                                              ^ (IData)(vlSelf->ALU__DOT__B_))
