@@ -33,12 +33,16 @@ VL_INLINE_OPT void VALU___024root___combo__TOP__1(VALU___024root* vlSelf) {
                                                     & (IData)(vlSelf->A))
                                                     ? 
                                                    (((7U 
-                                                      & (IData)(vlSelf->A)) 
-                                                     >= 
+                                                      & ((IData)(1U) 
+                                                         + 
+                                                         (~ (IData)(vlSelf->A)))) 
+                                                     > 
                                                      (7U 
-                                                      & (IData)(vlSelf->B)))
-                                                     ? 0U
-                                                     : 1U)
+                                                      & ((IData)(1U) 
+                                                         + 
+                                                         (~ (IData)(vlSelf->B)))))
+                                                     ? 1U
+                                                     : 0U)
                                                     : 
                                                    (((7U 
                                                       & (IData)(vlSelf->A)) 
