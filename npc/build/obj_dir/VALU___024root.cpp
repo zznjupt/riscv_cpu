@@ -34,7 +34,9 @@ VL_INLINE_OPT void VALU___024root___combo__TOP__1(VALU___024root* vlSelf) {
             vlSelf->overflow = 1U;
         }
     } else {
-        vlSelf->ALU__DOT__alu_reg = 0U;
+        vlSelf->ALU__DOT__alu_reg = ((2U == (IData)(vlSelf->op))
+                                      ? (0x1fU & (~ (IData)(vlSelf->ALU__DOT__A_)))
+                                      : 0U);
     }
     vlSelf->alu_result = (0xfU & (IData)(vlSelf->ALU__DOT__alu_reg));
     vlSelf->zero = (1U & (~ (0U != (IData)(vlSelf->ALU__DOT__alu_reg))));

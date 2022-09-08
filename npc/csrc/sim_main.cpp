@@ -40,18 +40,18 @@ int main(int argc, char** argv) {
                 tfp->dump(main_time); // dump_wave
                 int result = top->alu_result;
                 if(result>=8) result -= 16;
-                printf("A = %d, B = %d, A+B = %d, overflow = %d, zero = %d\n", A, B, result, top->overflow, top->zero);
+                printf("A = %d, B = %d, result = %d, overflow = %d, zero = %d\n", A, B, result, top->overflow, top->zero);
                 //assert(top->y == ((s==0)?a:b));
                 
                 main_time++;
 
-                op = 1;
+                op = 2;
                 top->op = op;
                 top->eval();
                 tfp->dump(main_time); // dump_wave
                 result = top->alu_result;
                 if(result>=8) result -= 16;
-                printf("A = %d, B = %d, A+B = %d, overflow = %d, zero = %d\n", A, B, result, top->overflow, top->zero);
+                printf("A = %d, B = %d, result = %d, overflow = %d, zero = %d\n", A, B, result, top->overflow, top->zero);
                 //assert(top->y == ((s==0)?a:b));
                 
                 main_time++;

@@ -41,6 +41,7 @@ module ALU (
                     overflow = 1;
                 end
             end
+            `NOT: alu_reg = A_ ^ 5'b11111;
             default: alu_reg = 0;
         endcase
     end
