@@ -51,7 +51,6 @@ module ALU (
                       ((~A+1'b1 > ~B+1'b1)?5'b00001:5'b0000)):
                       ((A[3] == 1'b1)?5'b00001:5'b00000);
             `EQUAL:   alu_reg = (A-B == 4'b0000)?5'b00001:5'b00000;
-                    
             default: alu_reg = 0;
         endcase
     end
