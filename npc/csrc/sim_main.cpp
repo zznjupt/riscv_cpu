@@ -40,8 +40,8 @@ int main(int argc, char** argv) {
 
     main_time++;
 
-    A = -3;
-    B = -5;
+    A = 3;
+    B = -4;
     op = 0;
     top->A = A;
     top->B = B;
