@@ -7,11 +7,15 @@
 
 //==========
 
-VL_INLINE_OPT void VALU___024root___combo__TOP__2(VALU___024root* vlSelf) {
+VL_INLINE_OPT void VALU___024root___combo__TOP__1(VALU___024root* vlSelf) {
     if (false && vlSelf) {}  // Prevent unused
     VALU__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
-    VL_DEBUG_IF(VL_DBG_MSGF("+    VALU___024root___combo__TOP__2\n"); );
+    VL_DEBUG_IF(VL_DBG_MSGF("+    VALU___024root___combo__TOP__1\n"); );
     // Body
+    vlSelf->ALU__DOT__A_ = ((0x10U & ((IData)(vlSelf->A) 
+                                      << 1U)) | (IData)(vlSelf->A));
+    vlSelf->ALU__DOT__B_ = ((0x10U & ((IData)(vlSelf->B) 
+                                      << 1U)) | (IData)(vlSelf->B));
     vlSelf->overflow = 0U;
     if ((0U == (IData)(vlSelf->op))) {
         vlSelf->ALU__DOT__alu_reg = (0x1fU & ((IData)(vlSelf->ALU__DOT__A_) 
@@ -41,7 +45,8 @@ void VALU___024root___eval(VALU___024root* vlSelf) {
     VALU__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    VALU___024root___eval\n"); );
     // Body
-    VALU___024root___combo__TOP__2(vlSelf);
+    VALU___024root___combo__TOP__1(vlSelf);
+    vlSelf->__Vm_traceActivity[1U] = 1U;
 }
 
 QData VALU___024root___change_request_1(VALU___024root* vlSelf);

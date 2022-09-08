@@ -25,34 +25,22 @@ void VALU___024root::__Vconfigure(VALU__Syms* _vlSymsp, bool first) {
 VALU___024root::~VALU___024root() {
 }
 
-void VALU___024root___initial__TOP__1(VALU___024root* vlSelf) {
-    if (false && vlSelf) {}  // Prevent unused
-    VALU__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
-    VL_DEBUG_IF(VL_DBG_MSGF("+    VALU___024root___initial__TOP__1\n"); );
-    // Body
-    vlSelf->ALU__DOT__A_ = ((0x10U & ((IData)(vlSelf->A) 
-                                      << 1U)) | (IData)(vlSelf->A));
-    vlSelf->ALU__DOT__B_ = ((0x10U & ((IData)(vlSelf->B) 
-                                      << 1U)) | (IData)(vlSelf->B));
-}
-
 void VALU___024root___eval_initial(VALU___024root* vlSelf) {
     if (false && vlSelf) {}  // Prevent unused
     VALU__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    VALU___024root___eval_initial\n"); );
-    // Body
-    VALU___024root___initial__TOP__1(vlSelf);
-    vlSelf->__Vm_traceActivity[0U] = 1U;
 }
 
-void VALU___024root___combo__TOP__2(VALU___024root* vlSelf);
+void VALU___024root___combo__TOP__1(VALU___024root* vlSelf);
 
 void VALU___024root___eval_settle(VALU___024root* vlSelf) {
     if (false && vlSelf) {}  // Prevent unused
     VALU__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    VALU___024root___eval_settle\n"); );
     // Body
-    VALU___024root___combo__TOP__2(vlSelf);
+    VALU___024root___combo__TOP__1(vlSelf);
+    vlSelf->__Vm_traceActivity[1U] = 1U;
+    vlSelf->__Vm_traceActivity[0U] = 1U;
 }
 
 void VALU___024root___final(VALU___024root* vlSelf) {
@@ -75,7 +63,7 @@ void VALU___024root___ctor_var_reset(VALU___024root* vlSelf) {
     vlSelf->ALU__DOT__A_ = VL_RAND_RESET_I(5);
     vlSelf->ALU__DOT__B_ = VL_RAND_RESET_I(5);
     vlSelf->ALU__DOT__alu_reg = VL_RAND_RESET_I(5);
-    for (int __Vi0=0; __Vi0<1; ++__Vi0) {
+    for (int __Vi0=0; __Vi0<2; ++__Vi0) {
         vlSelf->__Vm_traceActivity[__Vi0] = VL_RAND_RESET_I(1);
     }
 }

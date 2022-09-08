@@ -15,10 +15,12 @@ module ALU (
     // output cout,
     output zero
 );
-    reg [4:0] A_ = {A[3], A};
-    reg [4:0] B_ = {B[3], B};
+    reg [4:0] A_;
+    reg [4:0] B_;
     reg [4:0] alu_reg;
 
+    assign A_ = {A[3], A};
+    assign B_ = {B[3], B};
     assign alu_result = alu_reg[3:0];
     assign zero = ~(|alu_reg);
 

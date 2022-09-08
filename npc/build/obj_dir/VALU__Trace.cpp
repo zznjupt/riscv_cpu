@@ -23,17 +23,17 @@ void VALU___024root__traceChgSub0(VALU___024root* vlSelf, VerilatedVcd* tracep) 
     if (false && oldp) {}  // Prevent unused
     // Body
     {
-        if (VL_UNLIKELY(vlSelf->__Vm_traceActivity[0U])) {
+        if (VL_UNLIKELY(vlSelf->__Vm_traceActivity[1U])) {
             tracep->chgCData(oldp+0,(vlSelf->ALU__DOT__A_),5);
             tracep->chgCData(oldp+1,(vlSelf->ALU__DOT__B_),5);
+            tracep->chgCData(oldp+2,(vlSelf->ALU__DOT__alu_reg),5);
         }
-        tracep->chgCData(oldp+2,(vlSelf->op),3);
-        tracep->chgCData(oldp+3,(vlSelf->A),4);
-        tracep->chgCData(oldp+4,(vlSelf->B),4);
-        tracep->chgCData(oldp+5,(vlSelf->alu_result),4);
-        tracep->chgBit(oldp+6,(vlSelf->overflow));
-        tracep->chgBit(oldp+7,(vlSelf->zero));
-        tracep->chgCData(oldp+8,(vlSelf->ALU__DOT__alu_reg),5);
+        tracep->chgCData(oldp+3,(vlSelf->op),3);
+        tracep->chgCData(oldp+4,(vlSelf->A),4);
+        tracep->chgCData(oldp+5,(vlSelf->B),4);
+        tracep->chgCData(oldp+6,(vlSelf->alu_result),4);
+        tracep->chgBit(oldp+7,(vlSelf->overflow));
+        tracep->chgBit(oldp+8,(vlSelf->zero));
     }
 }
 
@@ -44,5 +44,6 @@ void VALU___024root__traceCleanup(void* voidSelf, VerilatedVcd* /*unused*/) {
     {
         vlSymsp->__Vm_activity = false;
         vlSymsp->TOP.__Vm_traceActivity[0U] = 0U;
+        vlSymsp->TOP.__Vm_traceActivity[1U] = 0U;
     }
 }

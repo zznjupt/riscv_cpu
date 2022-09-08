@@ -32,7 +32,7 @@ VL_MODULE(VALU___024root) {
     CData/*4:0*/ ALU__DOT__alu_reg;
 
     // LOCAL VARIABLES
-    VlUnpacked<CData/*0:0*/, 1> __Vm_traceActivity;
+    VlUnpacked<CData/*0:0*/, 2> __Vm_traceActivity;
 
     // INTERNAL VARIABLES
     VALU__Syms* vlSymsp;  // Symbol table
