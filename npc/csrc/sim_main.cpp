@@ -40,6 +40,19 @@ int main(int argc, char** argv) {
 
     main_time++;
 
+    A = -3;
+    B = -5;
+    op = 0;
+    top->A = A;
+    top->B = B;
+    top->op = op;
+    top->eval();
+    tfp->dump(main_time); // dump_wave
+    printf("A = %d, B = %d, A+B = %d, overflow = %d, zero = %d\n", A, B, top->alu_result, top->overflow, top->zero);
+    //assert(top->y == ((s==0)?a:b));
+    
+    main_time++;
+
     top->final();
     tfp->close();
     delete top;
