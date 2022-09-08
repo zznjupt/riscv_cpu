@@ -27,31 +27,6 @@ int main(int argc, char** argv) {
     tfp->open("wave.vcd");
 
     // simulate
-    int A = 3;
-    int B = -4;
-    int op = 0;
-    top->A = A;
-    top->B = B;
-    top->op = op;
-    top->eval();
-    tfp->dump(main_time); // dump_wave
-    printf("A = %d, B = %d, A+B = %d, overflow = %d, zero = %d\n", A, B, top->alu_result, top->overflow, top->zero);
-    //assert(top->y == ((s==0)?a:b));
-
-    main_time++;
-
-    A = 3;
-    B = 5;
-    op = 0;
-    top->A = A;
-    top->B = B;
-    top->op = op;
-    top->eval();
-    tfp->dump(main_time); // dump_wave
-    printf("A = %d, B = %d, A+B = %d, overflow = %d, zero = %d\n", A, B, top->alu_result, top->overflow, top->zero);
-    //assert(top->y == ((s==0)?a:b));
-    
-    main_time++;
 
     for(int A = -8; A <= 7; A++) {
         for(int B = -8; B <= 7; B++) {
@@ -59,7 +34,7 @@ int main(int argc, char** argv) {
                 top->A = A;
                 top->B = B;
 
-                op = 0;
+                int op = 0;
                 top->op = op;
                 top->eval();
                 tfp->dump(main_time); // dump_wave
@@ -80,8 +55,6 @@ int main(int argc, char** argv) {
 
         }
     }
-
-
 
     top->final();
     tfp->close();
