@@ -47,7 +47,8 @@ int main(int argc, char** argv) {
                 top->op = op;
                 top->eval();
                 tfp->dump(main_time); // dump_wave
-                printf("A = %d, B = %d, A+B = %4d, overflow = %d, zero = %d\n", A, B, top->alu_result, top->overflow, top->zero);
+                if(top->alu_result>=8) top->alu_result -= 16;
+                printf("A = %d, B = %d, A+B = %d, overflow = %d, zero = %d\n", A, B, top->alu_result, top->overflow, top->zero);
                 //assert(top->y == ((s==0)?a:b));
                 
                 main_time++;
