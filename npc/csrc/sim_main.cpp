@@ -55,11 +55,11 @@ int main(int argc, char** argv) {
 
     for(int A = -8; A <= 7; A++) {
         for(int B = -8; B <= 7; B++) {
-                A = 4;
-                B = -4;
-                op = 0;
+
                 top->A = A;
                 top->B = B;
+
+                op = 0;
                 top->op = op;
                 top->eval();
                 tfp->dump(main_time); // dump_wave
