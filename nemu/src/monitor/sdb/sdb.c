@@ -57,6 +57,7 @@ static int cmd_help(char *args);
 static int cmd_si(char *args);
 static int cmd_info(char *args);
 static int cmd_x(char *args);
+static int cmd_p(char *args);
 
 static struct {
   const char *name;
@@ -71,7 +72,7 @@ static struct {
   { "si", "Single step execution 'N' instructions and then pause", cmd_si},
   { "info", "Use 'info r' to print the register state and 'info w' to print the watchpoint infomation", cmd_info},
   { "x", "scan the address", cmd_x},
-  
+  { "p", "Expression evaluation", cmd_p},
 };
 
 #define NR_CMD ARRLEN(cmd_table)
@@ -143,6 +144,14 @@ static int cmd_x(char *args) {
   }
   printf("\n");
   return 0;
+}
+
+static int cmd_p(char *args) {
+	bool success;
+	int i;
+	i=expr(args,&success);
+	printf("%d\n",i);
+	return 0;
 }
 
 void sdb_set_batch_mode() {
