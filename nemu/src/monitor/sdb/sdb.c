@@ -25,9 +25,7 @@ static int is_batch_mode = false;
 
 void init_regex();
 void init_wp_pool();
-WP* new_wp();
-void free_wp(int);
-void print_wp();
+
 
 /* We use the `readline' library to provide more flexibility to read from stdin. */
 static char* rl_gets() {
