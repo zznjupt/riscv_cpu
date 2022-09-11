@@ -54,6 +54,7 @@ static int cmd_q(char *args) {
 
 static int cmd_help(char *args);
 static int cmd_si(char *args);
+static int cmd_info(char *args);
 
 static struct {
   const char *name;
@@ -63,12 +64,10 @@ static struct {
   { "help", "Display information about all supported commands", cmd_help },
   { "c", "Continue the execution of the program", cmd_c },
   { "q", "Exit NEMU", cmd_q },
-  { "si", "Single step execution 'N' instructions and then pause", cmd_si}
 
   /* TODO: Add more commands */
-
-
-
+  { "si", "Single step execution 'N' instructions and then pause", cmd_si},
+  { "info", "Use 'info r' to print the register state and 'info w' to print the watchpoint infomation", cmd_info},
 };
 
 #define NR_CMD ARRLEN(cmd_table)
@@ -108,6 +107,17 @@ static int cmd_si(char *args) { // 基本仿照 cmd_help
     return 0;
   }
   cpu_exec(i);
+  return 0;
+}
+
+static int cmd_info(char *args) {
+  char *arg = strtok(NULL, " ");
+  if(strcmp(arg, "r") == 0) {
+    isa_reg_display();
+  }
+  if(strcmp(arg, "w") == 0) {
+
+  }
   return 0;
 }
 
