@@ -13,32 +13,13 @@
 * See the Mulan PSL v2 for more details.
 ***************************************************************************************/
 
-#include "sdb.h"
 #include <regex.h>
-
-#define NR_WP 32
-
-typedef struct watchpoint {
-  int NO;
-  struct watchpoint *next;
-  int value;
-  int newvalue;
-  char Enb;
-  char type;
-  char str[32];
-  /* TODO: Add more members if necessary */
-
-} WP;
+#include "sdb.h"
+#include "watchpoint.h"
 
 
 static WP wp_pool[NR_WP];
 static WP *head, *free_;
-
-WP* new_wp();
-void free_wp(int);
-void print_wp();
-int judge_wp();
-
 
 void init_wp_pool() {
   int i;

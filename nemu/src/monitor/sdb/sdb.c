@@ -18,8 +18,15 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 #include <memory/vaddr.h>
-#include "watchpoint.c"
+#include "watchpoint.h"
 #include "sdb.h"
+#define NR_WP 32
+
+
+
+WP* new_wp();
+void free_wp(int);
+void print_wp();
 
 static int is_batch_mode = false;
 
