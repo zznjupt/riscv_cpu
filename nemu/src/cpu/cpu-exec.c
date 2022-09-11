@@ -109,6 +109,18 @@ void cpu_exec(uint64_t n) {
   uint64_t timer_end = get_time();
   g_timer += timer_end - timer_start;
 
+  #ifdef DEBUG
+      /* TODO: check watchpoints here. */
+    int judge=judge_wp();
+    if(judge==-1) {
+      nemu_state = NEMU_STOP;
+      printf("Triggered the monitoring point\n");
+      return;
+    }
+
+
+  #endif
+
   switch (nemu_state.state) {
     case NEMU_RUNNING: nemu_state.state = NEMU_STOP; break;
 
