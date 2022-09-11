@@ -108,7 +108,6 @@ static int cmd_si(char *args) { // 基本仿照 cmd_help
     return 0;
   }
   cpu_exec(i);
-
   return 0;
 }
 
