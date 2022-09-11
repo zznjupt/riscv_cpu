@@ -83,8 +83,8 @@ static struct {
   { "info", "Use 'info r' to print the register state and 'info w' to print the watchpoint infomation", cmd_info},
   { "x", "scan the address", cmd_x},
   { "p", "Expression evaluation", cmd_p},
-  {"w","Setting the monitoring point",cmd_w},
-  {"d","Delete monitoring point",cmd_d}, 
+  { "w", "Setting the monitoring point", cmd_w},
+  { "d", "Delete monitoring point", cmd_d}, 
 };
 
 #define NR_CMD ARRLEN(cmd_table)

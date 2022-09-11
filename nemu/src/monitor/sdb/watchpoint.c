@@ -17,7 +17,6 @@
 #include "sdb.h"
 #include "watchpoint.h"
 
-
 static WP wp_pool[NR_WP];
 static WP *head, *free_;
 
