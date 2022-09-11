@@ -129,14 +129,14 @@ static int cmd_info(char *args) {
 static int cmd_x(char *args) {
   char *argN = strtok(NULL, " "); // 获得扫描长度
   char *argEXPR = strtok(NULL, " "); // 获得起始内存
+  
   int len;
-
   vaddr_t address;
 
   sscanf(argN, "%d", &len);
   sscanf(argEXPR, "%lx", &address);
 
-  printf("0x%lx: ",address);
+  printf("0x%lx: ", address);
   for(int i = 0; i < len; i++) {
     printf("%lx ", vaddr_read(address, 4));
     address += 4;
