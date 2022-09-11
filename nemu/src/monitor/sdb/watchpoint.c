@@ -38,8 +38,7 @@ void init_wp_pool() {
 WP* new_wp(char *string) {
     WP *help;
     bool success;
-    if(free_==NULL)
-	    assert(0);
+    if(free_==NULL) assert(0);
    
     help=free_;
     free_=free_->next;
