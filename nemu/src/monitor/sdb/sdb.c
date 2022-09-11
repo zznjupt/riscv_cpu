@@ -100,6 +100,7 @@ static int cmd_si(char *args) { // 基本仿照 cmd_help
   int i = 0;
   if(arg == NULL) {
     cpu_exec(1); // cmd_c
+    return 0;
   }
   sscanf(arg, "%d", &i);
   if(i < -1) {
