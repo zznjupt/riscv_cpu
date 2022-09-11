@@ -118,7 +118,6 @@ void cpu_exec(uint64_t n) {
       return;
     }
 
-
   #endif
 
   switch (nemu_state.state) {
