@@ -18,12 +18,16 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 #include <memory/vaddr.h>
+#include "watchpoint.c"
 #include "sdb.h"
 
 static int is_batch_mode = false;
 
 void init_regex();
 void init_wp_pool();
+WP* new_wp();
+void free_wp(int);
+void print_wp();
 
 /* We use the `readline' library to provide more flexibility to read from stdin. */
 static char* rl_gets() {
@@ -58,6 +62,8 @@ static int cmd_si(char *args);
 static int cmd_info(char *args);
 static int cmd_x(char *args);
 static int cmd_p(char *args);
+static int cmd_w(char *args);
+static int cmd_d(char *args);
 
 static struct {
   const char *name;
@@ -73,6 +79,8 @@ static struct {
   { "info", "Use 'info r' to print the register state and 'info w' to print the watchpoint infomation", cmd_info},
   { "x", "scan the address", cmd_x},
   { "p", "Expression evaluation", cmd_p},
+  {"w","Setting the monitoring point",cmd_w},
+  {"d","Delete monitoring point",cmd_d}, 
 };
 
 #define NR_CMD ARRLEN(cmd_table)
@@ -153,6 +161,19 @@ static int cmd_p(char *args) {
 	printf("%d\n",i);
 	return 0;
 }
+
+static int cmd_w(char *args) {
+	new_wp(args);
+	return 0;
+}
+
+static int cmd_d(char *args) {
+	int i;
+	sscanf(args,"%d",&i);
+	free_wp(i);
+	return 0;
+}
+
 
 void sdb_set_batch_mode() {
   is_batch_mode = true;
