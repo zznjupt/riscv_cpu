@@ -100,7 +100,7 @@ void free_wp(int number) {
 void print_wp() {
 	printf("Num\tType\tEnb \t\t Value\t\t  What\n");
 	for(int i=0;i<NR_WP;i++)
-		printf("%4d\t%c\t%c\t\t0x%x\t%s\n",wp_pool[i].NO,wp_pool[i].type,wp_pool[i].Enb,wp_pool[i].value,wp_pool[i].str);
+		printf("%4d\t%c\t%c\t\t0x%08x\t%s\n",wp_pool[i].NO,wp_pool[i].type,wp_pool[i].Enb,wp_pool[i].value,wp_pool[i].str);
 }
 
 int judge_wp() {
