@@ -138,7 +138,7 @@ static int cmd_x(char *args) {
 
   printf("0x%lx: ",address);
   for(int i = 0; i < len; i++) {
-    printf("%08lx ", vaddr_read(address, 4));
+    printf("%lx ", vaddr_read(address, 4));
     address += 4;
   }
   printf("\n");
