@@ -62,7 +62,7 @@ static struct rule {
   {"\\|\\|",									      TK_logical_OR},  		// logical OR  
   {"!",      										  TK_logical_NOT},      // logical NOT  
   {"0[xX][A-Fa-f0-9]{1,8}",                           TK_hex},              // hex  
-  {"\\$0|(ra)|(s|g|t)p|t[0-6]|a[0-7]|s(11|10|[0-9])", TK_register},         // rv64 register
+  {"(\\$0)|(ra)|(s|g|t)p|t[0-6]|a[0-7]|s(11|10|[0-9])", TK_register},         // rv64 register
   {"\\$[Pp][Cc]",                                     TK_pc},               // PC
   {"[a_zA_Z_][a-zA-Z0-9_]*",                          TK_variable},         // variable  
   {"[0-9]{1,10}",                                     TK_number}            // number
