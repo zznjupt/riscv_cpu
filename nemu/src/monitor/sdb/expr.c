@@ -21,6 +21,13 @@
 #include <regex.h>
 #include <memory/vaddr.h>
 
+const char *regs[] = {
+  "$0", "ra", "sp", "gp", "tp", "t0", "t1", "t2",
+  "s0", "s1", "a0", "a1", "a2", "a3", "a4", "a5",
+  "a6", "a7", "s2", "s3", "s4", "s5", "s6", "s7",
+  "s8", "s9", "s10", "s11", "t3", "t4", "t5", "t6"
+};
+
 enum {
   TK_NOTYPE = 256,
   /* TODO: Add more token types */
@@ -213,7 +220,7 @@ int eval(int p, int q) {
 		// 寄存器（需要debug）
 		else if(tokens[p].type == 262) {
 			int j = 0, s = 1;
-			//for(; j < 32 && s != 0; j++) s = strcmp(tokens[p].str + 1, regs[j]); 		
+			for(; j < 32 && s != 0; j++) s = strcmp(tokens[p].str + 1, regs[j]); 		
 			if(s == 0) {	
 				i = cpu.gpr[j]; 
 				return i;
