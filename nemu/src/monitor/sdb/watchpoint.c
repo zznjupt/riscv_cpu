@@ -50,7 +50,7 @@ WP* new_wp(char *string) {
     regmatch_t pmatch[1];
     const size_t nmatch =1 ;
     regex_t reg;
-    const char * pattern="\\$[pP][cC][=][=]0x[0-9a-fA-F]{1,8}";
+    const char * pattern="[pP][cC][=][=]0x[0-9a-fA-F]{1,8}";
     regcomp(&reg, pattern, cflags);
     status=regexec(&reg,string,nmatch,pmatch,0);
     if(status == REG_NOMATCH)
