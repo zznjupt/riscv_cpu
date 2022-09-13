@@ -138,7 +138,7 @@ static int cmd_info(char *args) {
   }
   return 0;
 }
-
+// TODO: solve the segmentation error
 static int cmd_x(char *args) {
   char *argN = strtok(NULL, " "); // 获得扫描长度
   char *argEXPR = strtok(NULL, " "); // 获得起始内存
