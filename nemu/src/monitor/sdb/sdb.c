@@ -128,6 +128,7 @@ static int cmd_si(char *args) { // 基本仿照 cmd_help
   return 0;
 }
 
+// TODO: solve the segmentation error
 static int cmd_info(char *args) {
   char *arg = strtok(NULL, " ");
   if(strcmp(arg, "r") == 0) {
@@ -138,7 +139,7 @@ static int cmd_info(char *args) {
   }
   return 0;
 }
-
+// TODO: solve the segmentation error
 static int cmd_x(char *args) {
   char *argN = strtok(NULL, " "); // 获得扫描长度
   char *argEXPR = strtok(NULL, " "); // 获得起始内存
@@ -168,6 +169,8 @@ static int cmd_p(char *args) {
 
 static int cmd_w(char *args) {
 	new_wp(args);
+  // char *w = "info w";
+  // cmd_info(w);
 	return 0;
 }
 
