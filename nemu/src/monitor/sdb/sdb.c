@@ -128,6 +128,7 @@ static int cmd_si(char *args) { // 基本仿照 cmd_help
   return 0;
 }
 
+// TODO: solve the segmentation error
 static int cmd_info(char *args) {
   char *arg = strtok(NULL, " ");
   if(strcmp(arg, "r") == 0) {
