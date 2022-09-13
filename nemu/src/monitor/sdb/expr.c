@@ -226,7 +226,7 @@ int eval(int p, int q) {
 				return i;
 			}
 			// if(j==32) assert(0);
-			printf("DEBUG register!\n");
+			if(j==32)printf("DEBUG register!\n");
 		}
 		else if(tokens[p].type==266) return cpu.pc;
 		else assert(0);
