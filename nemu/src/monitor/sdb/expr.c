@@ -222,12 +222,10 @@ int eval(int p, int q) {
 			int j = 0, s = 1;
 			for(; j < 32 && s != 0; j++) s = strcmp(tokens[p].str + 1, regs[j]); 		
 			if(s == 0) {	
-				if(j==32)printf("DEBUG register!\n");
+				if(j==32) printf("DEBUG register!\n");
 				i = cpu.gpr[j]; 
 				return i;
 			}
-			// if(j==32) assert(0);
-			
 		}
 		else if(tokens[p].type==266) return cpu.pc;
 		else assert(0);
