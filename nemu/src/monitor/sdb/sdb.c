@@ -169,9 +169,9 @@ static int cmd_p(char *args) {
 
 static int cmd_w(char *args) {
 	new_wp(args);
-	return 0;
   char *w = "w";
   cmd_info(w);
+	return 0;
 }
 
 static int cmd_d(char *args) {
