@@ -33,7 +33,7 @@ enum {
 #define immU() do { *imm = SEXT(BITS(i, 31, 12), 20) << 12; } while(0)
 #define immS() do { *imm = (SEXT(BITS(i, 31, 25), 7) << 5) | BITS(i, 11, 7); } while(0)
 
-#define immJ() do { *imm = SEXT(BITS(i, 31, 31), 1)<<19 | (SEXT(BITS(i, 21, 12), 10) << 9) |  (SEXT(BITS(i, 20, 20), 1)<<8) | BITS(i, 30, 23);} while(0)
+#define immJ() do { *imm = SEXT(BITS(i, 31, 31), 1)<<20 | (SEXT(BITS(i, 19, 12), 8) << 12) | (SEXT(BITS(i, 20, 20), 1)<<11) | (SEXT(BITS(i, 30, 21), 10)<<1);} while(0)
 
 
 static void decode_operand(Decode *s, int *dest, word_t *src1, word_t *src2, word_t *imm, int type) {
