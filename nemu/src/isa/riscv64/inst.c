@@ -80,7 +80,7 @@ static int decode_exec(Decode *s) {
   INSTPAT("??????? ????? ????? 010 ????? 00000 11", lw     , I, R(dest) = (SEXT(BITS((src1 + imm), 31, 0), 64));printf("src1 = %016lx\nimm  = %03lx\nrd =   %016lx\n", src1, imm, R(dest)));
 
   INSTPAT("0000000 ????? ????? 000 ????? 01100 11", add    , R, R(dest) = src1 + src2; printf("src1 = %016lx\nsrc2 = %016lx\nrd =   %016lx\n", src1, src2, R(dest)););
-  INSTPAT("0000000 ????? ????? 000 ????? 01110 11", addw   , R, R(dest) = (SEXT(BITS(src1 + src2, 32, 0), 64)); printf("src1 = %016lx\nsrc2 = %016lx\nrd =   %016lx\n", src1, src2, R(dest)););
+  INSTPAT("0000000 ????? ????? 000 ????? 01110 11", addw   , R, R(dest) = (SEXT(BITS(src1 + src2, 31, 0), 64)); printf("src1 = %016lx\nsrc2 = %016lx\nrd =   %016lx\n", src1, src2, R(dest)););
   INSTPAT("0100000 ????? ????? 000 ????? 01100 11", sub    , R, R(dest) = src1 - src2; printf("src1 = %016lx\nsrc2 = %016lx\nrd =   %016lx\n", src1, src2, R(dest)););
   INSTPAT("0000000 ????? ????? 010 ????? 01100 11", slt,     R, R(dest) = src1 < src2 ? 1 : 0); // debug
 
