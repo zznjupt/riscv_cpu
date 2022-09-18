@@ -22,13 +22,13 @@ void Vysyx_22050243_ADDER___024root__traceInitSub0(Vysyx_22050243_ADDER___024roo
     if (false && tracep && c) {}  // Prevent unused
     // Body
     {
-        tracep->declBus(c+1,"a", false,-1, 0,0);
-        tracep->declBus(c+2,"b", false,-1, 0,0);
-        tracep->declBus(c+3,"s", false,-1, 0,0);
-        tracep->declBus(c+4,"ysyx_22050243_ADDER DATA_WIDTH", false,-1, 31,0);
-        tracep->declBus(c+1,"ysyx_22050243_ADDER a", false,-1, 0,0);
-        tracep->declBus(c+2,"ysyx_22050243_ADDER b", false,-1, 0,0);
-        tracep->declBus(c+3,"ysyx_22050243_ADDER s", false,-1, 0,0);
+        tracep->declQuad(c+1,"a", false,-1, 63,0);
+        tracep->declQuad(c+3,"b", false,-1, 63,0);
+        tracep->declQuad(c+5,"s", false,-1, 63,0);
+        tracep->declBus(c+7,"ysyx_22050243_ADDER DATA_WIDTH", false,-1, 31,0);
+        tracep->declQuad(c+1,"ysyx_22050243_ADDER a", false,-1, 63,0);
+        tracep->declQuad(c+3,"ysyx_22050243_ADDER b", false,-1, 63,0);
+        tracep->declQuad(c+5,"ysyx_22050243_ADDER s", false,-1, 63,0);
     }
 }
 
@@ -65,9 +65,9 @@ void Vysyx_22050243_ADDER___024root__traceFullSub0(Vysyx_22050243_ADDER___024roo
     if (false && oldp) {}  // Prevent unused
     // Body
     {
-        tracep->fullBit(oldp+1,(vlSelf->a));
-        tracep->fullBit(oldp+2,(vlSelf->b));
-        tracep->fullBit(oldp+3,(vlSelf->s));
-        tracep->fullIData(oldp+4,(1U),32);
+        tracep->fullQData(oldp+1,(vlSelf->a),64);
+        tracep->fullQData(oldp+3,(vlSelf->b),64);
+        tracep->fullQData(oldp+5,(vlSelf->s),64);
+        tracep->fullIData(oldp+7,(0x40U),32);
     }
 }

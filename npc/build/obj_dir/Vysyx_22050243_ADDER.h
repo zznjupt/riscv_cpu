@@ -27,9 +27,9 @@ class Vysyx_22050243_ADDER VL_NOT_FINAL {
     // PORTS
     // The application code writes and reads these signals to
     // propagate new values into/out from the Verilated model.
-    VL_IN8(&a,0,0);
-    VL_IN8(&b,0,0);
-    VL_OUT8(&s,0,0);
+    VL_IN64(&a,63,0);
+    VL_IN64(&b,63,0);
+    VL_OUT64(&s,63,0);
 
     // CELLS
     // Public to allow access to /* verilator public */ items.

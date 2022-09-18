@@ -19,9 +19,9 @@ VL_MODULE(Vysyx_22050243_ADDER___024root) {
   public:
 
     // PORTS
-    VL_IN8(a,0,0);
-    VL_IN8(b,0,0);
-    VL_OUT8(s,0,0);
+    VL_IN64(a,63,0);
+    VL_IN64(b,63,0);
+    VL_OUT64(s,63,0);
 
     // INTERNAL VARIABLES
     Vysyx_22050243_ADDER__Syms* vlSymsp;  // Symbol table

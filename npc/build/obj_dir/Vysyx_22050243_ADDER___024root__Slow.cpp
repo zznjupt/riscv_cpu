@@ -52,7 +52,7 @@ void Vysyx_22050243_ADDER___024root___ctor_var_reset(Vysyx_22050243_ADDER___024r
     Vysyx_22050243_ADDER__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vysyx_22050243_ADDER___024root___ctor_var_reset\n"); );
     // Body
-    vlSelf->a = VL_RAND_RESET_I(1);
-    vlSelf->b = VL_RAND_RESET_I(1);
-    vlSelf->s = VL_RAND_RESET_I(1);
+    vlSelf->a = VL_RAND_RESET_Q(64);
+    vlSelf->b = VL_RAND_RESET_Q(64);
+    vlSelf->s = VL_RAND_RESET_Q(64);
 }

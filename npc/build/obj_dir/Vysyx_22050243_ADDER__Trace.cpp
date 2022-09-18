@@ -23,9 +23,9 @@ void Vysyx_22050243_ADDER___024root__traceChgSub0(Vysyx_22050243_ADDER___024root
     if (false && oldp) {}  // Prevent unused
     // Body
     {
-        tracep->chgBit(oldp+0,(vlSelf->a));
-        tracep->chgBit(oldp+1,(vlSelf->b));
-        tracep->chgBit(oldp+2,(vlSelf->s));
+        tracep->chgQData(oldp+0,(vlSelf->a),64);
+        tracep->chgQData(oldp+2,(vlSelf->b),64);
+        tracep->chgQData(oldp+4,(vlSelf->s),64);
     }
 }
 
