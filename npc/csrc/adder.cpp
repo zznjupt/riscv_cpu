@@ -28,8 +28,8 @@ int main(int argc, char** argv) {
 
     // simulate
 
-    int A = 3;
-    int B = 4;
+    int A = 42124214;
+    int B = 3213124124;
 
     top->a = A;
     top->b = B;
