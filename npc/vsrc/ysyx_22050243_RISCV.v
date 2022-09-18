@@ -11,10 +11,10 @@ module ysyx_22050243_RISCV # (
     input  wire rst, // synchronous reset
 
     // instruction port
-    // input                                i_inst_valid           ,
+    input                                i_inst_valid           ,
     input  wire [IBUS_DATA_WIDTH-1 : 0]  i_inst                 ,
-    // output wire                          inst_en_o              ,
-    // output wire                          inst_addr_valid        ,
+    output wire                          inst_en_o              ,
+    output wire                          inst_addr_valid_o      ,
     output wire [IMEM_DATA_WIDTH-1 : 0]  inst_addr_o            ,
 
     // data port
@@ -33,8 +33,13 @@ module ysyx_22050243_RISCV # (
     // input  wire                          i_clint_timer_iqr      ,
     // output wire                          timer_irq_ready_o
 );
-
-    // PC
+    // pipeline
+    wire					   stall_hzd; // stall signal
+	wire					   stall_jalr;
+    wire                       mem_stall;
+    wire [1:0]			       fwd_jalr;
+    wire					   branch_out_signal;
+    
     // PC init
     reg  [DBUS_DATA_WIDTH-1:0] pc = 64'h0000_0000_8000_0000;
     // PC self-increment rusult
@@ -42,14 +47,26 @@ module ysyx_22050243_RISCV # (
 
     always @(posedge clk) begin
         if(rst) pc <= 64'h0000_0000_8000_0000;
+        // stall the pipeline
+        else if(stall_hzd | stall_jalr | inst_stall | mem_stall)
+                pc <= pc;
         // pc += 4 or J inst
         else    pc <= pc_seq_if_stage;
     end
+
+
+
     // ******* IF stage 1 *******  
     wire [IBUS_DATA_WIDTH-1:0] inst_if_stage;
-    
-    assign inst_if_stage = i_inst;
-    assign inst_addr_o   = {pc[IMEM_DATA_WIDTH-1:0]};
+    wire					   inst_stall;
+    wire                       pc_stall ;
+
+    assign inst_addr_o       = {pc[IMEM_DATA_WIDTH-1:0]};               // fetch the I addr
+    assign pc_stall          = stall_hzd | stall_jalr | inst_stall | mem_stall;
+    assign inst_addr_valid_o = (inst_addr_o != 'd0) & (!pc_stall)
+
+    assign inst_if_stage     = (inst_addr_valid_o & i_inst_valid)? i_inst | 'd0; // 
+    assign inst_stall        = inst_addr_valid_o &&
 
     ysyx_22050243_ADDER # (
         .DATA_WIDTH (DBUS_DATA_WIDTH)
@@ -58,8 +75,30 @@ module ysyx_22050243_RISCV # (
         .b (64'd4),
         .c (pc_seq_if_stage)
     );
-
     // IF to ID FFs
+    wire [IBUS_DATA_WIDTH-1:0] inst_if_2_id_ff;
+    wire [DBUS_DATA_WIDTH-1:0] pc_if_2_id_ff;
+    
+    ysyx_22050243_REGSLICE # (
+        .DATA_WIDTH (IBUS_DATA_WIDTH + DBUS_DATA_WIDTH)
+    ) ysyx_22050243_REGSLICE_IF_2_ID (
+        .clk(clk),
+        .rst(rst),
+        .flush(),
+        .stall(stall_hzd | mem_stall | stall_jalr),
+        .en(),
+
+        .din({inst_if_stage, pc}),
+        .dout({inst_if_2_id_ff, pc_if_2_id_ff)
+
+    );
+
+    // **************************
+
+
+
+
+
 
     // ******* ID stage 2 *******
     // ID opcode

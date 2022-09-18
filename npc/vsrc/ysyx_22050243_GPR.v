@@ -8,17 +8,17 @@ module ysyx_22050243_GPR # (
     input  wire [ADDR_WIDTH-1 : 0]  w_addr,
     input  wire [ADDR_WIDTH-1 : 0]  w_data,
     // rs1 port
-    input  wire                     rs1_en,
-    input  wire [ADDR_WIDTH-1 : 0]  rs1_addr,
-    output reg  [DATA_WIDTH-1 : 0]  rs1_data,
+    input  wire                     r1_en,
+    input  wire [ADDR_WIDTH-1 : 0]  r1_addr,
+    output reg  [DATA_WIDTH-1 : 0]  r1_data,
     // rs2 port
-    input  wire                     rs2_en,
-    input  wire [ADDR_WIDTH-1 : 0]  rs2_addr,
-    output reg  [DATA_WIDTH-1 : 0]  rs2_data,
+    input  wire                     r2_en,
+    input  wire [ADDR_WIDTH-1 : 0]  r2_addr,
+    output reg  [DATA_WIDTH-1 : 0]  r2_data,
     // rd  port
-    input  wire                     rd_en,
-    input  wire [ADDR_WIDTH-1 : 0]  rd_addr,
-    output reg  [DATA_WIDTH-1 : 0]  rd_data,
+    input  wire                     r3_en,
+    input  wire [ADDR_WIDTH-1 : 0]  r3_addr,
+    output reg  [DATA_WIDTH-1 : 0]  r3_data,
 
     // GPR direct port 
     // output wire [DATA_WIDTH-1 : 0]  gpr0__$0__o,
@@ -91,28 +91,28 @@ module ysyx_22050243_GPR # (
     
     always @(*) begin
         if(rs1_en) begin
-            if((rs1_addr == w_addr) && w_en) begin
-                rs1_data = w_data;
+            if((r1_addr == w_addr) && w_en) begin
+                r1_data = w_data;
             end
-            else rs1_data = gpr[rs1_addr];
+            else r1_data = gpr[r1_addr];
         end
     end
 
     always @(*) begin
         if(rs2_en) begin
-            if((rs2_addr == w_addr) && w_en) begin
-                rs2_data = w_data;
+            if((r2_addr == w_addr) && w_en) begin
+                r2_data = w_data;
             end
-            else rs2_data = gpr[rs2_addr];
+            else r2_data = gpr[r2_addr];
         end
     end
 
     always @(*) begin
         if(rd_en) begin
-            if((rd_addr == w_addr) && w_en) begin
-                rd_data = w_data;
+            if((r3_addr == w_addr) && w_en) begin
+                r3_data = w_data;
             end
-            else rd_data = gpr[rd_addr];
+            else r3_data = gpr[r3_addr];
         end
     end
 
