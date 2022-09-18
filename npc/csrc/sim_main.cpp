@@ -38,7 +38,7 @@ int main(int argc, char** argv) {
     tfp->dump(main_time); // dump_wave
     int result = top->s;
     printf("A = %d, B = %d, result = %d\n", A, B, result);
-    assert(result == (result == (A + B)));
+    assert((result == (A + B)));
     main_time++;
 
     top->final();
