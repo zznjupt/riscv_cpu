@@ -155,7 +155,9 @@ module ysyx_22050243_RISCV # (
 
     always @(*) begin
         case(opcode_id_stage)
-            `ysyx_22050243_JAL: adder_s2_id_stage = {43{inst_if_2_id_ff[31]}, inst_if_2_id_ff[31], inst_if_2_id_ff[]}
+            `ysyx_22050243_JAL:  adder_s2_id_stage = {43{inst_if_2_id_ff[31]}, inst_if_2_id_ff[31], inst_if_2_id_ff[20], inst_if_2_id_ff[30:21], 1'b0}; // int64_t
+            `ysyx_22050243_JALR: adder_s2_id_stage = {52{inst_if_2_id_ff[31]}, inst_if_2_id_ff[31:20]}; // int64_t
+            default:             adder_s2_id_stage = 64'd0;
         endcase
     end
 
