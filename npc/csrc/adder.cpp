@@ -28,15 +28,15 @@ int main(int argc, char** argv) {
 
     // simulate
 
-    int A = 42124214;
-    int B = 3213124124;
+    uint64_t A = 42124214;
+    uint64_t B = 3213124124;
 
     top->a = A;
     top->b = B;
 
     top->eval();
     tfp->dump(main_time); // dump_wave
-    int result = top->s;
+    uint64_t result = top->s;
     printf("A = %d, B = %d, result = %d\n", A, B, result);
     assert((result == (A + B)));
     main_time++;
