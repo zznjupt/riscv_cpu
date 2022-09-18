@@ -7,19 +7,21 @@
 typedef struct watchpoint {
   int NO;
   struct watchpoint *next;
+
+  /* TODO: Add more members if necessary */
+
   int value;
   int newvalue;
   char Enb;
   char type;
   char str[32];
-  /* TODO: Add more members if necessary */
 
 } WP;
 
-WP* new_wp();
+WP*  new_wp();
 void free_wp(int);
 void print_wp();
-int judge_wp();
+int  judge_wp();
 void init_wp_pool();
 
 #endif
