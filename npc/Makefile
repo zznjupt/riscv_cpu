@@ -1,5 +1,5 @@
 # Makefile
-TOPNAME = ysyx22050243_ADDER
+TOPNAME = ysyx_22050243_ADDER
 # NXDC_FILES = constr/top.nxdc
 # INC_PATH ?=
 
