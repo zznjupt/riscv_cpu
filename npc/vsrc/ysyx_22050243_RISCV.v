@@ -39,7 +39,19 @@ module ysyx_22050243_RISCV # (
     wire                       mem_stall;
     wire [1:0]			       fwd_jalr;
     wire					   branch_out_signal;
-    
+    wire					   jump_signal;
+
+    // CSR interface
+    wire [DBUS_DATA_WIDTH-1:0] w_pc_mtvec;
+    wire [DBUS_DATA_WIDTH-1:0] w_pc_mepc;
+    wire                       w_exception_flush;
+    wire [1:0]                 w_exception_csr_update;
+    wire                       w_irq_flush;
+    wire                       w_mret_csr_update;
+    wire [DBUS_DATA_WIDTH-1:0] w_mie;
+    wire [DBUS_DATA_WIDTH-1:0] w_mstatus;
+
+
     // PC init
     reg  [DBUS_DATA_WIDTH-1:0] pc = 64'h0000_0000_8000_0000;
     // PC self-increment rusult
@@ -64,9 +76,10 @@ module ysyx_22050243_RISCV # (
     assign inst_addr_o       = {pc[IMEM_DATA_WIDTH-1:0]};               // fetch the I addr
     assign pc_stall          = stall_hzd | stall_jalr | inst_stall | mem_stall;
     assign inst_addr_valid_o = (inst_addr_o != 'd0) & (!pc_stall)
+    assign inst_stall        = inst_addr_valid_o && !i_inst_valid
 
     assign inst_if_stage     = (inst_addr_valid_o & i_inst_valid)? i_inst | 'd0; // 
-    assign inst_stall        = inst_addr_valid_o &&
+
 
     ysyx_22050243_ADDER # (
         .DATA_WIDTH (DBUS_DATA_WIDTH)
@@ -82,17 +95,14 @@ module ysyx_22050243_RISCV # (
     ysyx_22050243_REGSLICE # (
         .DATA_WIDTH (IBUS_DATA_WIDTH + DBUS_DATA_WIDTH)
     ) ysyx_22050243_REGSLICE_IF_2_ID (
-        .clk(clk),
-        .rst(rst),
-        .flush(),
-        .stall(stall_hzd | mem_stall | stall_jalr),
-        .en(),
-
-        .din({inst_if_stage, pc}),
-        .dout({inst_if_2_id_ff, pc_if_2_id_ff)
-
+        .clk   (clk),
+        .rst   (rst),
+        .flush (w_irq_flush | w_exception_flush | w_mret_csr_update),
+        .stall (stall_hzd | mem_stall | stall_jalr),
+        .en    (!branch_out_signal & !jump_signal & !inst_stall),
+        .din   ({inst_if_stage  , pc           }),
+        .dout  ({inst_if_2_id_ff, pc_if_2_id_ff})
     );
-
     // **************************
 
 
@@ -107,9 +117,9 @@ module ysyx_22050243_RISCV # (
     // opcode decode result
 	wire	                    alu_src_id_stage;
     wire [2:0]                  mem2reg_id_stage;
-    wire	                    reg_write_id_stage;
-    wire	                    mem_read_id_stage;
-    wire	                    mem_write_id_stage;
+    wire	                    reg_w_id_stage;
+    wire	                    mem_r_id_stage;
+    wire	                    mem_w_id_stage;
     wire	                    branch_id_stage;
     wire [2:0]                  alu_op_id_stage;
 	wire [1:0]					pc_src_id_stage;
@@ -118,18 +128,46 @@ module ysyx_22050243_RISCV # (
 	reg	 [DBUS_DATA_WIDTH-1:0]	adder_s1_id_stage;
 	reg	 [DBUS_DATA_WIDTH-1:0]	adder_s2_id_stage;
 	wire [DBUS_DATA_WIDTH-1:0]	pc_jump_id_stage;
-	wire [DBUS_DATA_WIDTH-1:0]	rf_s1_id_stage;
-	wire						jump_signal;
+	wire [DBUS_DATA_WIDTH-1:0]	gpr_s1_id_stage;
 	
-	wire [RF_ADDR_WIDTH-1:0]    gpr_rd1_addr_id_stage;
-    wire [DBUS_DATA_WIDTH-1:0]	gpr_rd1_data_id_stage;
-	wire [RF_ADDR_WIDTH-1:0]    gpr_rd2_addr_id_stage;
-	wire [DBUS_DATA_WIDTH-1:0]	gpr_rd2_data_id_stage;
+	wire [RF_ADDR_WIDTH-1:0]    gpr_r1_addr_id_stage;
+    wire [DBUS_DATA_WIDTH-1:0]	gpr_r1_data_id_stage;
+	wire [RF_ADDR_WIDTH-1:0]    gpr_r2_addr_id_stage;
+	wire [DBUS_DATA_WIDTH-1:0]	gpr_r2_data_id_stage;
 
 	wire [DBUS_DATA_WIDTH-1:0]  imm_id_stage;
 	wire [3:0]					alu_ctrl_id_stage;
 	
-    assign opcode_id_stage = 
+    assign opcode_id_stage = inst_if_2_id_ff[ 6: 0];
+    assign funct3_id_stage = inst_if_2_id_ff[14:12];
+    assign jump_signal     = (opcode_id_stage == `ysyx_22050243_JAL) | (opcode_id_stage == `ysyx_22050243_JALR)?
+    
+    always @(*) begin
+        case(opcode_id_stage)
+            `ysyx_22050243_JALR:begin
+                // if(fwd_jalr == 2'b01)     adder_s1_id_stage =
+                // else if(fwd_jalr = 2'b10) adder_s1_id_stage =
+                // else                      adder_s1_id_stage = gpr_s1_id_stage;
+            end
+            default :                        adder_s1_id_stage = pc_if_2_id_ff;            
+        endcase
+    end
+
+    always @(*) begin
+        case(opcode_id_stage)
+            `ysyx_22050243_JAL: adder_s2_id_stage = {43{inst_if_2_id_ff[31]}, inst_if_2_id_ff[31], inst_if_2_id_ff[]}
+        endcase
+    end
+
+
+
+    ysyx_22050243_ADDER # (
+        .DATA_WIDTH(DBUS_DATA_WIDTH)
+    ) ysyx_22050243_ADDER_ID (
+        .a (adder_s1_id_stage),
+        .b (adder_s2_id_stage),
+        .s (pc_jump_id_stage)
+    );
 
     // ID to EX FFs
 
