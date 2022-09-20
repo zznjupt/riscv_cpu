@@ -12,10 +12,11 @@ module ysyx_22050243_Mem # (
 
     input           data_w_en,
     input           data_r_en,
-    input  [64:0]   data_addr,
-    input  [64:0]   data_w,
+    input  [63:0]   data_wmask,
+    input  [63:0]   data_addr,
+    input  [63:0]   data_w,
     
-    output [64:0]   data_r
+    output [63:0]   data_r
 );
     assign inst = (inst_en == 1'b1) ? 
 

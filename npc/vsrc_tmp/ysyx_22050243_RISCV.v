@@ -28,12 +28,12 @@ module ysyx_22050243_RISCV # (
 
     input  wire                          i_data_r_valid         ,
     input  wire [DBUS_DATA_WIDTH-1 : 0]  i_data_r               ,
-    output wire                          data_r_en_o            
+    output wire                          data_r_en_o            ,
 
     // IQR port
 
-    // input  wire                          i_clint_timer_iqr      ,
-    // output wire                          timer_irq_ready_o
+    input  wire                          i_clint_timer_iqr      ,
+    output wire                          timer_irq_ready_o
 );
     // pipeline
     wire					   stall_hzd; // stall signal
@@ -121,8 +121,8 @@ module ysyx_22050243_RISCV # (
 	reg	 [DBUS_DATA_WIDTH-1:0]	adder_s1_id_stage;
 	reg	 [DBUS_DATA_WIDTH-1:0]	adder_s2_id_stage;
 	wire [DBUS_DATA_WIDTH-1:0]	pc_jump_id_stage;
+
 	wire [DBUS_DATA_WIDTH-1:0]	gpr_s1_id_stage;
-	
 	wire [GPR_ADDR_WIDTH-1:0]   gpr_r1_addr_id_stage;
     wire [DBUS_DATA_WIDTH-1:0]	gpr_r1_data_id_stage;
 	wire [GPR_ADDR_WIDTH-1:0]   gpr_r2_addr_id_stage;
@@ -167,7 +167,7 @@ module ysyx_22050243_RISCV # (
         .funct3     (funct3_id_stage),
 
         .alu_src    (alu_src_id_stage),
-        .alu_op     (alu_op_id_stage),
+        .alu_op     (alu_op_id_stage)
     );
 
     ysyx_22050243_ALUCtrl ysyx_22050243_ALUCtrl_ (
@@ -184,18 +184,22 @@ module ysyx_22050243_RISCV # (
         .ADDR_WIDTH (GPR_ADDR_WIDTH)
     ) ysyx_22050243_GPR_ (
         .clk        (clk),
-        .w_en       (reg_w_id_stage),
-        .w_addr     (inst)
-        .w_data     ()
-        .r1_addr    (gpr_r1_addr_id_stage),
+        // rd
+        .w_en       (),
+        .w_addr     (inst_if_2_id_ff[11:7])
+        .w_data     (),
+        // rs1
         .r1_en      (1'b1),
-        .r1_data    ()
         .r1_addr    (gpr_r1_addr_id_stage),
-        .r1_en      (1'b1),
-        .r1_data    ()
-        .r1_addr    (gpr_r1_addr_id_stage),
-        .r1_en      (1'b1),
-        .r1_data    ()
+        .r1_data    (gpr_r1_data_id_stage)
+        // rs2
+        .r2_en      (1'b1),
+        .r2_addr    (gpr_r2_addr_id_stage),
+        .r2_data    (gpr_r2_data_id_stage)
+        // JALR read rs1 in IF
+        .r3_en      (1'b1),
+        .r3_addr    (inst_if_2_id_ff[19:15]),
+        .r3_data    (gpr_s1_id_stage)
     );
 
 

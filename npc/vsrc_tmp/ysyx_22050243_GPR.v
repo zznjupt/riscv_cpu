@@ -14,11 +14,11 @@ module ysyx_22050243_GPR # (
 
     input  wire                     r2_en,
     input  wire [ADDR_WIDTH-1 : 0]  r2_addr,
-    output reg  [DATA_WIDTH-1 : 0]  r2_data
+    output reg  [DATA_WIDTH-1 : 0]  r2_data,
 
-    // input  wire                     r3_en,
-    // input  wire [ADDR_WIDTH-1 : 0]  r3_addr,
-    // output reg  [DATA_WIDTH-1 : 0]  r3_data
+    input  wire                     r3_en,
+    input  wire [ADDR_WIDTH-1 : 0]  r3_addr,
+    output reg  [DATA_WIDTH-1 : 0]  r3_data
 
     // GPR direct port 
     // output wire [DATA_WIDTH-1 : 0]  gpr0__$0__o,
@@ -103,12 +103,12 @@ module ysyx_22050243_GPR # (
         end
     end
 
-    // always @(*) begin
-    //     if(r3_en) begin
-    //         if((r3_addr == w_addr) && w_en) r3_data = w_data;
-    //         else                            r3_data = gpr[r3_addr];
-    //     end
-    // end
+    always @(*) begin
+        if(r3_en) begin
+            if((r3_addr == w_addr) && w_en) r3_data = w_data;
+            else                            r3_data = gpr[r3_addr];
+        end
+    end
 
     always @(posedge clk) begin
         if(w_en) gpr[w_addr] <= w_data;
