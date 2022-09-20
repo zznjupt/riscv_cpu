@@ -38,7 +38,7 @@ int main(int argc, char** argv) {
 
     int alu_ctrl = 1;
     uint64_t a = 0x00000050;
-    uint64_t b = 0x00000001;
+    uint64_t b = 0x00000004;
 
     top->alu_ctrl = alu_ctrl;
     top->a = a;
