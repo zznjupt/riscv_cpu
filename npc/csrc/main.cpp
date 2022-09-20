@@ -36,7 +36,7 @@ int main(int argc, char** argv) {
     // uint64_t PC = 0x80000000;
     // uint32_t inst = 0x00448493;
 
-    int alu_ctrl = 7;
+    int alu_ctrl = 6;
     uint64_t a = 0x00000050;
     uint64_t b = 0x00000004;
 
