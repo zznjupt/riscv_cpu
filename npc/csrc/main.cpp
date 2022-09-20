@@ -44,7 +44,7 @@ int main(int argc, char** argv) {
     top->a = a;
     top->b = b;
     top->eval();
-    printf("result = %016x\n",top->alu_out);
+    printf("result = %016lx\n",top->alu_out);
 
 
     
