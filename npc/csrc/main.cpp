@@ -33,23 +33,16 @@ int main(int argc, char** argv) {
     // simulate
 
     uint64_t PC = 0x80000000;
-    uint32_t inst = 0x0;
-
-    
+    uint32_t inst = 0x00448493;
 
     while (sc_time_stamp() < 1000 && !Verilated::gotFinish()) {
          if ((main_time % 10) == 5) top->clk = 1;
          if ((main_time % 10) == 0) top->clk = 0;
          top->eval();
+         printf("result = %ld\n",top->result);
          tfp->dump(main_time);
          main_time++;
      }
-
-
-    uint64_t result = top->s;
-    printf("A = %ld, B = %ld, result = %ld\n", A, B, result);
-    assert((result == (A + B)));
-    main_time++;
 
     top->final();
     tfp->close();
