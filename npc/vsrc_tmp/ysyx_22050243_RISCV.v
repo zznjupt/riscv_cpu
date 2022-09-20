@@ -1,3 +1,5 @@
+`include "ysyx_22050243_DEFINE.v"
+
 module ysyx_22050243_RISCV # (
     parameter IMEM_DATA_WIDTH = 64,  // instruction     memory-address-width
     parameter DMEM_DATA_WIDTH = 64.  // data            memory-address-width
