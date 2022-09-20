@@ -5,7 +5,7 @@ module TOP # (
     input wire         rst,
     input wire  [31:0] i_inst,
     output wire [63:0] result,
-    output wire         out_zero
+    output wire        out_zero
 );
     // IF
     wire [63:0] pc_4;

@@ -23,24 +23,33 @@ int main(int argc, char** argv) {
     // .vcd dependency
     Verilated::traceEverOn(true);
     VerilatedVcdC* tfp = new VerilatedVcdC;
+
+    top->clk = 0;
+    top->rst = 0;
     top->trace(tfp, 0);
     tfp->open("wave.vcd");
 
+
     // simulate
 
-    // uint64_t A = 42124214;
-    // uint64_t B = 3213124124;
+    uint64_t PC = 0x80000000;
+    uint32_t inst = 0x0;
 
-    // top->a = A;
-    // top->b = B;
+    
 
-    // top->inst = pmem_read(top->pc)
-    // top->eval();
-    // tfp->dump(main_time); // dump_wave
-    // uint64_t result = top->s;
-    // printf("A = %ld, B = %ld, result = %ld\n", A, B, result);
-    // assert((result == (A + B)));
-    // main_time++;
+    while (sc_time_stamp() < 1000 && !Verilated::gotFinish()) {
+         if ((main_time % 10) == 5) top->clk = 1;
+         if ((main_time % 10) == 0) top->clk = 0;
+         top->eval();
+         tfp->dump(main_time);
+         main_time++;
+     }
+
+
+    uint64_t result = top->s;
+    printf("A = %ld, B = %ld, result = %ld\n", A, B, result);
+    assert((result == (A + B)));
+    main_time++;
 
     top->final();
     tfp->close();
