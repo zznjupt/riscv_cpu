@@ -1,24 +1,24 @@
 module ysyx_22050243_GPR # (
-    parameter ADDR_WIDTH = 1,
-    parameter DATA_WIDTH = 1
+    parameter ADDR_WIDTH = 5,
+    parameter DATA_WIDTH = 64
 ) (
     input  wire                     clk,
-    // write port
+
     input  wire                     w_en,
     input  wire [ADDR_WIDTH-1 : 0]  w_addr,
-    input  wire [ADDR_WIDTH-1 : 0]  w_data,
-    // rs1 port
+    input  wire [DATA_WIDTH-1 : 0]  w_data,
+
     input  wire                     r1_en,
     input  wire [ADDR_WIDTH-1 : 0]  r1_addr,
     output reg  [DATA_WIDTH-1 : 0]  r1_data,
-    // rs2 port
+
     input  wire                     r2_en,
     input  wire [ADDR_WIDTH-1 : 0]  r2_addr,
-    output reg  [DATA_WIDTH-1 : 0]  r2_data,
-    // rd  port
-    input  wire                     r3_en,
-    input  wire [ADDR_WIDTH-1 : 0]  r3_addr,
-    output reg  [DATA_WIDTH-1 : 0]  r3_data,
+    output reg  [DATA_WIDTH-1 : 0]  r2_data
+
+    // input  wire                     r3_en,
+    // input  wire [ADDR_WIDTH-1 : 0]  r3_addr,
+    // output reg  [DATA_WIDTH-1 : 0]  r3_data
 
     // GPR direct port 
     // output wire [DATA_WIDTH-1 : 0]  gpr0__$0__o,
@@ -54,7 +54,7 @@ module ysyx_22050243_GPR # (
     // output wire [DATA_WIDTH-1 : 0]  gpr30_t5__o,
     // output wire [DATA_WIDTH-1 : 0]  gpr31_t6__o
 );
-    reg [DATA_WIDTH-1:0] gpr [ADDR_WIDTH-1:0] // register file
+    reg [DATA_WIDTH-1:0] gpr [2**ADDR_WIDTH-1:0]; // register file
 
     // assign gpr0__$0__o = gpr[0];
     // assign gpr1__ra__o = gpr[1];
@@ -90,31 +90,25 @@ module ysyx_22050243_GPR # (
     // assign gpr31_t6__o = gpr[31];
     
     always @(*) begin
-        if(rs1_en) begin
-            if((r1_addr == w_addr) && w_en) begin
-                r1_data = w_data;
-            end
-            else r1_data = gpr[r1_addr];
+        if(r1_en) begin
+            if((r1_addr == w_addr) && w_en) r1_data = w_data;
+            else                            r1_data = gpr[r1_addr];
         end
     end
 
     always @(*) begin
-        if(rs2_en) begin
-            if((r2_addr == w_addr) && w_en) begin
-                r2_data = w_data;
-            end
-            else r2_data = gpr[r2_addr];
+        if(r2_en) begin
+            if((r2_addr == w_addr) && w_en) r2_data = w_data;
+            else                            r2_data = gpr[r2_addr];
         end
     end
 
-    always @(*) begin
-        if(rd_en) begin
-            if((r3_addr == w_addr) && w_en) begin
-                r3_data = w_data;
-            end
-            else r3_data = gpr[r3_addr];
-        end
-    end
+    // always @(*) begin
+    //     if(r3_en) begin
+    //         if((r3_addr == w_addr) && w_en) r3_data = w_data;
+    //         else                            r3_data = gpr[r3_addr];
+    //     end
+    // end
 
     always @(posedge clk) begin
         if(w_en) gpr[w_addr] <= w_data;

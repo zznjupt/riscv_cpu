@@ -2,9 +2,9 @@
 # DESCRIPTION: Verilator output: Makefile for building Verilated archive or executable
 #
 # Execute this makefile from the object directory:
-#    make -f VTOP.mk
+#    make -f Vysyx_22050243_ALU.mk
 
-default: /home/admin1/ZZworkspace/git/ysyx-workbench/npc/build/TOP
+default: /home/admin1/ZZworkspace/git/ysyx-workbench/npc/build/ysyx_22050243_ALU
 
 ### Constants...
 # Perl executable (from $PERL)
@@ -30,12 +30,12 @@ VM_SC_TARGET_ARCH = linux
 
 ### Vars...
 # Design prefix (from --prefix)
-VM_PREFIX = VTOP
+VM_PREFIX = Vysyx_22050243_ALU
 # Module prefix (from --prefix)
-VM_MODPREFIX = VTOP
+VM_MODPREFIX = Vysyx_22050243_ALU
 # User CFLAGS (from -CFLAGS on Verilator command line)
 VM_USER_CFLAGS = \
-	-DTOP_NAME="VTOP" \
+	-DTOP_NAME="Vysyx_22050243_ALU" \
 
 # User LDLIBS (from -LDFLAGS on Verilator command line)
 VM_USER_LDLIBS = \
@@ -51,7 +51,7 @@ VM_USER_DIR = \
 
 ### Default rules...
 # Include list of all generated classes
-include VTOP_classes.mk
+include Vysyx_22050243_ALU_classes.mk
 # Include global rules
 include $(VERILATOR_ROOT)/include/verilated.mk
 
@@ -62,7 +62,7 @@ main.o: /home/admin1/ZZworkspace/git/ysyx-workbench/npc/csrc/main.cpp
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
 
 ### Link rules... (from --exe)
-/home/admin1/ZZworkspace/git/ysyx-workbench/npc/build/TOP: $(VK_USER_OBJS) $(VK_GLOBAL_OBJS) $(VM_PREFIX)__ALL.a $(VM_HIER_LIBS)
+/home/admin1/ZZworkspace/git/ysyx-workbench/npc/build/ysyx_22050243_ALU: $(VK_USER_OBJS) $(VK_GLOBAL_OBJS) $(VM_PREFIX)__ALL.a $(VM_HIER_LIBS)
 	$(LINK) $(LDFLAGS) $^ $(LOADLIBES) $(LDLIBS) $(LIBS) $(SC_LIBS) -o $@
 
 

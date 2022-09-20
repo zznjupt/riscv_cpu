@@ -1,5 +1,5 @@
 # Makefile
-TOPNAME = TOP
+TOPNAME = ysyx_22050243_ALU
 # NXDC_FILES = constr/top.nxdc
 # INC_PATH ?=
 

@@ -47,6 +47,7 @@ module TOP # (
 
     wire [63:0]  rs1;
     wire [63:0]  rs2;
+    
     wire  [63:0]  rd;
     // wire [63:0]  s1; 
 
@@ -85,7 +86,6 @@ module TOP # (
     wire [63:0] a;
     wire [63:0] b;
 
-    wire [63:0] alu_result;
     wire        zero;
 
     assign a = rs1;
@@ -97,11 +97,10 @@ module TOP # (
         .a           (a),
         .b           (b),
         .alu_ctrl    (alu_ctrl_id),
-        .alu_result  (alu_result),
+        .alu_out     (rd),
         .zero        (zero)
     );
     assign out_zero = zero;
-    assign rd     = alu_result;
     assign result = rd;
 
 endmodule

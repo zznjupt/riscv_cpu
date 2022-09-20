@@ -1,3 +1,27 @@
+// top define
+
+`define ysyx_22050243_ZERO_WORD 64'h0000_0000_0000_0000
+`define ysyx_22050243_PC_START  64'h0000_0000_8000_0000
+
+// RV32I opcode field(include RV64I extended)
+
+`define ysyx_22050243_LUI       7'b01101_11
+`define ysyx_22050243_AUIPC     7'b00101_11
+
+`define ysyx_22050243_OP_IMM    7'b00100_11
+`define ysyx_22050243_OP_IMM32  7'b00110_11
+`define ysyx_22050243_OP_32     7'b01110_11
+`define ysyx_22050243_OP        7'b01100_11
+
+`define ysyx_22050243_JAL       7'b11011_11
+`define ysyx_22050243_JALR      7'b11001_11
+`define ysyx_22050243_BRANCH    7'b11000_11
+
+`define ysyx_22050243_STORE     7'b01000_11
+`define ysyx_22050243_LOAD      7'b00000_11
+
+`define ysyx_22050243_EBREAK    7'b11100_11
+
 module ysyx_22050243_ImmGen # (
     parameter IBUS_DATA_WIDTH = -1,
     parameter DBUS_DATA_WIDTH = -1
@@ -82,23 +106,23 @@ module ysyx_22050243_ImmGen # (
 
     always @(*) begin
         case(opcode) 
-            `ysyx_22050243_OP                   : {is_R, is_I, is_S, is_B, is_U, is_J} = 6'1_0_0_0_0_0;
+            `ysyx_22050243_OP                   : {is_R, is_I, is_S, is_B, is_U, is_J} = 6'b1_0_0_0_0_0;
 
             `ysyx_22050243_JALR,
             `ysyx_22050243_LOAD,
             `ysyx_22050243_OP_IMM,
-            `ysyx_22050243_OP_IMM32             : {is_R, is_I, is_S, is_B, is_U, is_J} = 6'0_1_0_0_0_0;
+            `ysyx_22050243_OP_IMM32             : {is_R, is_I, is_S, is_B, is_U, is_J} = 6'b0_1_0_0_0_0;
 
-            `ysyx_22050243_STORE                : {is_R, is_I, is_S, is_B, is_U, is_J} = 6'0_0_1_0_0_0;
+            `ysyx_22050243_STORE                : {is_R, is_I, is_S, is_B, is_U, is_J} = 6'b0_0_1_0_0_0;
 
-            `ysyx_22050243_BRANCH               : {is_R, is_I, is_S, is_B, is_U, is_J} = 6'0_0_0_1_0_0;
+            `ysyx_22050243_BRANCH               : {is_R, is_I, is_S, is_B, is_U, is_J} = 6'b0_0_0_1_0_0;
 
             `ysyx_22050243_LUI,
-            `ysyx_22050243_AUIPC                : {is_R, is_I, is_S, is_B, is_U, is_J} = 6'0_0_0_0_1_0;
+            `ysyx_22050243_AUIPC                : {is_R, is_I, is_S, is_B, is_U, is_J} = 6'b0_0_0_0_1_0;
 
-            `ysyx_22050243_JAL                  : {is_R, is_I, is_S, is_B, is_U, is_J} = 6'0_0_0_0_0_1;
+            `ysyx_22050243_JAL                  : {is_R, is_I, is_S, is_B, is_U, is_J} = 6'b0_0_0_0_0_1;
 
-            default                             : {is_R, is_I, is_S, is_B, is_U, is_J} = 6'000000;
+            default                             : {is_R, is_I, is_S, is_B, is_U, is_J} = 6'b000000;
         endcase
     end
 

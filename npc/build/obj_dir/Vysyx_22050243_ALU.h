@@ -5,33 +5,33 @@
 // The class here is then constructed to instantiate the design.
 // See the Verilator manual for examples.
 
-#ifndef VERILATED_VTOP_H_
-#define VERILATED_VTOP_H_  // guard
+#ifndef VERILATED_VYSYX_22050243_ALU_H_
+#define VERILATED_VYSYX_22050243_ALU_H_  // guard
 
 #include "verilated_heavy.h"
 
-class VTOP__Syms;
-class VTOP___024root;
+class Vysyx_22050243_ALU__Syms;
+class Vysyx_22050243_ALU___024root;
 class VerilatedVcdC;
-class VTOP_VerilatedVcd;
+class Vysyx_22050243_ALU_VerilatedVcd;
 
 
 // This class is the main interface to the Verilated model
-class VTOP VL_NOT_FINAL {
+class Vysyx_22050243_ALU VL_NOT_FINAL {
   private:
     // Symbol table holding complete model state (owned by this class)
-    VTOP__Syms* const vlSymsp;
+    Vysyx_22050243_ALU__Syms* const vlSymsp;
 
   public:
 
     // PORTS
     // The application code writes and reads these signals to
     // propagate new values into/out from the Verilated model.
-    VL_IN8(&clk,0,0);
-    VL_IN8(&rst,0,0);
-    VL_IN(&i_inst,31,0);
-    VL_OUT64(&result,63,0);
-    VL_OUT8(&out_zero,0,0);
+    VL_IN64(&a,63,0);
+    VL_IN64(&b,63,0);
+    VL_IN8(&alu_ctrl,3,0);
+    VL_OUT64(&alu_out,63,0);
+    VL_OUT8(&zero,0,0);
 
     // CELLS
     // Public to allow access to /* verilator public */ items.
@@ -39,19 +39,19 @@ class VTOP VL_NOT_FINAL {
 
     // Root instance pointer to allow access to model internals,
     // including inlined /* verilator public_flat_* */ items.
-    VTOP___024root* const rootp;
+    Vysyx_22050243_ALU___024root* const rootp;
 
     // CONSTRUCTORS
     /// Construct the model; called by application code
     /// If contextp is null, then the model will use the default global context
     /// If name is "", then makes a wrapper with a
     /// single model invisible with respect to DPI scope names.
-    explicit VTOP(VerilatedContext* contextp, const char* name = "TOP");
-    explicit VTOP(const char* name = "TOP");
+    explicit Vysyx_22050243_ALU(VerilatedContext* contextp, const char* name = "TOP");
+    explicit Vysyx_22050243_ALU(const char* name = "TOP");
     /// Destroy the model; called (often implicitly) by application code
-    virtual ~VTOP();
+    virtual ~Vysyx_22050243_ALU();
   private:
-    VL_UNCOPYABLE(VTOP);  ///< Copying not allowed
+    VL_UNCOPYABLE(Vysyx_22050243_ALU);  ///< Copying not allowed
 
   public:
     // API METHODS
