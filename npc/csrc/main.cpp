@@ -35,6 +35,12 @@ int main(int argc, char** argv) {
     uint64_t PC = 0x80000000;
     uint32_t inst = 0x00448493;
 
+    top->rst = 1;
+    top->eval();
+    top->rst = 0;
+    top->i_inst = inst;
+    
+
     while (sc_time_stamp() < 1000 && !Verilated::gotFinish()) {
          if ((main_time % 10) == 5) top->clk = 1;
          if ((main_time % 10) == 0) top->clk = 0;
