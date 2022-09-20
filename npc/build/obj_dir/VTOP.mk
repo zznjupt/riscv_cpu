@@ -2,9 +2,9 @@
 # DESCRIPTION: Verilator output: Makefile for building Verilated archive or executable
 #
 # Execute this makefile from the object directory:
-#    make -f Vysyx_22050243_ADDER.mk
+#    make -f VTOP.mk
 
-default: /home/admin1/ZZworkspace/git/ysyx-workbench/npc/build/ysyx_22050243_ADDER
+default: /home/admin1/ZZworkspace/git/ysyx-workbench/npc/build/TOP
 
 ### Constants...
 # Perl executable (from $PERL)
@@ -30,19 +30,19 @@ VM_SC_TARGET_ARCH = linux
 
 ### Vars...
 # Design prefix (from --prefix)
-VM_PREFIX = Vysyx_22050243_ADDER
+VM_PREFIX = VTOP
 # Module prefix (from --prefix)
-VM_MODPREFIX = Vysyx_22050243_ADDER
+VM_MODPREFIX = VTOP
 # User CFLAGS (from -CFLAGS on Verilator command line)
 VM_USER_CFLAGS = \
-	-DTOP_NAME="Vysyx_22050243_ADDER" \
+	-DTOP_NAME="VTOP" \
 
 # User LDLIBS (from -LDFLAGS on Verilator command line)
 VM_USER_LDLIBS = \
 
 # User .cpp files (from .cpp's on Verilator command line)
 VM_USER_CLASSES = \
-	adder \
+	main \
 
 # User .cpp directories (from .cpp's on Verilator command line)
 VM_USER_DIR = \
@@ -51,18 +51,18 @@ VM_USER_DIR = \
 
 ### Default rules...
 # Include list of all generated classes
-include Vysyx_22050243_ADDER_classes.mk
+include VTOP_classes.mk
 # Include global rules
 include $(VERILATOR_ROOT)/include/verilated.mk
 
 ### Executable rules... (from --exe)
 VPATH += $(VM_USER_DIR)
 
-adder.o: /home/admin1/ZZworkspace/git/ysyx-workbench/npc/csrc/adder.cpp
+main.o: /home/admin1/ZZworkspace/git/ysyx-workbench/npc/csrc/main.cpp
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
 
 ### Link rules... (from --exe)
-/home/admin1/ZZworkspace/git/ysyx-workbench/npc/build/ysyx_22050243_ADDER: $(VK_USER_OBJS) $(VK_GLOBAL_OBJS) $(VM_PREFIX)__ALL.a $(VM_HIER_LIBS)
+/home/admin1/ZZworkspace/git/ysyx-workbench/npc/build/TOP: $(VK_USER_OBJS) $(VK_GLOBAL_OBJS) $(VM_PREFIX)__ALL.a $(VM_HIER_LIBS)
 	$(LINK) $(LDFLAGS) $^ $(LOADLIBES) $(LDLIBS) $(LIBS) $(SC_LIBS) -o $@
 
 

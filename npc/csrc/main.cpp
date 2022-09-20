@@ -3,7 +3,7 @@
 #include <assert.h>
 #include <verilated.h>
 #include <verilated_vcd_c.h> // for .vcd
-#include <Vysyx_22050243_ADDER.h> // V{module_name}.h
+#include <VTOP.h> // V{module_name}.h
 
 vluint64_t main_time = 0; // initial sim time
 
@@ -18,7 +18,7 @@ int main(int argc, char** argv) {
 
     // initail 
 	Verilated::commandArgs(argc, argv);
-    Vysyx_22050243_ADDER* top = new Vysyx_22050243_ADDER("top");
+    VTOP* top = new VTOP("top");
 
     // .vcd dependency
     Verilated::traceEverOn(true);
@@ -28,18 +28,19 @@ int main(int argc, char** argv) {
 
     // simulate
 
-    uint64_t A = 42124214;
-    uint64_t B = 3213124124;
+    // uint64_t A = 42124214;
+    // uint64_t B = 3213124124;
 
-    top->a = A;
-    top->b = B;
+    // top->a = A;
+    // top->b = B;
 
-    top->eval();
-    tfp->dump(main_time); // dump_wave
-    uint64_t result = top->s;
-    printf("A = %ld, B = %ld, result = %ld\n", A, B, result);
-    assert((result == (A + B)));
-    main_time++;
+    // top->inst = pmem_read(top->pc)
+    // top->eval();
+    // tfp->dump(main_time); // dump_wave
+    // uint64_t result = top->s;
+    // printf("A = %ld, B = %ld, result = %ld\n", A, B, result);
+    // assert((result == (A + B)));
+    // main_time++;
 
     top->final();
     tfp->close();

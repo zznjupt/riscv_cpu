@@ -74,18 +74,14 @@ module ysyx_22050243_RISCV # (
     wire [IBUS_DATA_WIDTH-1:0] inst_if_stage;
     wire					   inst_stall;
     wire                       pc_stall ;
-
     assign inst_addr_o       = {pc[IMEM_DATA_WIDTH-1:0]};               // fetch the I addr
     assign pc_stall          = stall_hzd | stall_jalr | inst_stall | mem_stall;
     assign inst_addr_valid_o = (inst_addr_o != 'd0) & (!pc_stall)
     assign inst_stall        = inst_addr_valid_o && !i_inst_valid
-
-    assign inst_if_stage     = (inst_addr_valid_o & i_inst_valid)? i_inst | 'd0; // 
-
-
-    ysyx_22050243_ADDER # (
+    assign inst_if_stage     = (inst_addr_valid_o & i_inst_valid)? i_inst | 'd0;
+    ysyx_22050243_Adder # (
         .DATA_WIDTH (DBUS_DATA_WIDTH)
-    ) ysyx_22050243_ADDER_IF (
+    ) ysyx_22050243_Adder_IF (
         .a (pc),
         .b (64'd4),
         .c (pc_seq_if_stage)
@@ -93,10 +89,9 @@ module ysyx_22050243_RISCV # (
     // IF to ID FFs
     wire [IBUS_DATA_WIDTH-1:0] inst_if_2_id_ff;
     wire [DBUS_DATA_WIDTH-1:0] pc_if_2_id_ff;
-    
-    ysyx_22050243_REGSLICE # (
+    ysyx_22050243_Regslice # (
         .DATA_WIDTH (IBUS_DATA_WIDTH + DBUS_DATA_WIDTH)
-    ) ysyx_22050243_REGSLICE_IF_2_ID (
+    ) ysyx_22050243_Regslice_IF_2_ID (
         .clk   (clk),
         .rst   (rst),
         .flush (w_irq_flush | w_exception_flush | w_mret_csr_update),
@@ -106,10 +101,6 @@ module ysyx_22050243_RISCV # (
         .dout  ({inst_if_2_id_ff, pc_if_2_id_ff})
     );
     // **************************
-
-
-
-
 
 
     // ******* ID stage 2 *******
@@ -132,9 +123,9 @@ module ysyx_22050243_RISCV # (
 	wire [DBUS_DATA_WIDTH-1:0]	pc_jump_id_stage;
 	wire [DBUS_DATA_WIDTH-1:0]	gpr_s1_id_stage;
 	
-	wire [RF_ADDR_WIDTH-1:0]    gpr_r1_addr_id_stage;
+	wire [GPR_ADDR_WIDTH-1:0]   gpr_r1_addr_id_stage;
     wire [DBUS_DATA_WIDTH-1:0]	gpr_r1_data_id_stage;
-	wire [RF_ADDR_WIDTH-1:0]    gpr_r2_addr_id_stage;
+	wire [GPR_ADDR_WIDTH-1:0]   gpr_r2_addr_id_stage;
 	wire [DBUS_DATA_WIDTH-1:0]	gpr_r2_data_id_stage;
 
 	wire [DBUS_DATA_WIDTH-1:0]  imm_id_stage;
@@ -142,7 +133,7 @@ module ysyx_22050243_RISCV # (
 	
     assign opcode_id_stage = inst_if_2_id_ff[ 6: 0];
     assign funct3_id_stage = inst_if_2_id_ff[14:12];
-    assign jump_signal     = (opcode_id_stage == `ysyx_22050243_JAL) | (opcode_id_stage == `ysyx_22050243_JALR)?
+    assign jump_signal     = (opcode_id_stage == `ysyx_22050243_JAL) | (opcode_id_stage == `ysyx_22050243_JALR);
     
     always @(*) begin
         case(opcode_id_stage)
@@ -163,15 +154,51 @@ module ysyx_22050243_RISCV # (
         endcase
     end
 
-
-
-    ysyx_22050243_ADDER # (
+    ysyx_22050243_Adder # (
         .DATA_WIDTH(DBUS_DATA_WIDTH)
-    ) ysyx_22050243_ADDER_ID (
+    ) ysyx_22050243_Adder_ID (
         .a (adder_s1_id_stage),
         .b (adder_s2_id_stage),
         .s (pc_jump_id_stage)
     );
+
+    ysyx_22050243_Ctrl ysyx_22050243_Ctrl_ (
+        .opcode     (opcode_id_stage),
+        .funct3     (funct3_id_stage),
+
+        .alu_src    (alu_src_id_stage),
+        .alu_op     (alu_op_id_stage),
+    );
+
+    ysyx_22050243_ALUCtrl ysyx_22050243_ALUCtrl_ (
+        .alu_op     (alu_op_id_stage),
+        .funct      ({inst_if_2_id_ff[30], inst_if_2_id_ff[14:12]}),
+        .alu_ctrl   (alu_ctrl_id_stage)
+    );
+
+    assign gpr_r1_addr_id_stage = inst_if_2_id_ff[19:15];
+    assign gpr_r2_addr_id_stage = inst_if_2_id_ff[24:20];
+
+    ysyx_22050243_GPR # (
+        .DATA_WIDTH (DBUS_DATA_WIDTH),
+        .ADDR_WIDTH (GPR_ADDR_WIDTH)
+    ) ysyx_22050243_GPR_ (
+        .clk        (clk),
+        .w_en       (reg_w_id_stage),
+        .w_addr     (inst)
+        .w_data     ()
+        .r1_addr    (gpr_r1_addr_id_stage),
+        .r1_en      (1'b1),
+        .r1_data    ()
+        .r1_addr    (gpr_r1_addr_id_stage),
+        .r1_en      (1'b1),
+        .r1_data    ()
+        .r1_addr    (gpr_r1_addr_id_stage),
+        .r1_en      (1'b1),
+        .r1_data    ()
+    );
+
+
 
     // ID to EX FFs
 

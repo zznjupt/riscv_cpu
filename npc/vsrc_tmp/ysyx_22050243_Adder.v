@@ -1,4 +1,4 @@
-module ysyx_22050243_ADDER # (
+module ysyx_22050243_Adder # (
     parameter DATA_WIDTH = 64
 ) (
     input  [DATA_WIDTH-1 : 0] a,

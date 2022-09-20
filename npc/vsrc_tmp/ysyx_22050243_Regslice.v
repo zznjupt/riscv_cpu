@@ -1,4 +1,4 @@
-module ysyx_22050243_REGSLICE # (
+module ysyx_22050243_Regslice # (
     parameter DATA_WIDTH = 1
 ) (
     input  wire                     clk,

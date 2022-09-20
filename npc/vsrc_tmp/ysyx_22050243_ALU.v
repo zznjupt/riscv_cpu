@@ -58,17 +58,17 @@ module ysyx_22050243_ALU # (
         case (alu_ctrl)
             4'b0000: alu_out = add_result;                              //  add  | addi
             4'b0001: alu_out = a << b[5:0];                             //  sll  | slli
-            4'b0010: alu_out = (a  < b [5:0])? 'd1 : 'd0                //  slt  | slti
-            4'b0011: alu_out = (ua < ub[5:0])? 'd1 : 'd0                //  sltu | sltiu
+            4'b0010: alu_out = (a  < b [5:0])? 'd1 : 'd0;               //  slt  | slti
+            4'b0011: alu_out = (ua < ub[5:0])? 'd1 : 'd0;               //  sltu | sltiu
             4'b0100: alu_out = a ^ b;                                   //  xor  | xori
             4'b0101: alu_out = a >> b[5:0];                             //  srl  | srli
-            4'b0110: alu_out = a | b                                    //  or   | ori
-            4'b0111: alu_out = a & b                                    //  and  | andi
+            4'b0110: alu_out = a | b;                                   //  or   | ori
+            4'b0111: alu_out = a & b;                                   //  and  | andi
             4'b1000: alu_out = sub_result;                              //  sub
-            4'b1001: alu_out = {{32{add_result[31]}}, add_result[31:0]} //  addw | addiw 
-            4'b
+            4'b1001: alu_out = {{32{add_result[31]}}, add_result[31:0]};//  addw | addiw 
+            
+            default: alu_out = 'd0;
         endcase
     end
-
 
 endmodule
