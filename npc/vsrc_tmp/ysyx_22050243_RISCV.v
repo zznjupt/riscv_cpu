@@ -35,7 +35,7 @@ module ysyx_22050243_RISCV # (
     input  wire                          i_clint_timer_iqr      ,
     output wire                          timer_irq_ready_o
 );
-    // pipeline
+    // pipeline hazard|stall|clint and so on
     wire					   stall_hzd; // stall signal
 	wire					   stall_jalr;
     wire                       mem_stall;
