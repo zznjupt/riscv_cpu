@@ -1,10 +1,25 @@
-`include "ysyx_22050243_DEFINE.v"
+`define ysyx_22050243_LUI       7'b01101_11
+`define ysyx_22050243_AUIPC     7'b00101_11
+
+`define ysyx_22050243_OP_IMM    7'b00100_11
+`define ysyx_22050243_OP_IMM32  7'b00110_11
+`define ysyx_22050243_OP_32     7'b01110_11
+`define ysyx_22050243_OP        7'b01100_11
+
+`define ysyx_22050243_JAL       7'b11011_11
+`define ysyx_22050243_JALR      7'b11001_11
+`define ysyx_22050243_BRANCH    7'b11000_11
+
+`define ysyx_22050243_STORE     7'b01000_11
+`define ysyx_22050243_LOAD      7'b00000_11
+
+`define ysyx_22050243_EBREAK    7'b11100_11
 
 module ysyx_22050243_RISCV # (
     parameter IMEM_DATA_WIDTH = 64,  // instruction     memory-address-width
-    parameter DMEM_DATA_WIDTH = 64.  // data            memory-address-width
+    parameter DMEM_DATA_WIDTH = 64,  // data            memory-address-width
     parameter IBUS_DATA_WIDTH = 32,  // instruction-bus data-width
-    parameter DBUS_DATA_WIDTH = 64   // data-bus        data-width
+    parameter DBUS_DATA_WIDTH = 64,  // data-bus        data-width
     parameter GPR_ADDR_WIDTH  = 5    // gpr             address-width (log2(32) = 5) 
 
 ) (
@@ -194,9 +209,9 @@ module ysyx_22050243_RISCV # (
         else if(w_mret_csr_update)                               pc <= w_pc_mepc;
         else if(w_exception_flush | w_irq_flush)                     pc <= {w_pc_mtvec[DBUS_DATA_WIDTH-1:2], 2'b00};
         else if(branch_out_signal)                               pc <= adder_s_ex_stage;
-        else if(jump_signal)                                     pc <= pc_jump_id_stage
+        else if(jump_signal)                                     pc <= pc_jump_id_stage;
         else if(stall_hzd | stall_jalr | inst_stall | mem_stall) pc <= pc;
-        else if(inst_if_stage[6:0] == `JALR)                     pc <= {pc_seq_if_stage[DBUS_DATA_WIDTH-1:1], 1'b0};
+        else if(inst_if_stage[6:0] == `ysyx_22050243_JALR)                     pc <= {pc_seq_if_stage[DBUS_DATA_WIDTH-1:1], 1'b0};
         else                                                     pc <= pc_seq_if_stage;
     end
 
@@ -208,7 +223,7 @@ module ysyx_22050243_RISCV # (
     assign pc_stall          = stall_hzd | stall_jalr | inst_stall | mem_stall;
     assign inst_addr_valid_o = (inst_addr_o != 'd0) & (!pc_stall);
     assign inst_stall        = inst_addr_valid_o && !i_inst_valid;
-    assign inst_if_stage     = (inst_addr_valid_o & i_inst_valid)? i_inst | 'd0;
+    assign inst_if_stage     = (inst_addr_valid_o & i_inst_valid)? i_inst : 'd0;
 
 
     ysyx_22050243_Adder # (
@@ -245,7 +260,7 @@ module ysyx_22050243_RISCV # (
         case(opcode_id_stage)
             `ysyx_22050243_JALR:begin
                 if(fwd_jalr == 2'b01)     adder_s1_id_stage = result_ex_2_mem_ff;
-                else if(fwd_jalr = 2'b10) adder_s1_id_stage = w_data_wb_stage;
+                else if(fwd_jalr == 2'b10) adder_s1_id_stage = w_data_wb_stage;
                 else                      adder_s1_id_stage = gpr_s1_id_stage;
             end
             default :                     adder_s1_id_stage = pc_if_2_id_ff;            
@@ -255,9 +270,9 @@ module ysyx_22050243_RISCV # (
     always @(*) begin
         case(opcode_id_stage)
             `ysyx_22050243_JAL:  
-            adder_s2_id_stage = {43{inst_if_2_id_ff[31]}, inst_if_2_id_ff[31], inst_if_2_id_ff[20], inst_if_2_id_ff[30:21], 1'b0}; 
+            adder_s2_id_stage = {{43{inst_if_2_id_ff[31]}}, inst_if_2_id_ff[31], inst_if_2_id_ff[20], inst_if_2_id_ff[30:21], 1'b0}; 
             `ysyx_22050243_JALR: 
-            adder_s2_id_stage = {52{inst_if_2_id_ff[31]}, inst_if_2_id_ff[31:20]}; // int64_t
+            adder_s2_id_stage = {{52{inst_if_2_id_ff[31]}}, inst_if_2_id_ff[31:20]}; // int64_t
             default:             
             adder_s2_id_stage = 64'd0;
         endcase
@@ -346,12 +361,13 @@ module ysyx_22050243_RISCV # (
         .stall           (stall_hzd)
     );
     // ID to EX FFs
-    ysyx_22050243_Regslice_ID_2_EX # (
-        .DATA_WIDTH(1+1+3+1+1+1+1+3+2+4+ IBUS_DATA_WIDTH + DBUS_DATA_WIDTH + DBUS_DATA_WIDTH + DBUS_DATA_WIDTH + DBUS_DATA_WIDTH),
+    ysyx_22050243_Regslice # (
+        .DATA_WIDTH(1+1+3+1+1+1+1+3+2+4+ IBUS_DATA_WIDTH + DBUS_DATA_WIDTH + DBUS_DATA_WIDTH + DBUS_DATA_WIDTH + DBUS_DATA_WIDTH)
+    ) ysyx_22050243_Regslice_ID_2_EX (
         .rst(rst),
         .en(!branch_out_signal & !stall_hzd & ! stall_jalr),
         .stall(mem_stall),
-        .flush(w_irq_flushv | w_exception_flush | w_mret_csr_update),
+        .flush(w_irq_flush | w_exception_flush | w_mret_csr_update),
         .din({
             alu_src_id_stage, mem2reg_id_stage, reg_w_id_stage, mem_r_id_stage, mem_w_id_stage,
             branch_id_stage, alu_op_id_stage, pc_src_id_stage, alu_ctrl_id_stage, csr_r_id_stage, 
@@ -429,7 +445,7 @@ module ysyx_22050243_RISCV # (
         .rd_ex_2_mem_ff    (inst_ex_2_mem_ff[11:7]),
         .rd_mem_2_wb_ff    (inst_mem_2_wb_ff[11:7]),
         .reg_w_ex_2_mem_ff (reg_w_ex_2_mem_ff),
-        .reg_w_mem_2_wb_ff (reg_w_mem_2_wb_ff),
+        .reg_w_mem_2_wb_ff (reg_w_mem_2_wb_ff)
     );
 
     always @(*) begin
@@ -515,7 +531,7 @@ module ysyx_22050243_RISCV # (
 
     // MEM to WB FFs
     ysyx_22050243_Regslice # (
-        .DATA_WIDTH (1= DBUS_DATA_WIDTH + DBUS_DATA_WIDTH + DBUS_DATA_WIDTH + DBUS_DATA_WIDTH +3+1+ DBUS_DATA_WIDTH +DBUS_DATA_WIDTH + IBUS_DATA_WIDTH + DBUS_DATA_WIDTH)
+        .DATA_WIDTH (1+ DBUS_DATA_WIDTH + DBUS_DATA_WIDTH + DBUS_DATA_WIDTH + DBUS_DATA_WIDTH +3+1+ DBUS_DATA_WIDTH +DBUS_DATA_WIDTH + IBUS_DATA_WIDTH + DBUS_DATA_WIDTH)
     ) ysyx_22050243_Regslice_MEM_2_WB (
         .clk   (clk),
         .rst   (rst),
@@ -610,6 +626,7 @@ module ysyx_22050243_RISCV # (
             3'b110:  w_csr_data =  {59'd0, inst_mem_2_wb_ff[19:15]}                | ysyx_22050243_CSR_.csr[inst_mem_2_wb_ff[31:20]];
             3'b111:  w_csr_data = ~{59'd0, inst_mem_2_wb_ff[19:15]}                & ysyx_22050243_CSR_.csr[inst_mem_2_wb_ff[31:20]];
             default: w_csr_data =   64'd0;
+        endcase
     end
 
 
