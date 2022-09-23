@@ -12,7 +12,7 @@ module ysyx_22050243_Load # (
                 3'b000:  load_out = {{56{mem_out[7]}}, mem_out[7:0]};
                 3'b000:  load_out = {{48{mem_out[7]}}, mem_out[15:0]};
                 3'b000:  load_out = {{32{mem_out[7]}}, mem_out[31:0]};
-                3'b000:  load_out = mem_out
+                3'b000:  load_out = mem_out;
                 3'b000:  load_out = {56'b0, mem_out[7:0]};
                 3'b000:  load_out = {48'b0, mem_out[15:0]};
                 3'b000:  load_out = {32'b0, mem_out[31:0]};

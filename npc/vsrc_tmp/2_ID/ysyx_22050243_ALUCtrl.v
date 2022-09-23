@@ -33,7 +33,7 @@ module ysyx_22050243_ALUCtrl (
                 4'b?111:            alu_ctrl = 4'b0111; // andi
                 default:            alu_ctrl = 4'b1111;
             endcase
-        else if(apu_op == 3'b110)
+        else if(alu_op == 3'b110)
             case(funct)
                 4'b0000:            alu_ctrl = 4'b1001; // addw
                 4'b1000:            alu_ctrl = 4'b1010; // subw

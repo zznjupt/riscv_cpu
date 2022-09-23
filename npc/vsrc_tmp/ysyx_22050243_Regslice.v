@@ -9,7 +9,7 @@ module ysyx_22050243_Regslice # (
 
     input  wire [DATA_WIDTH-1 : 0]  din,
     output reg  [DATA_WIDTH-1 : 0]  dout 
-)
+);
     always @(posedge clk) begin
         if(rst)         dout <= 'd0;
         else if(flush)  dout <= 'd0;
