@@ -31,3 +31,4 @@ module ysyx_22050243_jalr_hazard_detect # (
         end
         else fwd_jalr = 2'b00; 
     end
+endmodule

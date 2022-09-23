@@ -32,7 +32,6 @@ module ysyx_22050243_ImmGen # (
     wire [6:0] opcode;
 
     reg        is_R;
-
     reg        is_I;
     reg        is_S;
     reg        is_B;
@@ -107,21 +106,13 @@ module ysyx_22050243_ImmGen # (
     always @(*) begin
         case(opcode) 
             `ysyx_22050243_OP                   : {is_R, is_I, is_S, is_B, is_U, is_J} = 6'b1_0_0_0_0_0;
-
-            `ysyx_22050243_JALR,
-            `ysyx_22050243_LOAD,
-            `ysyx_22050243_OP_IMM,
-            `ysyx_22050243_OP_IMM32             : {is_R, is_I, is_S, is_B, is_U, is_J} = 6'b0_1_0_0_0_0;
-
+            `ysyx_22050243_JALR,`ysyx_22050243_LOAD,`ysyx_22050243_OP_IMM,`ysyx_22050243_OP_IMM32: 
+                                                  {is_R, is_I, is_S, is_B, is_U, is_J} = 6'b0_1_0_0_0_0;
             `ysyx_22050243_STORE                : {is_R, is_I, is_S, is_B, is_U, is_J} = 6'b0_0_1_0_0_0;
-
             `ysyx_22050243_BRANCH               : {is_R, is_I, is_S, is_B, is_U, is_J} = 6'b0_0_0_1_0_0;
-
-            `ysyx_22050243_LUI,
-            `ysyx_22050243_AUIPC                : {is_R, is_I, is_S, is_B, is_U, is_J} = 6'b0_0_0_0_1_0;
-
+            `ysyx_22050243_LUI,`ysyx_22050243_AUIPC: 
+                                                  {is_R, is_I, is_S, is_B, is_U, is_J} = 6'b0_0_0_0_1_0;
             `ysyx_22050243_JAL                  : {is_R, is_I, is_S, is_B, is_U, is_J} = 6'b0_0_0_0_0_1;
-
             default                             : {is_R, is_I, is_S, is_B, is_U, is_J} = 6'b000000;
         endcase
     end
