@@ -3,7 +3,7 @@
 #include <assert.h>
 #include <verilated.h>
 #include <verilated_vcd_c.h> // for .vcd
-#include <Vysyx_22050243_ALU.h> // V{module_name}.h
+#include <Vysyx_22050243_RISCV.h> // V{module_name}.h
 
 vluint64_t main_time = 0; // initial sim time
 
@@ -18,7 +18,7 @@ int main(int argc, char** argv) {
 
     // initail 
 	Verilated::commandArgs(argc, argv);
-    Vysyx_22050243_ALU* top = new Vysyx_22050243_ALU("top");
+    Vysyx_22050243_RISCV* top = new Vysyx_22050243_RISCV("top");
 
     // .vcd dependency
     Verilated::traceEverOn(true);
