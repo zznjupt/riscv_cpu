@@ -6,7 +6,7 @@
 #if !defined(__ISA_NATIVE__) || defined(__NATIVE_USE_KLIB__)
 
 
-/* we use this so that we can do without the ctype library */
+/* use this so that we can do without the c-lib */
 static inline int isdigit(int ch) {
   return (ch >= '0') && (ch <= '9');
 }
