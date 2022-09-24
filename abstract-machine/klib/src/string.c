@@ -5,21 +5,21 @@
 #if !defined(__ISA_NATIVE__) || defined(__NATIVE_USE_KLIB__)
 
 size_t strlen(const char *s) {
-  panic("Not implemented");
+  // panic("Not implemented");
   const char *s_ = s;
   while(*s) s++;
   return s-s_;
 }
 
 char *strcpy(char *dst, const char *src) {
-  panic("Not implemented");
+  // panic("Not implemented");
   char *s = dst;
   while((*dst++ = *src++));
   return s;
 }
 
 char *strncpy(char *dst, const char *src, size_t n) {
-  panic("Not implemented");
+  // panic("Not implemented");
   char *dscan;
   const char *sscan;
   size_t count;
@@ -36,7 +36,7 @@ char *strncpy(char *dst, const char *src, size_t n) {
 }
 
 char *strcat(char *dst, const char *src) {
-  panic("Not implemented");
+  // panic("Not implemented");
   char *s = dst;
   while(*dst) dst++;
   while((*dst++ = *src++));
@@ -44,7 +44,7 @@ char *strcat(char *dst, const char *src) {
 }
 
 int strcmp(const char *s1, const char *s2) {
-  panic("Not implemented");
+  // panic("Not implemented");
   while(*s1 != '\0' && *s1 == *s2) {
     s1++;
     s2++;
@@ -53,7 +53,7 @@ int strcmp(const char *s1, const char *s2) {
 }
 
 int strncmp(const char *s1, const char *s2, size_t n) {
-  panic("Not implemented");
+  // panic("Not implemented");
   if(n == 0) return 0;
   while(n-- != 0 && *s1 == *s2) {
     if(n == 0 || *s1 =='\0' || *s2 == '\0') break;
@@ -64,7 +64,7 @@ int strncmp(const char *s1, const char *s2, size_t n) {
 }
 
 void *memset(void *s, int c, size_t n) {
-  panic("Not implemented");
+  // panic("Not implemented");
   char *s_ = (char *) s;
   for(int i = 0; i < n; i++) {
     *(s_ + i) = c;
@@ -73,7 +73,7 @@ void *memset(void *s, int c, size_t n) {
 }
 
 void *memmove(void *dst, const void *src, size_t n) {
-  panic("Not implemented");
+  // panic("Not implemented");
   char       *s1 = dst;
   const char *s2 = src;
   if(s2 < s1 && s1 < s2 + n) {
@@ -87,7 +87,7 @@ void *memmove(void *dst, const void *src, size_t n) {
 }
 
 void *memcpy(void *out, const void *in, size_t n) {
-  panic("Not implemented");
+  // panic("Not implemented");
   char *cin  = (char* )in;
   char *cout = (char* )out;
   for(int i = 0; i < n; i++) cout[i] = cin[i];
@@ -95,7 +95,7 @@ void *memcpy(void *out, const void *in, size_t n) {
 }
 
 int memcmp(const void *s1, const void *s2, size_t n) {
-  panic("Not implemented");
+  // panic("Not implemented");
   unsigned char *cs2  = (unsigned char* )s2;
   unsigned char *cs1  = (unsigned char* )s1;
   for(int i = 1; i < n; i++) {
