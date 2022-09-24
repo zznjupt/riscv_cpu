@@ -36,7 +36,7 @@ char *strncpy(char *dst, const char *src, size_t n) {
 }
 
 char *strcat(char *dst, const char *src) {
-  // panic("Not implemented");
+  panic("Not implemented");
   char *s = dst;
   while(*dst) dst++;
   while((*dst++ = *src++));
