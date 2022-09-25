@@ -95,6 +95,7 @@ int readIRingbuf(char *buf, uint32_t len) {
     memcpy(buf, pValid, len);
     pValid = pValid + len;
   }
+  printf("#\n");
   validLen -= len;
   printf("r: validLen = %d\n", validLen);
   return len;
