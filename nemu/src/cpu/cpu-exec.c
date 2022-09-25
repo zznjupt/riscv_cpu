@@ -180,7 +180,7 @@ void cpu_exec(uint64_t n) {
   execute(n);
   int readLen = readIRingbuf(readbuf, 100);
   for(int i = 0; i < readLen; i++) {
-    printf("%c ", (char)readbuf[i]);
+    printf("%c", (char)readbuf[i]);
   }
   printf("\n");
   releaseIRingbuf();
