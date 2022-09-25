@@ -80,6 +80,7 @@ int writeIRingbuf(char* buf, uint32_t addLen) {
 
 int readIRingbuf(char *buf, uint32_t len) {
   if(pHead == NULL) return -1;
+  printf("#\n");
   assert(buf);
   if(validLen == 0) return 0;
   if(len > validLen) len = validLen;
