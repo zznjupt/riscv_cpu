@@ -36,7 +36,7 @@ static char  *pHead      = NULL; // 环形缓冲区的首地址
 static char  *pTail      = NULL; // 环形缓冲区的尾地址
 static char  *pValid     = NULL; // 已使用的缓冲区的首地址
 static char  *pValidTail = NULL; // 已使用的缓冲区的尾地址
-char readbuf[100];
+char readbuf[10];
 
 void initIRingbuf(void) {
   if(pHead == NULL) pHead = (char*) malloc(BUFFER_SIZE);
@@ -131,13 +131,12 @@ static void exec_once(Decode *s, vaddr_t pc) {
   if (space_len < 0) space_len = 0;
   space_len = space_len * 3 + 1;
   memset(p, ' ', space_len);
-   writeIRingbuf(p, 20);
   p += space_len;
   
   void disassemble(char *str, int size, uint64_t pc, uint8_t *code, int nbyte);
   disassemble(p, s->logbuf + sizeof(s->logbuf) - p,
       MUXDEF(CONFIG_ISA_x86, s->snpc, s->pc), (uint8_t *)&s->isa.inst.val, ilen);
-  
+  writeIRingbuf(p, 20);
 #endif
 }
 
