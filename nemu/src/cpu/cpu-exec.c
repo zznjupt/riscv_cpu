@@ -74,7 +74,7 @@ int writeIRingbuf(char* buf, uint32_t addLen) {
   } else {
     validLen += addLen;
   }
-  printf("w: validLen = %d\n", validLen);
+  // printf("w: validLen = %d\n", validLen);
   return 0;
 }
 
@@ -98,7 +98,7 @@ int readIRingbuf(char *buf, uint32_t len) {
   }
   
   validLen -= len;
-  // printf("r: validLen = %d\n", validLen);
+  printf("r: validLen = %d\n", validLen);
   return len;
 }
 
