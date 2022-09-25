@@ -181,8 +181,8 @@ void cpu_exec(uint64_t n) {
 
   initIRingbuf();
   execute(n);
-  int readLen = readIRingbuf(readbuf, 128);
-  for(int i = 0; i < readLen; i++) {
+  readIRingbuf(readbuf, 128);
+  for(int i = 0; i < 128; i++) {
     printf("%c", (char)readbuf[i]);
   }
   printf("\n");
