@@ -89,7 +89,7 @@ int readIRingbuf(char *buf, uint32_t len) {
     int len1 = pTail - pValid;
     int len2 = len - len1;
     memcpy(buf, pValid, len1);
-    printf("#\n");
+    // printf("#\n");
     memcpy(buf + len1, pHead, len2);
     pValid = pValid + len2;        
   } else {
@@ -188,7 +188,7 @@ void cpu_exec(uint64_t n) {
 
   initIRingbuf();
   execute(n);
-  for(int i = 0; i < 4; i++) {
+  for(int i = 0; i < 3; i++) {
     readIRingbuf(readbuf, 128);
     puts(readbuf);
   }
