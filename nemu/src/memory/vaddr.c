@@ -21,7 +21,7 @@ word_t vaddr_ifetch(vaddr_t addr, int len) {
 }
 
 word_t vaddr_read(vaddr_t addr, int len) {
-  printf("Read the address:  0x%016lx , data lenth = %d\n", addr, len);
+  printf("Read the address:   0x%016lx , data lenth = %d\n", addr, len);
   return paddr_read(addr, len);
 }
 
