@@ -37,6 +37,7 @@ static char  *pTail      = NULL; // 环形缓冲区的尾地址
 static char  *pValid     = NULL; // 已使用的缓冲区的首地址
 static char  *pValidTail = NULL; // 已使用的缓冲区的尾地址
 char readbuf[128];
+char *nn ="\n";
 
 void initIRingbuf(void) {
   if(pHead == NULL) pHead = (char*) malloc(BUFFER_SIZE);
@@ -110,6 +111,7 @@ static void trace_and_difftest(Decode *_this, vaddr_t dnpc) {
   if (g_print_step) { 
     IFDEF(CONFIG_ITRACE, puts(_this->logbuf));
     writeIRingbuf(_this->logbuf, 128); 
+    writeIRingbuf(nn, 1);
   }
   IFDEF(CONFIG_DIFFTEST, difftest_step(_this->pc, dnpc));
 }
