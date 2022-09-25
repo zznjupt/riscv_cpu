@@ -188,6 +188,7 @@ void cpu_exec(uint64_t n) {
     readIRingbuf(readbuf, 128);
     puts(readbuf);
   }
+  printf("\n");
   releaseIRingbuf();
 
   uint64_t timer_end = get_time();
