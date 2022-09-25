@@ -186,9 +186,7 @@ void cpu_exec(uint64_t n) {
   execute(n);
   readIRingbuf(readbuf, 129);
   printf("validLen = %d\n", validLen);
-  for(int i = 0; i < 129; i++) {
-    printf("%c", (char)readbuf[i]);
-  }
+  puts(readbuf);
   printf("\n");
   releaseIRingbuf();
 
