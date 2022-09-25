@@ -24,7 +24,7 @@
  * You can modify this value as you want.
  */
 #define MAX_INST_TO_PRINT INT_FAST64_MAX // 10 -> max
-#define BUFFER_SIZE 100 //  iringbuf size
+#define BUFFER_SIZE 1000 //  iringbuf size
 
 CPU_state cpu = {};
 uint64_t g_nr_guest_inst = 0;
