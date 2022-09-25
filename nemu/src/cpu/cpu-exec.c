@@ -24,14 +24,81 @@
  * You can modify this value as you want.
  */
 #define MAX_INST_TO_PRINT INT_FAST64_MAX // 10 -> max
+#define BUFFER_SIZE 100 //  iringbuf size
 
 CPU_state cpu = {};
 uint64_t g_nr_guest_inst = 0;
 static uint64_t g_timer = 0; // unit: us
 static bool g_print_step = false;
 
+static uint32_t validLen;           // 已使用的数据长度
+static char  *pHead      = NULL; // 环形缓冲区的首地址
+static char  *pTail      = NULL; // 环形缓冲区的尾地址
+static char  *pValid     = NULL; // 已使用的缓冲区的首地址
+static char  *pValidTail = NULL; // 已使用的缓冲区的尾地址
+char readbuf[10];
 
+void initIRingbuf(void) {
+  if(pHead == NULL) pHead = (char*) malloc(BUFFER_SIZE);
+  pValid = pValidTail = pHead;
+  pTail  = pHead + BUFFER_SIZE;
+  validLen = 0;
+}
 
+int writeIRingbuf(char* buf, uint32_t addLen) {
+  if(addLen > BUFFER_SIZE) return -2;
+  if(pHead == NULL)        return -1;
+  assert(buf);
+  // 将要存入的数据 copy 到 pValidTail 处
+  if(pValidTail + addLen > pTail) {
+    int len1 = pTail - pValidTail;
+    int len2 = addLen - len1;
+    memcpy(pValidTail, buf, len1);
+    memcpy(pHead, buf + len1, len2);
+    pValidTail = pHead + len2;
+  } else {
+    memcpy(pValidTail, buf, addLen);
+    pValidTail += addLen;
+  }
+  if(validLen + addLen > BUFFER_SIZE) {
+    int moveLen = validLen + addLen - BUFFER_SIZE;
+    if(pValid + moveLen > pTail) {
+      int len1 = pTail - pValid;
+      int len2 = moveLen - len1;
+      pValid = pHead + len2;
+    } else {
+      pValid = pValid + moveLen;
+    }
+    validLen = BUFFER_SIZE;
+  } else {
+    validLen += addLen;
+  }
+  return 0;
+}
+
+int readIRingbuf(char *buf, uint32_t len) {
+  if(pHead == NULL) return -1;
+  assert(buf);
+  if(validLen == 0) return 0;
+  if(len > validLen) len = validLen;
+  if(pValid + len > pTail) {
+    int len1 = pTail - pValidTail;
+    int len2 = len - len1;
+    memcpy(buf, pValid, len1);
+    memcpy(buf + len1, pHead, len2);
+    pValid = pValid + len2;        
+  } else {
+    memcpy(buf, pValid, len);
+    pValid = pValid + len;
+  }
+  validLen -= len;
+  return len;
+}
+
+void releaseIRingbuf(void) {
+  if(pHead != NULL) free(pHead);
+  pHead = NULL;
+}
 
 
 void device_update();
@@ -68,6 +135,7 @@ static void exec_once(Decode *s, vaddr_t pc) {
   void disassemble(char *str, int size, uint64_t pc, uint8_t *code, int nbyte);
   disassemble(p, s->logbuf + sizeof(s->logbuf) - p,
       MUXDEF(CONFIG_ISA_x86, s->snpc, s->pc), (uint8_t *)&s->isa.inst.val, ilen);
+  writeIRingbuf(p, 10);
 #endif
 }
 
@@ -108,7 +176,14 @@ void cpu_exec(uint64_t n) {
 
   uint64_t timer_start = get_time();
 
+  initIRingbuf();
   execute(n);
+  int readLen = readIRingbuf(readbuf, 100);
+  for(int i = 0; i < readLen; i++) {
+    printf("%c ", (char)readbuf[i]);
+  }
+  printf("\n");
+  releaseIRingbuf();
 
   uint64_t timer_end = get_time();
   g_timer += timer_end - timer_start;
