@@ -98,7 +98,7 @@ int readIRingbuf(char *buf, uint32_t len) {
   }
   
   validLen -= len;
-  printf("r: validLen = %d\n", validLen);
+  // printf("r: validLen = %d\n", validLen);
   return len;
 }
 
