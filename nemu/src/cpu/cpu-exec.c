@@ -31,7 +31,7 @@ uint64_t g_nr_guest_inst = 0;
 static uint64_t g_timer = 0; // unit: us
 static bool g_print_step = false;
 
-static uint32_t validLen;           // 已使用的数据长度
+static uint32_t validLen;        // 已使用的数据长度
 static char  *pHead      = NULL; // 环形缓冲区的首地址
 static char  *pTail      = NULL; // 环形缓冲区的尾地址
 static char  *pValid     = NULL; // 已使用的缓冲区的首地址
@@ -74,6 +74,7 @@ int writeIRingbuf(char* buf, uint32_t addLen) {
   } else {
     validLen += addLen;
   }
+  printf("w: validLen = %d\n", validLen);
   return 0;
 }
 
