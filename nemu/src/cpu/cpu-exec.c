@@ -189,10 +189,10 @@ void cpu_exec(uint64_t n) {
   initIRingbuf();
 
   execute(n);
-  for(int i = 0; i < 3; i++) {
-    readIRingbuf(readbuf, 128);
-    puts(readbuf);
-  }
+  // for(int i = 0; i < 3; i++) {
+  //   readIRingbuf(readbuf, 128);
+  //   puts(readbuf);
+  // }
 
   releaseIRingbuf();
 
