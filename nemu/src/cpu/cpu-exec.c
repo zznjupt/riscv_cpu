@@ -24,7 +24,7 @@
  * You can modify this value as you want.
  */
 #define MAX_INST_TO_PRINT INT_FAST64_MAX // 10 -> max
-#define BUFFER_SIZE 128*3 //  iringbuf size
+#define BUFFER_SIZE (128*3) //  iringbuf size
 
 CPU_state cpu = {};
 uint64_t g_nr_guest_inst = 0;
@@ -36,7 +36,7 @@ static char  *pHead      = NULL; // 环形缓冲区的首地址
 static char  *pTail      = NULL; // 环形缓冲区的尾地址
 static char  *pValid     = NULL; // 已使用的缓冲区的首地址
 static char  *pValidTail = NULL; // 已使用的缓冲区的尾地址
-// char readbuf[128];
+char readbuf[128];
 char *nn ="\n";
 
 void initIRingbuf(void) {
@@ -185,7 +185,6 @@ void cpu_exec(uint64_t n) {
   initIRingbuf();
   execute(n);
   for(int i = 0; i < 3; i++) {
-    char readbuf[128];
     readIRingbuf(readbuf, 128);
     puts(readbuf);
   }
