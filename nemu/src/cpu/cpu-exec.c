@@ -24,7 +24,7 @@
  * You can modify this value as you want.
  */
 #define MAX_INST_TO_PRINT INT_FAST64_MAX // 10 -> max
-#define BUFFER_SIZE 128*3 //  iringbuf size
+#define BUFFER_SIZE 128*4 //  iringbuf size
 
 CPU_state cpu = {};
 uint64_t g_nr_guest_inst = 0;
@@ -184,7 +184,7 @@ void cpu_exec(uint64_t n) {
 
   initIRingbuf();
   execute(n);
-  for(int i = 0; i < 3; i++) {
+  for(int i = 0; i < 4; i++) {
     readIRingbuf(readbuf, 128);
     puts(readbuf);
   }
