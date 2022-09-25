@@ -36,7 +36,7 @@ static char  *pHead      = NULL; // 环形缓冲区的首地址
 static char  *pTail      = NULL; // 环形缓冲区的尾地址
 static char  *pValid     = NULL; // 已使用的缓冲区的首地址
 static char  *pValidTail = NULL; // 已使用的缓冲区的尾地址
-char readbuf[128*8];
+char readbuf[128];
 
 void initIRingbuf(void) {
   if(pHead == NULL) pHead = (char*) malloc(BUFFER_SIZE);
