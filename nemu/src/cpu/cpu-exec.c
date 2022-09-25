@@ -94,6 +94,7 @@ int readIRingbuf(char *buf, uint32_t len) {
     pValid = pValid + len;
   }
   validLen -= len;
+  printf("r: validLen = %d\n", validLen);
   return len;
 }
 
@@ -185,7 +186,7 @@ void cpu_exec(uint64_t n) {
   initIRingbuf();
   execute(n);
   readIRingbuf(readbuf, 129*2);
-  printf("validLen = %d\n", validLen);
+  
   puts(readbuf);
   printf("\n");
   releaseIRingbuf();
