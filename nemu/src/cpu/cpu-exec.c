@@ -86,7 +86,7 @@ int readIRingbuf(char *buf, uint32_t len) {
   // printf("#\n");
   if(len > validLen) len = validLen;
   if(pValid + len > pTail) {
-    int len1 = pTail - pValidTail;
+    int len1 = pTail - pValid;
     int len2 = len - len1;
     memcpy(buf, pValid, len1);
     printf("#\n");
