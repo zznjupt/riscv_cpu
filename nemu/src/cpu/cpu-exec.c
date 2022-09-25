@@ -24,7 +24,7 @@
  * You can modify this value as you want.
  */
 #define MAX_INST_TO_PRINT INT_FAST64_MAX // 10 -> max
-#define BUFFER_SIZE 200 //  iringbuf size
+#define BUFFER_SIZE 128*8 //  iringbuf size
 
 CPU_state cpu = {};
 uint64_t g_nr_guest_inst = 0;
@@ -36,7 +36,7 @@ static char  *pHead      = NULL; // 环形缓冲区的首地址
 static char  *pTail      = NULL; // 环形缓冲区的尾地址
 static char  *pValid     = NULL; // 已使用的缓冲区的首地址
 static char  *pValidTail = NULL; // 已使用的缓冲区的尾地址
-char readbuf[200];
+char readbuf[128*8];
 
 void initIRingbuf(void) {
   if(pHead == NULL) pHead = (char*) malloc(BUFFER_SIZE);
