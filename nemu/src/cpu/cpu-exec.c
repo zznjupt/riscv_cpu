@@ -83,6 +83,7 @@ int readIRingbuf(char *buf, uint32_t len) {
   printf("#\n");
   assert(buf);
   if(validLen == 0) return 0;
+  printf("#\n");
   if(len > validLen) len = validLen;
   if(pValid + len > pTail) {
     int len1 = pTail - pValidTail;
