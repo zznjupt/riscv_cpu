@@ -18,16 +18,16 @@
 #include "../local-include/reg.h"
 
 bool isa_difftest_checkregs(CPU_state *ref_r, vaddr_t pc) {
-  // if(cpu.pc != ref_r->pc) {
-  //   printf("input pc 0x%016lx\n", cpu.pc);
-  //   printf("ref pc 0x%016lx\n", ref_r->pc);
-  //   printf("wrong in pc\n");
-  //   return false;
-  // }
-  for(int i = 0; i < 32; i++) {
-    if(cpu.gpr[i] != ref_r->gpr[i]) printf("wrong in pgr[%d], value is 0x%16lx\n", i, ref_r->gpr[i]);
+  if(cpu.pc != ref_r->pc) {
+    printf("input pc 0x%016lx\n", cpu.pc);
+    printf("ref pc 0x%016lx\n", ref_r->pc);
+    printf("wrong in pc\n");
     return false;
   }
+  // for(int i = 0; i < 32; i++) {
+  //   if(cpu.gpr[i] != ref_r->gpr[i]) printf("wrong in pgr[%d], value is 0x%16lx\n", i, ref_r->gpr[i]);
+  //   return false;
+  // }
   return true;
 }
 
