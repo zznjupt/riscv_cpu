@@ -51,6 +51,8 @@ int main(int argc, char** argv) {
 
     top->eval();
     printf("ebreak_flag = %d\n", ebreak_flag);
+    printf("opcode = 0x%2x\n", opcode);
+    printf("funct = 0x%1x\n", funct3);
     while(ebreak_flag == 1) {
         printf("ebreak_flag = %d\n", ebreak_flag);
         // printf("wait for \"ebreak\"\n");
