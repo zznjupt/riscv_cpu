@@ -28,20 +28,20 @@ char *strcpy(char *dst, const char *src) {
 }
 
 char *strncpy(char *dst, const char *src, size_t n) {
-  panic("Not implemented");
-  // char *dscan;
-  // const char *sscan;
-  // size_t count;
+  // panic("Not implemented");
+  char *dscan;
+  const char *sscan;
+  size_t count;
 
-  // dscan = dst;
-  // sscan = src;
-  // count = n;
-  // while(count > 0) {
-  //   --count;
-  //   if((*dscan++ = *sscan++) == '\0') break;
-  // }
-  // while(count-- >0) *dscan++ = '\0';
-  // return dst;
+  dscan = dst;
+  sscan = src;
+  count = n;
+  while(count > 0) {
+    --count;
+    if((*dscan++ = *sscan++) == '\0') break;
+  }
+  while(count-- >0) *dscan++ = '\0';
+  return dst;
 }
 
 char *strcat(char *dst, const char *src) {
@@ -96,11 +96,11 @@ void *memmove(void *dst, const void *src, size_t n) {
 }
 
 void *memcpy(void *out, const void *in, size_t n) {
-  // panic("Not implemented");
-  char *cin  = (char* )in;
-  char *cout = (char* )out;
-  for(int i = 0; i < n; i++) cout[i] = cin[i];
-  return out; 
+  panic("Not implemented");
+  // char *cin  = (char* )in;
+  // char *cout = (char* )out;
+  // for(int i = 0; i < n; i++) cout[i] = cin[i];
+  // return out; 
 }
 
 int memcmp(const void *s1, const void *s2, size_t n) {
