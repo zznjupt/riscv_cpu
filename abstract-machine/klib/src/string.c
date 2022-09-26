@@ -14,6 +14,7 @@ size_t strlen(const char *s) {
 //add
 
 size_t strnlen(const char *s, size_t n) {
+  // panic("Not implemented");
   const char *s_;
   for (s_ = s; n-- && *s_ != '\0'; ++s_);
   return s_-s;
