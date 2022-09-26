@@ -49,12 +49,12 @@ int main(int argc, char** argv) {
     top->opcode = opcode;
     top->funct3 = funct3; 
 
-    top->eval();
+    // top->eval();
     printf("ebreak_flag = %d\n", ebreak_flag);
-    // while(ebreak_flag = 1) {
-    //     printf("ebreak_flag = %d\n", ebreak_flag);
-    //     // printf("wait for \"ebreak\"\n");
-    // }
+    while(ebreak_flag = 1) {
+        printf("ebreak_flag = %d\n", ebreak_flag);
+        // printf("wait for \"ebreak\"\n");
+    }
 
     // while (sc_time_stamp() < 1000 && !Verilated::gotFinish()) {
     //      if ((main_time % 10) == 5) top->clk = 1;
