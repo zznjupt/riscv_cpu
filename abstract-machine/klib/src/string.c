@@ -82,25 +82,25 @@ void *memset(void *s, int c, size_t n) {
 }
 
 void *memmove(void *dst, const void *src, size_t n) {
-  // panic("Not implemented");
-  char       *s1 = dst;
-  const char *s2 = src;
-  if(s2 < s1 && s1 < s2 + n) {
-    s2 += n;
-    s1 += n;
-    while(n--) * --s1 = * --s2;
-  } else {
-    while(n--) * s1++ = * s2++;
-  }
-  return dst;
+  panic("Not implemented");
+  // char       *s1 = dst;
+  // const char *s2 = src;
+  // if(s2 < s1 && s1 < s2 + n) {
+  //   s2 += n;
+  //   s1 += n;
+  //   while(n--) * --s1 = * --s2;
+  // } else {
+  //   while(n--) * s1++ = * s2++;
+  // }
+  // return dst;
 }
 
 void *memcpy(void *out, const void *in, size_t n) {
-  panic("Not implemented");
-  // char *cin  = (char* )in;
-  // char *cout = (char* )out;
-  // for(int i = 0; i < n; i++) cout[i] = cin[i];
-  // return out; 
+  // panic("Not implemented");
+  char *cin  = (char* )in;
+  char *cout = (char* )out;
+  for(int i = 0; i < n; i++) cout[i] = cin[i];
+  return out; 
 }
 
 int memcmp(const void *s1, const void *s2, size_t n) {
