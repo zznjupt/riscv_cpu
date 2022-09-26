@@ -50,7 +50,7 @@ int main(int argc, char** argv) {
     top->funct3 = funct3; 
 
     top->eval();
-    while(ebreak_flag = 0) {
+    while(ebreak_flag = 1) {
         printf("wait for \"ebreak\"\n");
     }
 
