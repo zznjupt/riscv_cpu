@@ -49,9 +49,9 @@ int main(int argc, char** argv) {
     top->opcode = opcode;
     top->funct3 = funct3; 
 
-    // top->eval();
+    top->eval();
     printf("ebreak_flag = %d\n", ebreak_flag);
-    while(ebreak_flag = 1) {
+    while(ebreak_flag == 1) {
         printf("ebreak_flag = %d\n", ebreak_flag);
         // printf("wait for \"ebreak\"\n");
     }
