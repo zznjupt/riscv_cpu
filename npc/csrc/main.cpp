@@ -55,7 +55,10 @@ int main(int argc, char** argv) {
     printf("funct = 0x%1x\n", funct3);
     while(ebreak_flag == 1) {
         printf("ebreak_flag = %d\n", ebreak_flag);
-        // printf("wait for \"ebreak\"\n");
+            top->final();
+            tfp->close();
+            delete top;
+            return 0;
     }
 
     // while (sc_time_stamp() < 1000 && !Verilated::gotFinish()) {
