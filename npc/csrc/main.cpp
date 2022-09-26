@@ -3,12 +3,18 @@
 #include <assert.h>
 #include <verilated.h>
 #include <verilated_vcd_c.h> // for .vcd
-#include <Vysyx_22050243_RISCV.h> // V{module_name}.h
+#include <Vysyx_22050243_Ctrl.h> // V{module_name}.h
+#include <svdpi.h>
 
 vluint64_t main_time = 0; // initial sim time
 
 double sc_time_stamp() {
 	return main_time;
+}
+
+int ebreak_flag = 0;
+extern "C" void ebreak() {
+    ebreak_flag = 1;
 }
 
 int main(int argc, char** argv) {
@@ -18,7 +24,7 @@ int main(int argc, char** argv) {
 
     // initail 
 	Verilated::commandArgs(argc, argv);
-    Vysyx_22050243_RISCV* top = new Vysyx_22050243_RISCV("top");
+    Vysyx_22050243_Ctrl* top = new Vysyx_22050243_Ctrl("top");
 
     // .vcd dependency
     Verilated::traceEverOn(true);
@@ -36,18 +42,17 @@ int main(int argc, char** argv) {
     // uint64_t PC = 0x80000000;
     // uint32_t inst = 0x00448493;
 
-    int alu_ctrl = 6;
-    uint64_t a = 0x00000050;
-    uint64_t b = 0x00000004;
+    uint32_t opcode = 0xD3;
+    uint32_t funct3 = 0x0;
 
-    top->alu_ctrl = alu_ctrl;
-    top->a = a;
-    top->b = b;
+
+    top->opcode = opcode;
+    top->funct3 = funct3; 
+
     top->eval();
-    printf("result = %016lx\n",top->alu_out);
-
-
-    
+    while(ebreak_flag = 0) {
+        printf("wait for \"ebreak\"");
+    }
 
     // while (sc_time_stamp() < 1000 && !Verilated::gotFinish()) {
     //      if ((main_time % 10) == 5) top->clk = 1;
