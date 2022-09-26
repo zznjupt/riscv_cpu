@@ -91,7 +91,16 @@ static char* number(char *str, long num, int base, int size, int precision, int 
 
 
 int printf(const char *fmt, ...) {
-  panic("Not implemented");
+//   panic("Not implemented");
+    va_list args;
+    va_start(args, fmt);
+    char out[1000];
+    int out_len = vsprintf(out, fmt, args);
+    va_end(args);
+    for(int i = 0; i < out_len; i++) {
+        putch(out[i]);
+    }
+    return 0;
 }
 
 int vsprintf(char *out, const char *fmt, va_list ap) {
