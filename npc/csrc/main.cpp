@@ -53,7 +53,7 @@ int main(int argc, char** argv) {
     printf("ebreak_flag = %d\n", ebreak_flag);
     while(ebreak_flag = 1) {
         printf("ebreak_flag = %d\n", ebreak_flag);
-        printf("wait for \"ebreak\"\n");
+        // printf("wait for \"ebreak\"\n");
     }
 
     // while (sc_time_stamp() < 1000 && !Verilated::gotFinish()) {
