@@ -51,7 +51,7 @@ int main(int argc, char** argv) {
 
     top->eval();
     while(ebreak_flag = 0) {
-        printf("wait for \"ebreak\"");
+        printf("wait for \"ebreak\"\n");
     }
 
     // while (sc_time_stamp() < 1000 && !Verilated::gotFinish()) {
