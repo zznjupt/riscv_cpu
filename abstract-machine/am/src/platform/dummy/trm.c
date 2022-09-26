@@ -3,7 +3,7 @@
 Area heap = RANGE(NULL, NULL);
 
 void putch(char ch) {
-  outb(SERIAL_PORT, ch);
+  // outb(SERIAL_PORT, ch);
 }
 
 void halt(int code) {
