@@ -4,7 +4,7 @@
 #include <verilated.h>
 #include <verilated_vcd_c.h> // for .vcd
 #include <Vysyx_22050243_Ctrl.h> // V{module_name}.h
-#include <svdpi.h>
+// #include <svdpi.h>
 
 vluint64_t main_time = 0; // initial sim time
 
