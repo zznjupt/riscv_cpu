@@ -42,7 +42,7 @@ int main(int argc, char** argv) {
     // uint64_t PC = 0x80000000;
     // uint32_t inst = 0x00448493;
 
-    uint32_t opcode = 0xD2;
+    uint32_t opcode = 0xD3;
     uint32_t funct3 = 0x0;
 
 
@@ -50,9 +50,10 @@ int main(int argc, char** argv) {
     top->funct3 = funct3; 
 
     top->eval();
-    while(ebreak_flag = 1) {
-        printf("wait for \"ebreak\"\n");
-    }
+    printf("ebreak_flag = %d\n", ebreak_flag);
+    // while(ebreak_flag = 1) {
+    //     printf("wait for \"ebreak\"\n");
+    // }
 
     // while (sc_time_stamp() < 1000 && !Verilated::gotFinish()) {
     //      if ((main_time % 10) == 5) top->clk = 1;
