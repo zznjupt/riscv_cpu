@@ -104,14 +104,14 @@ void *memcpy(void *out, const void *in, size_t n) {
 }
 
 int memcmp(const void *s1, const void *s2, size_t n) {
-  // panic("Not implemented");
-  unsigned char *cs2  = (unsigned char* )s2;
-  unsigned char *cs1  = (unsigned char* )s1;
-  for(int i = 1; i < n; i++) {
-    if(cs2[i] < cs1[i]) return -1;
-    if(cs2[i] > cs1[i]) return 1;
-  }
-  return 0;
+  panic("Not implemented");
+  // unsigned char *cs2  = (unsigned char* )s2;
+  // unsigned char *cs1  = (unsigned char* )s1;
+  // for(int i = 1; i < n; i++) {
+  //   if(cs2[i] < cs1[i]) return -1;
+  //   if(cs2[i] > cs1[i]) return 1;
+  // }
+  // return 0;
 }
 
 #endif
