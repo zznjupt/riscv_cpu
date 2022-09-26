@@ -6,9 +6,9 @@
 
 size_t strlen(const char *s) {
   // panic("Not implemented");
-  const char *s_ = s;
-  while(*s) s++;
-  return s-s_;
+  size_t len = 0;
+  while((*s++) != '\0') len++;
+  return len;
 }
 
 //add
