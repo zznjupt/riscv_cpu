@@ -73,12 +73,12 @@ int strncmp(const char *s1, const char *s2, size_t n) {
 }
 
 void *memset(void *s, int c, size_t n) {
-  // panic("Not implemented");
-  char *s_ = (char *) s;
-  for(int i = 0; i < n; i++) {
-    *(s_ + i) = c;
-  }
-  return s;
+  panic("Not implemented");
+  // char *s_ = (char *) s;
+  // for(int i = 0; i < n; i++) {
+  //   *(s_ + i) = c;
+  // }
+  // return s;
 }
 
 void *memmove(void *dst, const void *src, size_t n) {
