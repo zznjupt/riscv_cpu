@@ -8,6 +8,7 @@ module ysyx_22050243_Mem # (
 
     input  [63:0]   inst_addr,
     input           inst_en,
+
     output [31:0]   inst,
 
     input           data_w_en,
@@ -15,6 +16,7 @@ module ysyx_22050243_Mem # (
     input  [63:0]   data_wmask,
     input  [63:0]   data_addr,
     input  [63:0]   data_w,
+    
     output [63:0]   data_r
 );
     

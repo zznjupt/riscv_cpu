@@ -31,26 +31,42 @@ module ysyx_22050243_Ctrl (
 );
     always @(*) begin
         case (opcode)
-            7'b00000_00:             {csr_r, alu_src, mem2reg, reg_w, mem_r, mem_w, branch, pc_src_ctrl, alu_op} = 14'b0_0_000_0_0_0_0_00_000;
-            `ysyx_22050243_LUI:      {csr_r, alu_src, mem2reg, reg_w, mem_r, mem_w, branch, pc_src_ctrl, alu_op} = 14'b0_0_010_1_0_0_0_00_000;
-            `ysyx_22050243_AUIPC:    {csr_r, alu_src, mem2reg, reg_w, mem_r, mem_w, branch, pc_src_ctrl, alu_op} = 14'b0_0_100_1_0_0_0_00_000;
-            `ysyx_22050243_JAL:      {csr_r, alu_src, mem2reg, reg_w, mem_r, mem_w, branch, pc_src_ctrl, alu_op} = 14'b0_0_011_1_0_0_0_01_000;
-            `ysyx_22050243_JALR:     {csr_r, alu_src, mem2reg, reg_w, mem_r, mem_w, branch, pc_src_ctrl, alu_op} = 14'b0_0_011_1_0_0_0_10_000;
-            `ysyx_22050243_BRANCH:   {csr_r, alu_src, mem2reg, reg_w, mem_r, mem_w, branch, pc_src_ctrl, alu_op} = 14'b0_0_000_0_0_0_1_00_001;
-            `ysyx_22050243_LOAD:     {csr_r, alu_src, mem2reg, reg_w, mem_r, mem_w, branch, pc_src_ctrl, alu_op} = 14'b0_1_001_1_1_0_0_00_000;
-            `ysyx_22050243_STORE:    {csr_r, alu_src, mem2reg, reg_w, mem_r, mem_w, branch, pc_src_ctrl, alu_op} = 14'b0_1_000_0_0_1_0_00_000;
-            `ysyx_22050243_OP_IMM:   {csr_r, alu_src, mem2reg, reg_w, mem_r, mem_w, branch, pc_src_ctrl, alu_op} = 14'b0_1_000_1_0_0_0_00_011;
-            `ysyx_22050243_OP:       {csr_r, alu_src, mem2reg, reg_w, mem_r, mem_w, branch, pc_src_ctrl, alu_op} = 14'b0_0_000_1_0_0_0_00_010;
+            7'b00000_00:             
+            {csr_r, alu_src, mem2reg, reg_w, mem_r, mem_w, branch, pc_src_ctrl, alu_op} = 14'b0_0_000_0_0_0_0_00_000;
+            `ysyx_22050243_LUI:     // lui      
+            {csr_r, alu_src, mem2reg, reg_w, mem_r, mem_w, branch, pc_src_ctrl, alu_op} = 14'b0_0_010_1_0_0_0_00_000;
+            `ysyx_22050243_AUIPC:   // auipc 
+            {csr_r, alu_src, mem2reg, reg_w, mem_r, mem_w, branch, pc_src_ctrl, alu_op} = 14'b0_0_100_1_0_0_0_00_000;
+            `ysyx_22050243_JAL:     // jal 
+            {csr_r, alu_src, mem2reg, reg_w, mem_r, mem_w, branch, pc_src_ctrl, alu_op} = 14'b0_0_011_1_0_0_0_01_000;
+            `ysyx_22050243_JALR:    // jalr
+            {csr_r, alu_src, mem2reg, reg_w, mem_r, mem_w, branch, pc_src_ctrl, alu_op} = 14'b0_0_011_1_0_0_0_10_000;
+            `ysyx_22050243_BRANCH:  // beq, bne, blt, bge, bltu, bgeu 
+            {csr_r, alu_src, mem2reg, reg_w, mem_r, mem_w, branch, pc_src_ctrl, alu_op} = 14'b0_0_000_0_0_0_1_00_001;
+            `ysyx_22050243_LOAD:    // lb, lh, lw, lbu, lhu  
+            {csr_r, alu_src, mem2reg, reg_w, mem_r, mem_w, branch, pc_src_ctrl, alu_op} = 14'b0_1_001_1_1_0_0_00_000;
+            `ysyx_22050243_STORE:   // sb, sh, sw 
+            {csr_r, alu_src, mem2reg, reg_w, mem_r, mem_w, branch, pc_src_ctrl, alu_op} = 14'b0_1_000_0_0_1_0_00_000;
+            `ysyx_22050243_OP_IMM:  // addi,     slti, sltiu, xori, ori, andi, slli, srli, srai 
+            {csr_r, alu_src, mem2reg, reg_w, mem_r, mem_w, branch, pc_src_ctrl, alu_op} = 14'b0_1_000_1_0_0_0_00_011;
+            `ysyx_22050243_OP:      // add, sub, slt,  sltu,  xor,  or,  and,  sll,  srl,  sra 
+            {csr_r, alu_src, mem2reg, reg_w, mem_r, mem_w, branch, pc_src_ctrl, alu_op} = 14'b0_0_000_1_0_0_0_00_010;
             // fence
-            7'b00011_11:             {csr_r, alu_src, mem2reg, reg_w, mem_r, mem_w, branch, pc_src_ctrl, alu_op} = 14'b0_0_000_0_0_0_0_00_000;
+            7'b00011_11:             
+            {csr_r, alu_src, mem2reg, reg_w, mem_r, mem_w, branch, pc_src_ctrl, alu_op} = 14'b0_0_000_0_0_0_0_00_000;
             // CSR
             7'b11100_11: begin
-                if(funct3 === 3'b000){csr_r, alu_src, mem2reg, reg_w, mem_r, mem_w, branch, pc_src_ctrl, alu_op} = 14'b0_0_000_0_0_0_0_00_000;
-                else                 {csr_r, alu_src, mem2reg, reg_w, mem_r, mem_w, branch, pc_src_ctrl, alu_op} = 14'b1_0_101_1_0_0_0_00_000;
+                if(funct3 === 3'b000)
+                {csr_r, alu_src, mem2reg, reg_w, mem_r, mem_w, branch, pc_src_ctrl, alu_op} = 14'b0_0_000_0_0_0_0_00_000;
+                else                 
+                {csr_r, alu_src, mem2reg, reg_w, mem_r, mem_w, branch, pc_src_ctrl, alu_op} = 14'b1_0_101_1_0_0_0_00_000;
             end
-            `ysyx_22050243_OP_IMM32: {csr_r, alu_src, mem2reg, reg_w, mem_r, mem_w, branch, pc_src_ctrl, alu_op} = 14'b0_1_000_1_0_0_0_00_111;
-            `ysyx_22050243_OP_32:    {csr_r, alu_src, mem2reg, reg_w, mem_r, mem_w, branch, pc_src_ctrl, alu_op} = 14'b0_0_000_1_0_0_0_00_110;
-            default:                 {csr_r, alu_src, mem2reg, reg_w, mem_r, mem_w, branch, pc_src_ctrl, alu_op} = 14'b0_0_000_0_0_0_0_00_000;
+            `ysyx_22050243_OP_IMM32:// addiw, slliw, srliw, sraiw
+            {csr_r, alu_src, mem2reg, reg_w, mem_r, mem_w, branch, pc_src_ctrl, alu_op} = 14'b0_1_000_1_0_0_0_00_111;
+            `ysyx_22050243_OP_32:   // addw, subw, sllw, srlw, sraw 
+            {csr_r, alu_src, mem2reg, reg_w, mem_r, mem_w, branch, pc_src_ctrl, alu_op} = 14'b0_0_000_1_0_0_0_00_110;
+            default:                
+            {csr_r, alu_src, mem2reg, reg_w, mem_r, mem_w, branch, pc_src_ctrl, alu_op} = 14'b0_0_000_0_0_0_0_00_000;
         endcase
     end
 
