@@ -42,8 +42,8 @@ int main(int argc, char** argv) {
     // uint64_t PC = 0x80000000;
     // uint32_t inst = 0x00448493;
 
-    uint32_t opcode = 0xD3;
-    uint32_t funct3 = 0x5;
+    uint32_t opcode = 0xD2;
+    uint32_t funct3 = 0x0;
 
 
     top->opcode = opcode;
