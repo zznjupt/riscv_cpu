@@ -29,6 +29,7 @@ module ysyx_22050243_Mem # (
 
     always @(posedge clk) begin
         MEM_pmem_write(data_addr, data_w, data_wmask, data_w_en);
+        $display("i_data_w = %x", data_w);
     end
 
     always @(*) begin

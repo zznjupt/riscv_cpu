@@ -55,6 +55,7 @@ VL_INLINE_OPT void Vysyx_22050243_Mem___024root___sequent__TOP__3(Vysyx_22050243
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vysyx_22050243_Mem___024root___sequent__TOP__3\n"); );
     // Body
     Vysyx_22050243_Mem___024root____Vdpiimwrap_ysyx_22050243_Mem__DOT__MEM_pmem_write_TOP(vlSelf->data_addr, vlSelf->data_w, (IData)(vlSelf->data_wmask), vlSelf->data_w_en);
+    VL_WRITEF("i_data_w = %x\n",64,vlSelf->data_w);
 }
 
 void Vysyx_22050243_Mem___024root___eval(Vysyx_22050243_Mem___024root* vlSelf) {
