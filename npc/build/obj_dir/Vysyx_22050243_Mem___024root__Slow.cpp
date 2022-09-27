@@ -35,14 +35,14 @@ void Vysyx_22050243_Mem___024root___eval_initial(Vysyx_22050243_Mem___024root* v
     vlSelf->__Vclklast__TOP__clk = vlSelf->clk;
 }
 
-void Vysyx_22050243_Mem___024root___combo__TOP__1(Vysyx_22050243_Mem___024root* vlSelf);
+void Vysyx_22050243_Mem___024root___settle__TOP__2(Vysyx_22050243_Mem___024root* vlSelf);
 
 void Vysyx_22050243_Mem___024root___eval_settle(Vysyx_22050243_Mem___024root* vlSelf) {
     if (false && vlSelf) {}  // Prevent unused
     Vysyx_22050243_Mem__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vysyx_22050243_Mem___024root___eval_settle\n"); );
     // Body
-    Vysyx_22050243_Mem___024root___combo__TOP__1(vlSelf);
+    Vysyx_22050243_Mem___024root___settle__TOP__2(vlSelf);
 }
 
 void Vysyx_22050243_Mem___024root___final(Vysyx_22050243_Mem___024root* vlSelf) {
