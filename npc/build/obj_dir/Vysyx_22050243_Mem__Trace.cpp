@@ -24,12 +24,15 @@ void Vysyx_22050243_Mem___024root__traceChgSub0(Vysyx_22050243_Mem___024root* vl
     // Body
     {
         tracep->chgBit(oldp+0,(vlSelf->clk));
-        tracep->chgBit(oldp+1,(vlSelf->data_w_en));
-        tracep->chgBit(oldp+2,(vlSelf->data_r_en));
-        tracep->chgCData(oldp+3,(vlSelf->data_wmask),8);
-        tracep->chgQData(oldp+4,(vlSelf->data_addr),64);
-        tracep->chgQData(oldp+6,(vlSelf->data_w),64);
-        tracep->chgQData(oldp+8,(vlSelf->data_r),64);
+        tracep->chgQData(oldp+1,(vlSelf->pc),64);
+        tracep->chgBit(oldp+3,(vlSelf->inst_en));
+        tracep->chgIData(oldp+4,(vlSelf->inst),32);
+        tracep->chgBit(oldp+5,(vlSelf->data_w_en));
+        tracep->chgBit(oldp+6,(vlSelf->data_r_en));
+        tracep->chgCData(oldp+7,(vlSelf->data_wmask),8);
+        tracep->chgQData(oldp+8,(vlSelf->data_addr),64);
+        tracep->chgQData(oldp+10,(vlSelf->data_w),64);
+        tracep->chgQData(oldp+12,(vlSelf->data_r),64);
     }
 }
 

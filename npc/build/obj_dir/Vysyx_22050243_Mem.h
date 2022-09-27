@@ -29,6 +29,9 @@ class Vysyx_22050243_Mem VL_NOT_FINAL {
     // The application code writes and reads these signals to
     // propagate new values into/out from the Verilated model.
     VL_IN8(&clk,0,0);
+    VL_IN64(&pc,63,0);
+    VL_IN8(&inst_en,0,0);
+    VL_OUT(&inst,31,0);
     VL_IN8(&data_w_en,0,0);
     VL_IN8(&data_r_en,0,0);
     VL_IN8(&data_wmask,7,0);

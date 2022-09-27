@@ -13,6 +13,8 @@ extern "C" {
 
 
     // DPI IMPORTS
+    // DPI import at /home/admin1/ZZworkspace/git/ysyx-workbench/npc/vsrc/ysyx_22050243_Mem.v:22:34
+    extern void IF_inst_read(long long pc, int* inst, svBit inst_en);
     // DPI import at /home/admin1/ZZworkspace/git/ysyx-workbench/npc/vsrc/ysyx_22050243_Mem.v:24:34
     extern void MEM_pmem_read(long long raddr, long long* rdata, svBit r_en);
     // DPI import at /home/admin1/ZZworkspace/git/ysyx-workbench/npc/vsrc/ysyx_22050243_Mem.v:23:34

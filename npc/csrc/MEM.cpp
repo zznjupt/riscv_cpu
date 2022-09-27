@@ -1,8 +1,5 @@
 #include <verilated.h>
 
-
-// ----------- log -----------
-
 #define ANSI_FG_BLACK   "\33[1;30m"
 #define ANSI_FG_RED     "\33[1;31m"
 #define ANSI_FG_GREEN   "\33[1;32m"
@@ -66,7 +63,11 @@ extern "C" void MEM_pmem_read(uint64_t raddr, uint64_t* rdata, bool r_en) {
     } else assert(0);
 }
 
-extern "C" void IF_inst_read(uint64_t inst_addr, bool inst_en) {
+extern "C" void IF_inst_read(uint64_t pc, uint32_t* inst, bool inst_en) {
     if(!inst_en) return;
+    if(pc >= CONFIG_MBASE) {
+        *inst = *(uint32_t*) guest_to_host(pc);
+        printf("\033[1;33mcprintf: MEM stage\33[0m\nread from addr:   \33[1;34m0x%016lx\33[0m, rdata =  \33[1;32m0x%08x\33[0m\n", pc, *inst);
+    } else assert(0);
 
 }

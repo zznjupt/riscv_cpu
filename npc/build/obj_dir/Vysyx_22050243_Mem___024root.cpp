@@ -9,6 +9,20 @@
 
 //==========
 
+extern "C" void IF_inst_read(long long pc, int* inst, svBit inst_en);
+
+VL_INLINE_OPT void Vysyx_22050243_Mem___024root____Vdpiimwrap_ysyx_22050243_Mem__DOT__IF_inst_read_TOP(QData/*63:0*/ pc, IData/*31:0*/ &inst, CData/*0:0*/ inst_en) {
+    VL_DEBUG_IF(VL_DBG_MSGF("+    Vysyx_22050243_Mem___024root____Vdpiimwrap_ysyx_22050243_Mem__DOT__IF_inst_read_TOP\n"); );
+    // Body
+    long long pc__Vcvt;
+    for (size_t pc__Vidx = 0; pc__Vidx < 1; ++pc__Vidx) pc__Vcvt = pc;
+    int inst__Vcvt;
+    svBit inst_en__Vcvt;
+    for (size_t inst_en__Vidx = 0; inst_en__Vidx < 1; ++inst_en__Vidx) inst_en__Vcvt = inst_en;
+    IF_inst_read(pc__Vcvt, &inst__Vcvt, inst_en__Vcvt);
+    inst = inst__Vcvt;
+}
+
 extern "C" void MEM_pmem_write(long long waddr, long long wdata, char wmask, svBit w_en);
 
 VL_INLINE_OPT void Vysyx_22050243_Mem___024root____Vdpiimwrap_ysyx_22050243_Mem__DOT__MEM_pmem_write_TOP(QData/*63:0*/ waddr, QData/*63:0*/ wdata, CData/*7:0*/ wmask, CData/*0:0*/ w_en) {
@@ -44,8 +58,10 @@ VL_INLINE_OPT void Vysyx_22050243_Mem___024root___combo__TOP__1(Vysyx_22050243_M
     Vysyx_22050243_Mem__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vysyx_22050243_Mem___024root___combo__TOP__1\n"); );
     // Body
-    Vysyx_22050243_Mem___024root____Vdpiimwrap_ysyx_22050243_Mem__DOT__MEM_pmem_read_TOP(vlSelf->data_addr, vlSelf->__Vtask_ysyx_22050243_Mem__DOT__MEM_pmem_read__1__rdata, (IData)(vlSelf->data_r_en));
-    vlSelf->data_r = vlSelf->__Vtask_ysyx_22050243_Mem__DOT__MEM_pmem_read__1__rdata;
+    Vysyx_22050243_Mem___024root____Vdpiimwrap_ysyx_22050243_Mem__DOT__IF_inst_read_TOP(vlSelf->pc, vlSelf->__Vtask_ysyx_22050243_Mem__DOT__IF_inst_read__0__inst, (IData)(vlSelf->inst_en));
+    vlSelf->inst = vlSelf->__Vtask_ysyx_22050243_Mem__DOT__IF_inst_read__0__inst;
+    Vysyx_22050243_Mem___024root____Vdpiimwrap_ysyx_22050243_Mem__DOT__MEM_pmem_read_TOP(vlSelf->data_addr, vlSelf->__Vtask_ysyx_22050243_Mem__DOT__MEM_pmem_read__2__rdata, (IData)(vlSelf->data_r_en));
+    vlSelf->data_r = vlSelf->__Vtask_ysyx_22050243_Mem__DOT__MEM_pmem_read__2__rdata;
 }
 
 VL_INLINE_OPT void Vysyx_22050243_Mem___024root___sequent__TOP__3(Vysyx_22050243_Mem___024root* vlSelf) {
@@ -97,6 +113,8 @@ void Vysyx_22050243_Mem___024root___eval_debug_assertions(Vysyx_22050243_Mem___0
     // Body
     if (VL_UNLIKELY((vlSelf->clk & 0xfeU))) {
         Verilated::overWidthError("clk");}
+    if (VL_UNLIKELY((vlSelf->inst_en & 0xfeU))) {
+        Verilated::overWidthError("inst_en");}
     if (VL_UNLIKELY((vlSelf->data_w_en & 0xfeU))) {
         Verilated::overWidthError("data_w_en");}
     if (VL_UNLIKELY((vlSelf->data_r_en & 0xfeU))) {

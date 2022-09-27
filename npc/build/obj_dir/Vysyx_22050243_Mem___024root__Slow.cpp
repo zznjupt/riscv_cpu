@@ -57,11 +57,15 @@ void Vysyx_22050243_Mem___024root___ctor_var_reset(Vysyx_22050243_Mem___024root*
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vysyx_22050243_Mem___024root___ctor_var_reset\n"); );
     // Body
     vlSelf->clk = VL_RAND_RESET_I(1);
+    vlSelf->pc = VL_RAND_RESET_Q(64);
+    vlSelf->inst_en = VL_RAND_RESET_I(1);
+    vlSelf->inst = VL_RAND_RESET_I(32);
     vlSelf->data_w_en = VL_RAND_RESET_I(1);
     vlSelf->data_r_en = VL_RAND_RESET_I(1);
     vlSelf->data_wmask = VL_RAND_RESET_I(8);
     vlSelf->data_addr = VL_RAND_RESET_Q(64);
     vlSelf->data_w = VL_RAND_RESET_Q(64);
     vlSelf->data_r = VL_RAND_RESET_Q(64);
-    vlSelf->__Vtask_ysyx_22050243_Mem__DOT__MEM_pmem_read__1__rdata = 0;
+    vlSelf->__Vtask_ysyx_22050243_Mem__DOT__IF_inst_read__0__inst = 0;
+    vlSelf->__Vtask_ysyx_22050243_Mem__DOT__MEM_pmem_read__2__rdata = 0;
 }

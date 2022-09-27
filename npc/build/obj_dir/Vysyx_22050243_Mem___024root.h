@@ -20,16 +20,20 @@ VL_MODULE(Vysyx_22050243_Mem___024root) {
 
     // PORTS
     VL_IN8(clk,0,0);
+    VL_IN8(inst_en,0,0);
     VL_IN8(data_w_en,0,0);
     VL_IN8(data_r_en,0,0);
     VL_IN8(data_wmask,7,0);
+    VL_OUT(inst,31,0);
+    VL_IN64(pc,63,0);
     VL_IN64(data_addr,63,0);
     VL_IN64(data_w,63,0);
     VL_OUT64(data_r,63,0);
 
     // LOCAL VARIABLES
     CData/*0:0*/ __Vclklast__TOP__clk;
-    QData/*63:0*/ __Vtask_ysyx_22050243_Mem__DOT__MEM_pmem_read__1__rdata;
+    IData/*31:0*/ __Vtask_ysyx_22050243_Mem__DOT__IF_inst_read__0__inst;
+    QData/*63:0*/ __Vtask_ysyx_22050243_Mem__DOT__MEM_pmem_read__2__rdata;
 
     // INTERNAL VARIABLES
     Vysyx_22050243_Mem__Syms* vlSymsp;  // Symbol table

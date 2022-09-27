@@ -12,6 +12,9 @@
 Vysyx_22050243_Mem::Vysyx_22050243_Mem(VerilatedContext* _vcontextp__, const char* _vcname__)
     : vlSymsp{new Vysyx_22050243_Mem__Syms(_vcontextp__, _vcname__, this)}
     , clk{vlSymsp->TOP.clk}
+    , pc{vlSymsp->TOP.pc}
+    , inst_en{vlSymsp->TOP.inst_en}
+    , inst{vlSymsp->TOP.inst}
     , data_w_en{vlSymsp->TOP.data_w_en}
     , data_r_en{vlSymsp->TOP.data_r_en}
     , data_wmask{vlSymsp->TOP.data_wmask}

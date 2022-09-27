@@ -31,6 +31,7 @@ int main(int argc, char** argv) {
     //      top->eval();
     // }
                                                 top->clk = 0;
+    bool     inst_en    = 0;                    top->inst_en    = inst_en;
     bool     r_en       = 0;                    top->data_r_en  = r_en;
     bool     w_en       = 1;                    top->data_w_en  = w_en;
     uint64_t data_addr  = 0x0000000080000008;   top->data_addr  = data_addr;

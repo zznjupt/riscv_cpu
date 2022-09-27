@@ -6,10 +6,10 @@ module ysyx_22050243_Mem # (
 ) (
     input           clk,
 
-    // input  [63:0]   inst_addr,
-    // input           inst_en,
+    input  [63:0]   pc,
+    input           inst_en,
 
-    // output [31:0]   inst,
+    output [31:0]   inst,
 
     input           data_w_en,
     input           data_r_en,
@@ -19,13 +19,13 @@ module ysyx_22050243_Mem # (
     
     output [63:0]   data_r
 );
-    // import "DPI-C" function void IF_inst_read(input longint inst_addr, input bit inst_en);
+    import "DPI-C" function void IF_inst_read(input longint pc, output int inst, input bit inst_en);
     import "DPI-C" function void MEM_pmem_write(input longint waddr, input longint wdata, input byte wmask, input bit w_en);
     import "DPI-C" function void MEM_pmem_read(input longint raddr, output longint rdata, input bit r_en);
 
-    // always @(*) begin
-    //     IF_inst_read(inst_addr, inst_en);
-    // end
+    always @(*) begin
+        IF_inst_read(pc, inst, inst_en);
+    end
 
     always @(posedge clk) begin
         MEM_pmem_write(data_addr, data_w, data_wmask, data_w_en);
