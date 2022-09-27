@@ -68,7 +68,7 @@ VL_INLINE_OPT void Vysyx_22050243_Ctrl___024root___combo__TOP__1(Vysyx_22050243_
                 } else if ((2U & (IData)(vlSelf->opcode))) {
                     if ((1U & (IData)(vlSelf->opcode))) {
                         if ((0U == (IData)(vlSelf->funct3))) {
-                            Vysyx_22050243_Ctrl___024root____Vdpiimwrap_ysyx_22050243_Ctrl__DOT__ID_ctrl_show_TOP(0x73ULL);
+                            Vysyx_22050243_Ctrl___024root____Vdpiimwrap_ysyx_22050243_Ctrl__DOT__ID_ctrl_show_TOP((QData)((IData)(vlSelf->opcode)));
                             vlSelf->csr_r = 0U;
                             vlSelf->alu_src = 0U;
                             vlSelf->mem2reg = 0U;
@@ -604,7 +604,6 @@ VL_INLINE_OPT void Vysyx_22050243_Ctrl___024root___combo__TOP__1(Vysyx_22050243_
         vlSelf->pc_src_ctrl = 0U;
         vlSelf->alu_op = 0U;
     } else {
-        Vysyx_22050243_Ctrl___024root____Vdpiimwrap_ysyx_22050243_Ctrl__DOT__ID_ctrl_show_TOP(0ULL);
         vlSelf->csr_r = 0U;
         vlSelf->alu_src = 0U;
         vlSelf->mem2reg = 0U;

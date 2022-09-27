@@ -17,7 +17,9 @@ extern "C" void ID_ctrl_show(uint64_t opcode) {
     printf("I_opcode = 0x%2lx\n", opcode);
 }
 extern "C" void ID_funct3_show(uint64_t funct3) { printf("I_funct3 = 0x%1lx\n", funct3); } 
-
+// extern "C" void ID_result_show(uint64_t result) { 
+//     printf("ID_output: csr_r, alu_src, mem2reg, reg_w, mem_r, mem_w, branch, pc_src_ctrl, alu_op = \n14'h%04lx", result);
+// }
 int ebreak_flag = 0;
 extern "C" void ebreak() { ebreak_flag = 1; }
 
