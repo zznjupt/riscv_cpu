@@ -42,8 +42,9 @@ VM_USER_LDLIBS = \
 
 # User .cpp files (from .cpp's on Verilator command line)
 VM_USER_CLASSES = \
+	MEM \
+	ctrl \
 	main \
-	mem \
 
 # User .cpp directories (from .cpp's on Verilator command line)
 VM_USER_DIR = \
@@ -59,9 +60,11 @@ include $(VERILATOR_ROOT)/include/verilated.mk
 ### Executable rules... (from --exe)
 VPATH += $(VM_USER_DIR)
 
-main.o: /home/admin1/ZZworkspace/git/ysyx-workbench/npc/csrc/main.cpp
+MEM.o: /home/admin1/ZZworkspace/git/ysyx-workbench/npc/csrc/MEM.cpp
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
-mem.o: /home/admin1/ZZworkspace/git/ysyx-workbench/npc/csrc/mem.cpp
+ctrl.o: /home/admin1/ZZworkspace/git/ysyx-workbench/npc/csrc/ctrl.cpp
+	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
+main.o: /home/admin1/ZZworkspace/git/ysyx-workbench/npc/csrc/main.cpp
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
 
 ### Link rules... (from --exe)
