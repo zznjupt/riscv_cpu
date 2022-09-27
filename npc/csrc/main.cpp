@@ -55,9 +55,6 @@ uint8_t* guest_to_host(uint32_t paddr) { return pmem + paddr - CONFIG_MBASE; }
 
 extern "C" void MEM_pmem_write(uint64_t waddr, uint64_t wdata, char wmask, bool w_en) {
     if(!w_en) return;
-    // 总是往地址为`waddr & ~0x7ull`的8字节按写掩码`wmask`写入`wdata`
-    // `wmask`中每比特表示`wdata`中1个字节的掩码,
-    // 如`wmask = 0x3`代表只写入最低2个字节, 内存中的其它字节保持不变
     int low = 0, high = 0, index = 0, low_get = 0;
     uint8_t mask = wmask;
     while (mask != 0) {
@@ -118,7 +115,7 @@ int main(int argc, char** argv) {
     bool     w_en       = 1;
     uint64_t data_addr  = 0x0000000080000008;
     uint64_t data_w     = 0x00000000ffffffff;
-    uint8_t  data_wmask = 0xf;
+    uint8_t  data_wmask = 0x8;
     top->data_w_en      = w_en;
     top->data_addr      = data_addr;
     top->data_w         = data_w;
@@ -147,8 +144,6 @@ int main(int argc, char** argv) {
     printf("sim exit\n");
     main_time++;
     tfp->dump(main_time);
-
-
     top->final();
     tfp->close();
     delete top;
