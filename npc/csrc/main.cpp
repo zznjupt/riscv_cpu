@@ -13,8 +13,8 @@ double sc_time_stamp() {
 }
 
 extern "C" void ctrl_show(uint64_t opcode, uint64_t funct3) {
-    printf("opcode = 0x%2x\n", opcode);
-    printf("funct = 0x%1x\n", funct3);
+    printf("opcode = 0x%2lx\n", opcode);
+    printf("funct = 0x%1lx\n", funct3);
 } 
 
 
