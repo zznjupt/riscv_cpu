@@ -54,30 +54,31 @@ int main(int argc, char** argv) {
     top->funct3 = funct3; 
 
     top->eval();
-    
-    
-    // while(ebreak_flag == 0) {
-
-    // }
-
     while (sc_time_stamp() < 1 && !Verilated::gotFinish() && ebreak_flag == 0) {
         //  if ((main_time % 10) == 5) top->clk = 1;
         //  if ((main_time % 10) == 0) top->clk = 0;
-         top->eval();
-         printf("O_csr_r       = 0x%02x\n",top->csr_r);
-         printf("O_alu_src     = 0x%x\n",top->alu_src);
-         printf("O_mem2reg     = 0x%x\n",top->mem2reg);
-         printf("O_reg_w       = 0x%x\n",top->reg_w);
-         printf("O_mem_r       = 0x%x\n",top->mem_r);
-         printf("O_mem_w       = 0x%x\n",top->mem_w);
-         printf("O_branch      = 0x%x\n",top->branch);
-         printf("O_pc_src_ctrl = 0x%x\n",top->pc_src_ctrl);
-         printf("O_alu_op      = 0x%x\n",top->alu_op);
-         tfp->dump(main_time);
-         main_time++;
+
+        top->eval();
+        printf("O_csr_r       = 0x%x\n",top->csr_r);
+        printf("O_alu_src     = 0x%x\n",top->alu_src);
+        printf("O_mem2reg     = 0x%x\n",top->mem2reg);
+        printf("O_reg_w       = 0x%x\n",top->reg_w);
+        printf("O_mem_r       = 0x%x\n",top->mem_r);
+        printf("O_mem_w       = 0x%x\n",top->mem_w);
+        printf("O_branch      = 0x%x\n",top->branch);
+        printf("O_pc_src_ctrl = 0x%x\n",top->pc_src_ctrl);
+        printf("O_alu_op      = 0x%x\n",top->alu_op);
+        tfp->dump(main_time);
+        main_time++;
+        uint32_t opcode = 0x73;
+        uint32_t funct3 = 0x0;
+        top->opcode = opcode;
+        top->funct3 = funct3;
+        top->eval(); 
+        if(ebreak_flag == 1) printf("ebreak\n");
      }
 
-    printf("ebreak\n");
+    printf("sim exit\n");
     tfp->dump(main_time);
     main_time++;
     top->final();

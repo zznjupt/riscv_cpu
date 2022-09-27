@@ -30,8 +30,8 @@ module ysyx_22050243_Ctrl (
     output reg        csr_r
 );
     import "DPI-C" function void ebreak();
-    import "DPI-C" function void ID_ctrl_show(input longint opcode);
-    import "DPI-C" function void ID_funct3_show(input longint funct3);
+    // import "DPI-C" function void ID_ctrl_show(input longint opcode);
+    // import "DPI-C" function void ID_funct3_show(input longint funct3);
     always @(*) begin
         // ID_ctrl_show({{57{1'b0}}, opcode});
         // ID_funct3_show({{61{1'b0}}, funct3});
