@@ -111,13 +111,13 @@ int main(int argc, char** argv) {
     //      top->eval();
     // }
     top->clk = 0;
-    bool     r_en       = 0;
-    bool     w_en       = 1;
+    bool     r_en       = 0;                top->data_r_en = r_en;
+    bool     w_en       = 1; top->data_w_en      = w_en;
     uint64_t data_addr  = 0x0000000080000008;
     uint64_t data_w     = 0xffffffffffffffff;
-    uint8_t  data_wmask = 0xff;
-    top->data_w_en      = w_en;
-    top->data_addr      = data_addr;
+    uint8_t  data_wmask = 0xff; top->data_addr      = data_addr;
+    
+    
     top->data_w         = data_w;
     top->data_wmask     = data_wmask; 
     top->eval();main_time++;tfp->dump(main_time);
