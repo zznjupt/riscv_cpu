@@ -67,7 +67,7 @@ extern "C" void IF_inst_read(uint64_t pc, uint32_t* inst, bool inst_en) {
     if(!inst_en) return;
     if(pc >= CONFIG_MBASE) {
         *inst = *(uint32_t*) guest_to_host(pc);
-        printf("\033[1;33mcprintf:  IF stage\33[0m\nread from pc:     \33[1;34m0x%016lx\33[0m,  inst =  \33[1;32m0x%08lx\33[0m\n", pc, *inst);
+        printf("\033[1;33mcprintf:  IF stage\33[0m\nread from pc:     \33[1;34m0x%016lx\33[0m,  inst =          \33[1;32m0x%08lx\33[0m\n", pc, *inst);
     } else assert(0);
 
 }
