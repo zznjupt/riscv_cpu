@@ -42,8 +42,6 @@ VL_INLINE_OPT void Vysyx_22050243_Ctrl___024root___combo__TOP__1(Vysyx_22050243_
     Vysyx_22050243_Ctrl__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vysyx_22050243_Ctrl___024root___combo__TOP__1\n"); );
     // Body
-    Vysyx_22050243_Ctrl___024root____Vdpiimwrap_ysyx_22050243_Ctrl__DOT__ID_ctrl_show_TOP((QData)((IData)(vlSelf->opcode)));
-    Vysyx_22050243_Ctrl___024root____Vdpiimwrap_ysyx_22050243_Ctrl__DOT__ID_funct3_show_TOP((QData)((IData)(vlSelf->funct3)));
     if ((0x40U & (IData)(vlSelf->opcode))) {
         if ((0x20U & (IData)(vlSelf->opcode))) {
             if ((0x10U & (IData)(vlSelf->opcode))) {
@@ -70,7 +68,6 @@ VL_INLINE_OPT void Vysyx_22050243_Ctrl___024root___combo__TOP__1(Vysyx_22050243_
                 } else if ((2U & (IData)(vlSelf->opcode))) {
                     if ((1U & (IData)(vlSelf->opcode))) {
                         if ((0U == (IData)(vlSelf->funct3))) {
-                            Vysyx_22050243_Ctrl___024root____Vdpiimwrap_ysyx_22050243_Ctrl__DOT__ebreak_TOP();
                             vlSelf->csr_r = 0U;
                             vlSelf->alu_src = 0U;
                             vlSelf->mem2reg = 0U;
@@ -80,6 +77,7 @@ VL_INLINE_OPT void Vysyx_22050243_Ctrl___024root___combo__TOP__1(Vysyx_22050243_
                             vlSelf->branch = 0U;
                             vlSelf->pc_src_ctrl = 0U;
                             vlSelf->alu_op = 0U;
+                            Vysyx_22050243_Ctrl___024root____Vdpiimwrap_ysyx_22050243_Ctrl__DOT__ebreak_TOP();
                         } else {
                             vlSelf->csr_r = 1U;
                             vlSelf->alu_src = 0U;
