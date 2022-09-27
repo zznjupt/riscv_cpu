@@ -17,7 +17,6 @@ extern "C" void ID_ctrl_show(uint64_t opcode) {
     printf("I_opcode = 0x%2lx\n", opcode);
 }
 extern "C" void ID_funct3_show(uint64_t funct3) {
-    printf("ID_stage:\n");
     printf("I_funct3 = 0x%1lx\n", funct3);
 } 
 
