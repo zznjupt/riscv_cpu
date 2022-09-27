@@ -114,22 +114,22 @@ int main(int argc, char** argv) {
     //      top->eval();
     // }
     top->clk = 0;
-
     bool     w_en       = 1;
     uint64_t data_addr  = 0x80000008;
     uint64_t data_w     = 0x00000001;
     uint8_t  data_wmask = 0xF;
-
     top->data_w_en      = w_en;
     top->data_addr      = data_addr;
     top->data_w         = data_w;
     top->data_wmask     = data_wmask; 
- 
+
+    top->eval();main_time++;tfp->dump(main_time);
+
     top->clk = 1;
 
     bool r_en      = 1;
     top->data_r_en = r_en;
-    top->eval();
+    top->eval();main_time++;tfp->dump(main_time);
 
     printf("sim exit\n");
     tfp->dump(main_time);
