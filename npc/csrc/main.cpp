@@ -129,7 +129,7 @@ int main(int argc, char** argv) {
     w_en                = 1;                    top->data_w_en  = w_en;
     data_addr           = 0x0000000080000008;   top->data_addr  = data_addr;
     data_w              = 0x0000000000000000;   top->data_w     = data_w;
-    data_wmask          = 0x8;                  top->data_wmask = data_wmask; 
+    data_wmask          = 0x08;                 top->data_wmask = data_wmask; 
     top->eval();main_time++;tfp->dump(main_time);
                                                 top->clk = 1;
     top->eval();main_time++;tfp->dump(main_time);
