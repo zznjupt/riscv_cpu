@@ -130,13 +130,13 @@ int main(int argc, char** argv) {
     r_en     = 0;
     top->data_r_en = r_en;
     top->eval();main_time++;tfp->dump(main_time);
-    
+
     top->clk = 0;
     r_en                = 0;
     w_en                = 1;
     data_addr           = 0x0000000080000008;
     data_w              = 0x0000000000000000;
-    data_wmask          = 0x1;
+    data_wmask          = 0x8;
     top->data_w_en      = w_en;
     top->data_addr      = data_addr;
     top->data_w         = data_w;
