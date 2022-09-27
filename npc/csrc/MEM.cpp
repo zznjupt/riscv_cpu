@@ -47,7 +47,7 @@ extern "C" void MEM_pmem_write(uint64_t waddr, uint64_t wdata, uint8_t wmask, bo
         }
         high = index - 1;
         int length = high - low + 1;
-        printf("cprintf: MEM stage write in wdata = \33[1;44m0x%016lx, wmask = 0x%02x\n", waddr, wdata, wmask);
+        printf("cprintf: MEM stage write in wdata = \33[1;44m0x%016lx\33[0m, wmask = 0x%02x\n", waddr, wdata, wmask);
         switch (length) {
             case 1: *(uint8_t  *)guest_to_host((waddr & ~0x7ull) + low) = (uint8_t )wdata; break;
             case 2: *(uint16_t *)guest_to_host((waddr & ~0x7ull) + low) = (uint16_t)wdata; break;
@@ -62,7 +62,7 @@ extern "C" void MEM_pmem_read(uint64_t raddr, uint64_t* rdata, bool r_en) {
     if(!r_en) return;
     if(raddr >= CONFIG_MBASE) {
         *rdata = *(uint64_t*) guest_to_host(raddr);
-        printf("cprintf: MEM stage read from 0x%016lx\33[0m, rdata = 0x%016lx\n", raddr, *rdata);
+        printf("cprintf: MEM stage read from 0x%016lx, rdata = 0x%016lx\n", raddr, *rdata);
     } else assert(0);
 }
 
