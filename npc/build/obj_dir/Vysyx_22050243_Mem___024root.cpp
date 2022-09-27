@@ -46,7 +46,7 @@ VL_INLINE_OPT void Vysyx_22050243_Mem___024root___combo__TOP__1(Vysyx_22050243_M
     // Body
     Vysyx_22050243_Mem___024root____Vdpiimwrap_ysyx_22050243_Mem__DOT__MEM_pmem_read_TOP(vlSelf->data_addr, vlSelf->__Vtask_ysyx_22050243_Mem__DOT__MEM_pmem_read__1__rdata, (IData)(vlSelf->data_r_en));
     vlSelf->data_r = vlSelf->__Vtask_ysyx_22050243_Mem__DOT__MEM_pmem_read__1__rdata;
-    VL_WRITEF("o_data_r = 0xysyx_22050243_Memx%20#\n",
+    VL_WRITEF("vprintf: o_data_r = 0xysyx_22050243_Memx%20#\n",
               64,vlSelf->data_r);
 }
 
@@ -56,7 +56,7 @@ VL_INLINE_OPT void Vysyx_22050243_Mem___024root___sequent__TOP__3(Vysyx_22050243
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vysyx_22050243_Mem___024root___sequent__TOP__3\n"); );
     // Body
     Vysyx_22050243_Mem___024root____Vdpiimwrap_ysyx_22050243_Mem__DOT__MEM_pmem_write_TOP(vlSelf->data_addr, vlSelf->data_w, (IData)(vlSelf->data_wmask), vlSelf->data_w_en);
-    VL_WRITEF("i_data_w     = 0x%x\ni_data_wmask = 0x%x\n",
+    VL_WRITEF("vprintf: i_data_w     = 0x%x\nvprintf: i_data_wmask = 0x%x\n",
               64,vlSelf->data_w,8,(IData)(vlSelf->data_wmask));
 }
 

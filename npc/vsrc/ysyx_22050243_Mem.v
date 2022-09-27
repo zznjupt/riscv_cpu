@@ -29,13 +29,13 @@ module ysyx_22050243_Mem # (
 
     always @(posedge clk) begin
         MEM_pmem_write(data_addr, data_w, data_wmask, data_w_en);
-        $display("i_data_w     = 0x%x", data_w);
-        $display("i_data_wmask = 0x%x", data_wmask);
+        $display("vprintf: i_data_w     = 0x%x", data_w);
+        $display("vprintf: i_data_wmask = 0x%x", data_wmask);
     end
 
     always @(*) begin
         MEM_pmem_read(data_addr, data_r, data_r_en);
-        $display("o_data_r = 0x%01lx", data_r);
+        $display("vprintf: o_data_r = 0x%01lx", data_r);
     end
 
 endmodule
