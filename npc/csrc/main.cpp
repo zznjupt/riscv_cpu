@@ -60,7 +60,7 @@ int main(int argc, char** argv) {
 
     // }
 
-    while (sc_time_stamp() < 1000 && !Verilated::gotFinish() && ebreak_flag == 0) {
+    while (sc_time_stamp() < 2 && !Verilated::gotFinish() && ebreak_flag == 0) {
         //  if ((main_time % 10) == 5) top->clk = 1;
         //  if ((main_time % 10) == 0) top->clk = 0;
          top->eval();
