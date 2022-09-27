@@ -114,6 +114,7 @@ int main(int argc, char** argv) {
     //      top->eval();
     // }
     top->clk = 0;
+    bool     r_en       = 0;
     bool     w_en       = 1;
     uint64_t data_addr  = 0x80000008;
     uint64_t data_w     = 0x00000001;
@@ -127,7 +128,7 @@ int main(int argc, char** argv) {
 
     top->clk = 1;
 
-    bool r_en      = 1;
+    r_en     = 1;
     top->data_r_en = r_en;
     top->eval();main_time++;tfp->dump(main_time);
 
