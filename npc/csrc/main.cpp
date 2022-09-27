@@ -118,7 +118,7 @@ int main(int argc, char** argv) {
     bool     w_en       = 1;
     uint64_t data_addr  = 0x0000000080000008;
     uint64_t data_w     = 0x00000000000000ff;
-    uint8_t  data_wmask = 0xf;
+    uint8_t  data_wmask = 0x1;
     top->data_w_en      = w_en;
     top->data_addr      = data_addr;
     top->data_w         = data_w;
