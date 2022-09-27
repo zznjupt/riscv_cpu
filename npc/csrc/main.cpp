@@ -123,9 +123,14 @@ int main(int argc, char** argv) {
     top->data_addr      = data_addr;
     top->data_w         = data_w;
     top->data_wmask     = data_wmask; 
-
     top->eval();main_time++;tfp->dump(main_time);
     top->clk = 1;
+    top->eval();main_time++;tfp->dump(main_time);
+    top->eval();main_time++;tfp->dump(main_time);
+    top->eval();main_time++;tfp->dump(main_time);
+    top->eval();main_time++;tfp->dump(main_time);
+    top->eval();main_time++;tfp->dump(main_time);
+    top->eval();main_time++;tfp->dump(main_time);
     top->eval();main_time++;tfp->dump(main_time);
 
     r_en     = 1;
