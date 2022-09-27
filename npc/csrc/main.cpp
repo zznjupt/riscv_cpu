@@ -12,7 +12,7 @@ double sc_time_stamp() {
 	return main_time;
 }
 
-extern "C" void ctrl_show(uint32_t opcode, uint32_t funct3) {
+extern "C" void ctrl_show(uint64_t opcode, uint64_t funct3) {
     printf("opcode = 0x%2x\n", opcode);
     printf("funct = 0x%1x\n", funct3);
 } 
@@ -56,12 +56,8 @@ int main(int argc, char** argv) {
     top->eval();
     
     
-    while(ebreak_flag == 1) {
-        printf("ebreak\n");
-        top->final();
-        tfp->close();
-        delete top;
-        return 0;
+    while(ebreak_flag == 0) {
+
     }
 
     // while (sc_time_stamp() < 1000 && !Verilated::gotFinish()) {
@@ -73,6 +69,7 @@ int main(int argc, char** argv) {
     //      main_time++;
     //  }
 
+    printf("ebreak\n");
     tfp->dump(main_time);
     main_time++;
     top->final();
