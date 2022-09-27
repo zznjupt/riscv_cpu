@@ -79,10 +79,10 @@ extern "C" void MEM_pmem_write(uint64_t waddr, uint64_t wdata, char wmask, bool 
 
 }
 
-extern "C" void MEM_pmem_read(uint64_t raddr, uint64_t rdata, bool r_en) {
+extern "C" void MEM_pmem_read(uint64_t raddr, uint64_t* rdata, bool r_en) {
     if(!r_en) return;
     if(raddr >= CONFIG_MBASE) {
-        rdata = *(uint64_t*) guest_to_host(raddr);
+        *rdata = *(uint64_t*) guest_to_host(raddr);
         printf("cprintf: MEM stage read from 0x%016lx, rdata = 0x%016lx\n", raddr, rdata);
     }
 }
