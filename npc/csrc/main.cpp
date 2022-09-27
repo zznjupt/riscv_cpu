@@ -16,10 +16,7 @@ extern "C" void ID_ctrl_show(uint64_t opcode) {
     printf("ID_stage:\n");
     printf("I_opcode = 0x%2lx\n", opcode);
 }
-extern "C" void ID_funct3_show(uint64_t funct3) {
-    printf("I_funct3 = 0x%1lx\n", funct3);
-} 
-
+extern "C" void ID_funct3_show(uint64_t funct3) { printf("I_funct3 = 0x%1lx\n", funct3); } 
 
 int ebreak_flag = 0;
 extern "C" void ebreak() { ebreak_flag = 1; }
@@ -59,9 +56,9 @@ int main(int argc, char** argv) {
     top->eval();
     
     
-    while(ebreak_flag == 0) {
+    // while(ebreak_flag == 0) {
 
-    }
+    // }
 
     // while (sc_time_stamp() < 1000 && !Verilated::gotFinish()) {
     //      if ((main_time % 10) == 5) top->clk = 1;
