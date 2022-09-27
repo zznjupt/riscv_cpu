@@ -145,8 +145,9 @@ int main(int argc, char** argv) {
     top->eval();main_time++;tfp->dump(main_time);
 
     printf("sim exit\n");
-    tfp->dump(main_time);
     main_time++;
+    tfp->dump(main_time);
+
 
     top->final();
     tfp->close();
