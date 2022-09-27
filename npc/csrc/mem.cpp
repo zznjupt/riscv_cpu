@@ -13,7 +13,7 @@ static uint8_t pmem[CONFIG_MSIZE] PG_ALIGN = {};
 uint8_t* guest_to_host(uint32_t paddr) { return pmem + paddr - CONFIG_MBASE; }
 // uint32_t host_to_guest(uint8_t *haddr) { return haddr - pmem + CONFIG_MBASE; }
 
-extern "C" void MEM_pmem_write(uint64_t waddr, uint64_t wdata, char wmask, bool w_en) {
+extern "C" void MEM_pmem_write(uint64_t waddr, uint64_t wdata, uint8_t wmask, bool w_en) {
     if(!w_en) return;
     int low = 0, high = 0, index = 0, low_get = 0;
     uint8_t mask = wmask;
