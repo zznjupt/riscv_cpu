@@ -60,14 +60,22 @@ int main(int argc, char** argv) {
 
     // }
 
-    // while (sc_time_stamp() < 1000 && !Verilated::gotFinish()) {
-    //      if ((main_time % 10) == 5) top->clk = 1;
-    //      if ((main_time % 10) == 0) top->clk = 0;
-    //      top->eval();
-    //      printf("result = %ld\n",top->result);
-    //      tfp->dump(main_time);
-    //      main_time++;
-    //  }
+    while (sc_time_stamp() < 1000 && !Verilated::gotFinish() && ebreak_flag == 0) {
+        //  if ((main_time % 10) == 5) top->clk = 1;
+        //  if ((main_time % 10) == 0) top->clk = 0;
+         top->eval();
+         printf("O_csr_r       = 0x%02x\n",top->csr_r);
+         printf("O_alu_src     = 0x%x\n",top->alu_src);
+         printf("O_mem2reg     = 0x%x\n",top->mem2reg);
+         printf("O_reg_w       = 0x%x\n",top->reg_w);
+         printf("O_mem_r       = 0x%x\n",top->mem_r);
+         printf("O_mem_w       = 0x%x\n",top->mem_w);
+         printf("O_branch      = 0x%x\n",top->branch);
+         printf("O_pc_src_ctrl = 0x%x\n",top->pc_src_ctrl);
+         printf("O_alu_op      = 0x%x\n",top->alu_op);
+         tfp->dump(main_time);
+         main_time++;
+     }
 
     printf("ebreak\n");
     tfp->dump(main_time);
