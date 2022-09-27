@@ -5,40 +5,36 @@
 // The class here is then constructed to instantiate the design.
 // See the Verilator manual for examples.
 
-#ifndef VERILATED_VYSYX_22050243_CTRL_H_
-#define VERILATED_VYSYX_22050243_CTRL_H_  // guard
+#ifndef VERILATED_VYSYX_22050243_MEM_H_
+#define VERILATED_VYSYX_22050243_MEM_H_  // guard
 
 #include "verilated_heavy.h"
 #include "svdpi.h"
 
-class Vysyx_22050243_Ctrl__Syms;
-class Vysyx_22050243_Ctrl___024root;
+class Vysyx_22050243_Mem__Syms;
+class Vysyx_22050243_Mem___024root;
 class VerilatedVcdC;
-class Vysyx_22050243_Ctrl_VerilatedVcd;
+class Vysyx_22050243_Mem_VerilatedVcd;
 
 
 // This class is the main interface to the Verilated model
-class Vysyx_22050243_Ctrl VL_NOT_FINAL {
+class Vysyx_22050243_Mem VL_NOT_FINAL {
   private:
     // Symbol table holding complete model state (owned by this class)
-    Vysyx_22050243_Ctrl__Syms* const vlSymsp;
+    Vysyx_22050243_Mem__Syms* const vlSymsp;
 
   public:
 
     // PORTS
     // The application code writes and reads these signals to
     // propagate new values into/out from the Verilated model.
-    VL_IN8(&opcode,6,0);
-    VL_IN8(&funct3,2,0);
-    VL_OUT8(&alu_src,0,0);
-    VL_OUT8(&mem2reg,2,0);
-    VL_OUT8(&reg_w,0,0);
-    VL_OUT8(&mem_r,0,0);
-    VL_OUT8(&mem_w,0,0);
-    VL_OUT8(&branch,0,0);
-    VL_OUT8(&pc_src_ctrl,1,0);
-    VL_OUT8(&alu_op,2,0);
-    VL_OUT8(&csr_r,0,0);
+    VL_IN8(&clk,0,0);
+    VL_IN8(&data_w_en,0,0);
+    VL_IN8(&data_r_en,0,0);
+    VL_IN8(&data_wmask,7,0);
+    VL_IN64(&data_addr,63,0);
+    VL_IN64(&data_w,63,0);
+    VL_OUT64(&data_r,63,0);
 
     // CELLS
     // Public to allow access to /* verilator public */ items.
@@ -46,19 +42,19 @@ class Vysyx_22050243_Ctrl VL_NOT_FINAL {
 
     // Root instance pointer to allow access to model internals,
     // including inlined /* verilator public_flat_* */ items.
-    Vysyx_22050243_Ctrl___024root* const rootp;
+    Vysyx_22050243_Mem___024root* const rootp;
 
     // CONSTRUCTORS
     /// Construct the model; called by application code
     /// If contextp is null, then the model will use the default global context
     /// If name is "", then makes a wrapper with a
     /// single model invisible with respect to DPI scope names.
-    explicit Vysyx_22050243_Ctrl(VerilatedContext* contextp, const char* name = "TOP");
-    explicit Vysyx_22050243_Ctrl(const char* name = "TOP");
+    explicit Vysyx_22050243_Mem(VerilatedContext* contextp, const char* name = "TOP");
+    explicit Vysyx_22050243_Mem(const char* name = "TOP");
     /// Destroy the model; called (often implicitly) by application code
-    virtual ~Vysyx_22050243_Ctrl();
+    virtual ~Vysyx_22050243_Mem();
   private:
-    VL_UNCOPYABLE(Vysyx_22050243_Ctrl);  ///< Copying not allowed
+    VL_UNCOPYABLE(Vysyx_22050243_Mem);  ///< Copying not allowed
 
   public:
     // API METHODS

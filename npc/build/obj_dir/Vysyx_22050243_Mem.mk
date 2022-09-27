@@ -2,9 +2,9 @@
 # DESCRIPTION: Verilator output: Makefile for building Verilated archive or executable
 #
 # Execute this makefile from the object directory:
-#    make -f Vysyx_22050243_Ctrl.mk
+#    make -f Vysyx_22050243_Mem.mk
 
-default: /home/admin1/ZZworkspace/git/ysyx-workbench/npc/build/ysyx_22050243_Ctrl
+default: /home/admin1/ZZworkspace/git/ysyx-workbench/npc/build/ysyx_22050243_Mem
 
 ### Constants...
 # Perl executable (from $PERL)
@@ -30,12 +30,12 @@ VM_SC_TARGET_ARCH = linux
 
 ### Vars...
 # Design prefix (from --prefix)
-VM_PREFIX = Vysyx_22050243_Ctrl
+VM_PREFIX = Vysyx_22050243_Mem
 # Module prefix (from --prefix)
-VM_MODPREFIX = Vysyx_22050243_Ctrl
+VM_MODPREFIX = Vysyx_22050243_Mem
 # User CFLAGS (from -CFLAGS on Verilator command line)
 VM_USER_CFLAGS = \
-	-DTOP_NAME="Vysyx_22050243_Ctrl" \
+	-DTOP_NAME="Vysyx_22050243_Mem" \
 
 # User LDLIBS (from -LDFLAGS on Verilator command line)
 VM_USER_LDLIBS = \
@@ -51,7 +51,7 @@ VM_USER_DIR = \
 
 ### Default rules...
 # Include list of all generated classes
-include Vysyx_22050243_Ctrl_classes.mk
+include Vysyx_22050243_Mem_classes.mk
 # Include global rules
 include $(VERILATOR_ROOT)/include/verilated.mk
 
@@ -62,7 +62,7 @@ main.o: /home/admin1/ZZworkspace/git/ysyx-workbench/npc/csrc/main.cpp
 	$(OBJCACHE) $(CXX) $(CXXFLAGS) $(CPPFLAGS) $(OPT_FAST) -c -o $@ $<
 
 ### Link rules... (from --exe)
-/home/admin1/ZZworkspace/git/ysyx-workbench/npc/build/ysyx_22050243_Ctrl: $(VK_USER_OBJS) $(VK_GLOBAL_OBJS) $(VM_PREFIX)__ALL.a $(VM_HIER_LIBS)
+/home/admin1/ZZworkspace/git/ysyx-workbench/npc/build/ysyx_22050243_Mem: $(VK_USER_OBJS) $(VK_GLOBAL_OBJS) $(VM_PREFIX)__ALL.a $(VM_HIER_LIBS)
 	$(LINK) $(LDFLAGS) $^ $(LOADLIBES) $(LDLIBS) $(LIBS) $(SC_LIBS) -o $@
 
 

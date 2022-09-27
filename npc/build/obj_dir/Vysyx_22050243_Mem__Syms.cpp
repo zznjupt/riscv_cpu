@@ -1,16 +1,16 @@
 // Verilated -*- C++ -*-
 // DESCRIPTION: Verilator output: Symbol table implementation internals
 
-#include "Vysyx_22050243_Ctrl__Syms.h"
-#include "Vysyx_22050243_Ctrl.h"
-#include "Vysyx_22050243_Ctrl___024root.h"
+#include "Vysyx_22050243_Mem__Syms.h"
+#include "Vysyx_22050243_Mem.h"
+#include "Vysyx_22050243_Mem___024root.h"
 
 // FUNCTIONS
-Vysyx_22050243_Ctrl__Syms::~Vysyx_22050243_Ctrl__Syms()
+Vysyx_22050243_Mem__Syms::~Vysyx_22050243_Mem__Syms()
 {
 }
 
-Vysyx_22050243_Ctrl__Syms::Vysyx_22050243_Ctrl__Syms(VerilatedContext* contextp, const char* namep,Vysyx_22050243_Ctrl* modelp)
+Vysyx_22050243_Mem__Syms::Vysyx_22050243_Mem__Syms(VerilatedContext* contextp, const char* namep,Vysyx_22050243_Mem* modelp)
     : VerilatedSyms{contextp}
     // Setup internal state of the Syms class
     , __Vm_modelp(modelp)

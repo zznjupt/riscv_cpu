@@ -1,5 +1,5 @@
 # Makefile
-TOPNAME = ysyx_22050243_Ctrl
+TOPNAME = ysyx_22050243_Mem
 # NXDC_FILES = constr/top.nxdc
 # INC_PATH ?=
 
