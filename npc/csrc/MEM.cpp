@@ -25,7 +25,7 @@
 #define PG_ALIGN __attribute((aligned(4096)))
 
 static uint8_t pmem[CONFIG_MSIZE] PG_ALIGN = {};
-static uint32_t inst[5] PG_ALIGN = {
+static uint32_t inst[5] = {
     0x11111111,
     0x22222222,
     0x33333333,
