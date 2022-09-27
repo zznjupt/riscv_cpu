@@ -3,7 +3,6 @@
 // #include <assert.h>
 #include <verilated.h>
 
-
 // MEM stage
 
 #define CONFIG_MBASE 0x80000000
