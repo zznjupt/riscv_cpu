@@ -36,8 +36,8 @@ static uint32_t inst[5]  = {
 uint8_t* guest_to_host(uint32_t paddr) { return pmem + paddr - CONFIG_MBASE; }
 
 uint32_t* IF(uint64_t pc) {
-    printf("0x%08n\n", inst) ;
-    printf("0x%08n\n", (inst+pc-CONFIG_MBASE));
+    printf("0x%08x\n", inst) ;
+    printf("0x%08x\n", (inst+pc-CONFIG_MBASE));
     printf("0x%08x\n", *inst);
     printf("0x%08x\n", *(inst+pc-CONFIG_MBASE));
     return inst + pc - CONFIG_MBASE; 
