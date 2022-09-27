@@ -53,7 +53,7 @@ int main(int argc, char** argv) {
 
 
     top->opcode = opcode;
-    top->funct3 = funct3; 
+    // top->funct3 = funct3; 
 
     top->eval();
     
