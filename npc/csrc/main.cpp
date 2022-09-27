@@ -71,7 +71,7 @@ extern "C" void MEM_pmem_write(uint64_t waddr, uint64_t wdata, char wmask, bool 
     }
     high = index - 1;
     int length = high - low + 1;
-    printf("MEM stage write in  0x%016lx, wdata = 0x%016lx,\nwmask = %x, high = %d, low = %d\n", waddr, wdata, wmask, high, low);
+    printf("MEM stage write in  0x%016lx, wdata = 0x%016lx\nwmask = %x, high = %d, low = %d\n", waddr, wdata, wmask, high, low);
     switch (length) {
         case 1: *(uint8_t  *)guest_to_host((waddr & ~0x7ull) + low) = (uint8_t )wdata; break;
         case 2: *(uint16_t *)guest_to_host((waddr & ~0x7ull) + low) = (uint16_t)wdata; break;
@@ -127,7 +127,7 @@ int main(int argc, char** argv) {
     top->eval();main_time++;tfp->dump(main_time);
     top->clk = 1;
     top->eval();main_time++;tfp->dump(main_time);
-    
+
     r_en     = 1;
     top->data_r_en = r_en;
     top->eval();main_time++;tfp->dump(main_time);
