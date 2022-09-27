@@ -123,10 +123,11 @@ int main(int argc, char** argv) {
     top->eval();main_time++;tfp->dump(main_time);
     top->clk = 1;
     top->eval();main_time++;tfp->dump(main_time);
-
+    top->clk = 0;
     r_en     = 1;
     top->data_r_en = r_en;
     top->eval();main_time++;tfp->dump(main_time);
+    top->clk = 1;
     printf("o_data_r = 0x%016x\n", top->data_r);
     r_en     = 0;
     top->data_r_en = r_en;
@@ -145,15 +146,18 @@ int main(int argc, char** argv) {
     top->eval();main_time++;tfp->dump(main_time);
     top->clk = 1;
     top->eval();main_time++;tfp->dump(main_time);
-    printf("o_data_r = 0x%016x\n", top->data_r);
     r_en     = 1;
     top->data_r_en = r_en;
     top->eval();main_time++;tfp->dump(main_time);
-    printf("o_data_r = 0x%016x\n", top->data_r);
     r_en     = 0;
     top->data_r_en = r_en;
     top->eval();main_time++;tfp->dump(main_time);
     // printf("o_data_r = 0x%016x\n", top->data_r);
+    // while (sc_time_stamp() < 10 && !Verilated::gotFinish()) { //  && ebreak_flag == 0
+    //     top->clk = ~top->clk;
+
+    //     top->eval();
+    // }
     printf("sim exit\n");
     main_time++;
     tfp->dump(main_time);

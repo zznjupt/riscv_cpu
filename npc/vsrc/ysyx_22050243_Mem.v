@@ -33,6 +33,7 @@ module ysyx_22050243_Mem # (
 
     always @(*) begin
         MEM_pmem_read(data_addr, data_r, data_r_en);
+        $display("o_data_r = %x", data_r);
     end
 
 endmodule
