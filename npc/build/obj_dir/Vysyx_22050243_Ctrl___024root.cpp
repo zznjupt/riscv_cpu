@@ -69,6 +69,15 @@ VL_INLINE_OPT void Vysyx_22050243_Ctrl___024root___combo__TOP__1(Vysyx_22050243_
                     if ((1U & (IData)(vlSelf->opcode))) {
                         if ((0U == (IData)(vlSelf->funct3))) {
                             Vysyx_22050243_Ctrl___024root____Vdpiimwrap_ysyx_22050243_Ctrl__DOT__ID_ctrl_show_TOP(0x73ULL);
+                            vlSelf->csr_r = 0U;
+                            vlSelf->alu_src = 0U;
+                            vlSelf->mem2reg = 0U;
+                            vlSelf->reg_w = 0U;
+                            vlSelf->mem_r = 0U;
+                            vlSelf->mem_w = 0U;
+                            vlSelf->branch = 0U;
+                            vlSelf->pc_src_ctrl = 0U;
+                            vlSelf->alu_op = 0U;
                             Vysyx_22050243_Ctrl___024root____Vdpiimwrap_ysyx_22050243_Ctrl__DOT__ID_funct3_show_TOP(0ULL);
                             Vysyx_22050243_Ctrl___024root____Vdpiimwrap_ysyx_22050243_Ctrl__DOT__ebreak_TOP();
                         } else {
