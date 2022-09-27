@@ -32,8 +32,10 @@ module ysyx_22050243_Ctrl (
     import "DPI-C" function void ebreak();        ;
     always_latch @(*) begin
         case (opcode)
-            7'b00000_00:             
+            7'b00000_00: begin             
             {csr_r, alu_src, mem2reg, reg_w, mem_r, mem_w, branch, pc_src_ctrl, alu_op} = 14'b0_0_000_0_0_0_0_00_000;
+                
+            end
             `ysyx_22050243_LUI:     // lui      
             {csr_r, alu_src, mem2reg, reg_w, mem_r, mem_w, branch, pc_src_ctrl, alu_op} = 14'b0_0_010_1_0_0_0_00_000;
             `ysyx_22050243_AUIPC:   // auipc 

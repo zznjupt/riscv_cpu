@@ -12,10 +12,14 @@ double sc_time_stamp() {
 	return main_time;
 }
 
+extern "C" void ctrl_show(uint32_t opcode, uint32_t funct3) {
+    printf("opcode = 0x%2x\n", opcode);
+    printf("funct = 0x%1x\n", funct3);
+} 
+
+
 int ebreak_flag = 0;
-extern "C" void ebreak() {
-    ebreak_flag = 1;
-}
+extern "C" void ebreak() { ebreak_flag = 1; }
 
 int main(int argc, char** argv) {
 
@@ -50,15 +54,14 @@ int main(int argc, char** argv) {
     top->funct3 = funct3; 
 
     top->eval();
-    printf("ebreak_flag = %d\n", ebreak_flag);
-    printf("opcode = 0x%2x\n", opcode);
-    printf("funct = 0x%1x\n", funct3);
+    
+    
     while(ebreak_flag == 1) {
-        printf("ebreak_flag = %d\n", ebreak_flag);
-            top->final();
-            tfp->close();
-            delete top;
-            return 0;
+        printf("ebreak\n");
+        top->final();
+        tfp->close();
+        delete top;
+        return 0;
     }
 
     // while (sc_time_stamp() < 1000 && !Verilated::gotFinish()) {
