@@ -19,7 +19,7 @@ extern "C" void MEM_pmem_write(uint64_t waddr, uint64_t wdata, uint8_t wmask, bo
         int low = 0, high = 0, index = 0, low_get = 0;
         uint8_t mask = wmask;
         while (mask != 0) {
-            printf("cprintf: index = %d, mask = %x\n", index, mask);
+            // printf("cprintf: index = %d, mask = %x\n", index, mask);
             if (!low_get && mask % 2 == 1) {
                 low_get = 1;
                 low = index;
