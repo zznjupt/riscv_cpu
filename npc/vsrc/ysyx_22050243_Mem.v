@@ -35,7 +35,7 @@ module ysyx_22050243_Mem # (
 
     always @(*) begin
         MEM_pmem_read(data_addr, data_r, data_r_en);
-        $display("vprintf: o_data_r = 0x%0x", data_r);
+        $display("vprintf: o_data_r = 0x%x", data_r);
     end
 
 endmodule

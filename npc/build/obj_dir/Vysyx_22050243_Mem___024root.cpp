@@ -46,7 +46,7 @@ VL_INLINE_OPT void Vysyx_22050243_Mem___024root___combo__TOP__1(Vysyx_22050243_M
     // Body
     Vysyx_22050243_Mem___024root____Vdpiimwrap_ysyx_22050243_Mem__DOT__MEM_pmem_read_TOP(vlSelf->data_addr, vlSelf->__Vtask_ysyx_22050243_Mem__DOT__MEM_pmem_read__1__rdata, (IData)(vlSelf->data_r_en));
     vlSelf->data_r = vlSelf->__Vtask_ysyx_22050243_Mem__DOT__MEM_pmem_read__1__rdata;
-    VL_WRITEF("vprintf: o_data_r = 0x%0x\n",64,vlSelf->data_r);
+    VL_WRITEF("vprintf: o_data_r = 0x%x\n",64,vlSelf->data_r);
 }
 
 VL_INLINE_OPT void Vysyx_22050243_Mem___024root___sequent__TOP__3(Vysyx_22050243_Mem___024root* vlSelf) {
