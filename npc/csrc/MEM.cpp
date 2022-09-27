@@ -1,6 +1,3 @@
-// #include <stdio.h>
-// #include <stdlib.h>
-// #include <assert.h>
 #include <verilated.h>
 
 // MEM stage
@@ -29,7 +26,7 @@ extern "C" void MEM_pmem_write(uint64_t waddr, uint64_t wdata, uint8_t wmask, bo
         }
         high = index - 1;
         int length = high - low + 1;
-        printf("cprintf: MEM stage write in  0x%016lx\n         wdata = 0x%016lx, wmask = 0x%02x\n", waddr, wdata, wmask);
+        printf("cprintf: MEM stage write in  \033[1;34m0x%016lx\033[0m\n         wdata = 0x%016lx, wmask = 0x%02x\n", waddr, wdata, wmask);
         switch (length) {
             case 1: *(uint8_t  *)guest_to_host((waddr & ~0x7ull) + low) = (uint8_t )wdata; break;
             case 2: *(uint16_t *)guest_to_host((waddr & ~0x7ull) + low) = (uint16_t)wdata; break;
