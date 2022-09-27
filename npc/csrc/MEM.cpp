@@ -34,7 +34,7 @@ static uint32_t inst[5] PG_ALIGN = {
 };
 
 uint8_t* guest_to_host(uint32_t paddr) { return pmem + paddr - CONFIG_MBASE; }
-uint32_t* IF(uint32_t pc) { return inst + pc - CONFIG_MBASE; }
+uint32_t* IF(uint64_t pc) { return inst + pc - CONFIG_MBASE; }
 
 extern "C" void MEM_pmem_write(uint64_t waddr, uint64_t wdata, uint8_t wmask, bool w_en) {
     if(!w_en) return;
