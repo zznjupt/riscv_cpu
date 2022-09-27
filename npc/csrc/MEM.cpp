@@ -25,21 +25,20 @@
 #define PG_ALIGN __attribute((aligned(4096)))
 
 static uint8_t pmem[CONFIG_MSIZE] PG_ALIGN = {};
-static uint32_t inst[5]  = {
-    0x11111111,
-    0x22222222,
-    0x33333333,
-    0x44444444,
-    0x55555555
+static uint8_t inst[5] PG_ALIGN= {
+    0x11,
+    0x11,
+    0x11,
+    0x11
 };
 
 uint8_t* guest_to_host(uint32_t paddr) { return pmem + paddr - CONFIG_MBASE; }
 
-uint32_t* IF(uint64_t pc) {
-    printf("0x%08x\n", inst) ;
-    printf("0x%08x\n", (inst+pc-CONFIG_MBASE));
-    printf("0x%08x\n", *inst);
-    printf("0x%08x\n", *(inst+pc-CONFIG_MBASE));
+uint8_t* IF(uint64_t pc) {
+    // printf("0x%08x\n", inst) ;
+    // printf("0x%08x\n", (inst+pc-CONFIG_MBASE));
+    // printf("0x%08x\n", *inst);
+    // printf("0x%08x\n", *(inst+pc-CONFIG_MBASE));
     return inst + pc - CONFIG_MBASE; 
 }
 
@@ -81,7 +80,7 @@ extern "C" void MEM_pmem_read(uint64_t raddr, uint64_t* rdata, bool r_en) {
 extern "C" void IF_inst_read(uint64_t pc, uint32_t* inst, bool inst_en) {
     if(!inst_en) return;
     if(pc >= CONFIG_MBASE) {
-        *inst = *IF(pc);
+        *inst = *(uint32_t*) IF(pc);
         printf("\033[1;33mcprintf:  IF stage\33[0m\nread from pc:     \33[1;34m0x%016lx\33[0m,  inst =          \33[1;32m0x%08x\33[0m\n", pc, *inst);
     } else assert(0);
 
