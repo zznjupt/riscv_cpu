@@ -43,9 +43,11 @@ int main(int argc, char** argv) {
     top->eval();main_time++;tfp->dump(main_time);
                                                 top->clk = 0;
     r_en     = 1;                               top->data_r_en  = r_en;
+    inst_en  = 1;                               top->inst_en    = inst_en;
     top->eval();main_time++;tfp->dump(main_time);
                                                 top->clk = 1;
     r_en     = 0;                               top->data_r_en  = r_en;
+    inst_en  = 0;                               top->inst_en    = inst_en;
     top->eval();main_time++;tfp->dump(main_time);
                                                 top->clk = 0;
     w_en                = 1;                    top->data_w_en  = w_en;
@@ -56,9 +58,10 @@ int main(int argc, char** argv) {
                                                 top->clk = 1;
     top->eval();main_time++;tfp->dump(main_time);
     r_en     = 1;                               top->data_r_en  = r_en;
-    
+    inst_en  = 1;                               top->inst_en    = inst_en;
     top->eval();main_time++;tfp->dump(main_time);
-    r_en     = 0;                               top->data_r_en = r_en;
+    r_en     = 0;                               top->data_r_en  = r_en;
+    inst_en  = 0;                               top->inst_en    = inst_en;
     top->eval();main_time++;tfp->dump(main_time);
     // printf("o_data_r = 0x%016x\n", top->data_r);
     // while (sc_time_stamp() < 10 && !Verilated::gotFinish()) { //  && ebreak_flag == 0
