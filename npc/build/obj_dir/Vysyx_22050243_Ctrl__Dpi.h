@@ -15,6 +15,8 @@ extern "C" {
     // DPI IMPORTS
     // DPI import at /home/admin1/ZZworkspace/git/ysyx-workbench/npc/vsrc/ysyx_22050243_Ctrl.v:33:34
     extern void ID_ctrl_show(long long opcode);
+    // DPI import at /home/admin1/ZZworkspace/git/ysyx-workbench/npc/vsrc/ysyx_22050243_Ctrl.v:34:34
+    extern void ID_funct3_show(long long funct3);
     // DPI import at /home/admin1/ZZworkspace/git/ysyx-workbench/npc/vsrc/ysyx_22050243_Ctrl.v:32:34
     extern void ebreak();
 

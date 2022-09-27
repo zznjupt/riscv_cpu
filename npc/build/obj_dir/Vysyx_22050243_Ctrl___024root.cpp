@@ -27,6 +27,16 @@ VL_INLINE_OPT void Vysyx_22050243_Ctrl___024root____Vdpiimwrap_ysyx_22050243_Ctr
     ID_ctrl_show(opcode__Vcvt);
 }
 
+extern "C" void ID_funct3_show(long long funct3);
+
+VL_INLINE_OPT void Vysyx_22050243_Ctrl___024root____Vdpiimwrap_ysyx_22050243_Ctrl__DOT__ID_funct3_show_TOP(QData/*63:0*/ funct3) {
+    VL_DEBUG_IF(VL_DBG_MSGF("+    Vysyx_22050243_Ctrl___024root____Vdpiimwrap_ysyx_22050243_Ctrl__DOT__ID_funct3_show_TOP\n"); );
+    // Body
+    long long funct3__Vcvt;
+    for (size_t funct3__Vidx = 0; funct3__Vidx < 1; ++funct3__Vidx) funct3__Vcvt = funct3;
+    ID_funct3_show(funct3__Vcvt);
+}
+
 VL_INLINE_OPT void Vysyx_22050243_Ctrl___024root___combo__TOP__1(Vysyx_22050243_Ctrl___024root* vlSelf) {
     if (false && vlSelf) {}  // Prevent unused
     Vysyx_22050243_Ctrl__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
@@ -59,6 +69,7 @@ VL_INLINE_OPT void Vysyx_22050243_Ctrl___024root___combo__TOP__1(Vysyx_22050243_
                     if ((1U & (IData)(vlSelf->opcode))) {
                         if ((0U == (IData)(vlSelf->funct3))) {
                             Vysyx_22050243_Ctrl___024root____Vdpiimwrap_ysyx_22050243_Ctrl__DOT__ID_ctrl_show_TOP(0x73ULL);
+                            Vysyx_22050243_Ctrl___024root____Vdpiimwrap_ysyx_22050243_Ctrl__DOT__ID_funct3_show_TOP(0ULL);
                             Vysyx_22050243_Ctrl___024root____Vdpiimwrap_ysyx_22050243_Ctrl__DOT__ebreak_TOP();
                         } else {
                             vlSelf->csr_r = 1U;
