@@ -43,6 +43,7 @@ VL_INLINE_OPT void Vysyx_22050243_Ctrl___024root___combo__TOP__1(Vysyx_22050243_
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vysyx_22050243_Ctrl___024root___combo__TOP__1\n"); );
     // Body
     Vysyx_22050243_Ctrl___024root____Vdpiimwrap_ysyx_22050243_Ctrl__DOT__ID_ctrl_show_TOP((QData)((IData)(vlSelf->opcode)));
+    Vysyx_22050243_Ctrl___024root____Vdpiimwrap_ysyx_22050243_Ctrl__DOT__ID_funct3_show_TOP((QData)((IData)(vlSelf->funct3)));
     if ((0x40U & (IData)(vlSelf->opcode))) {
         if ((0x20U & (IData)(vlSelf->opcode))) {
             if ((0x10U & (IData)(vlSelf->opcode))) {

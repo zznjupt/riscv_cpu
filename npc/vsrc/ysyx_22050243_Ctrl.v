@@ -35,7 +35,7 @@ module ysyx_22050243_Ctrl (
     // import "DPI-C" function void ID_result_show(input longint result);
     always @(*) begin
         ID_ctrl_show({{57{1'b0}}, opcode});
-        // ID_funct3_show({{63{1'b0}}, funct3});
+        ID_funct3_show({{61{1'b0}}, funct3});
         // ID_result_show({{50{1'b0}}, {csr_r, alu_src, mem2reg, reg_w, mem_r, mem_w, branch, pc_src_ctrl, alu_op}});
         case (opcode)
             7'b00000_00:
