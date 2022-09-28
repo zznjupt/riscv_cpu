@@ -19,12 +19,25 @@
 #define ANSI_NONE       "\33[0m"
 
 // MEM stage
-
+#define CONFIG_PC_RESET_OFFSET 0x0
 #define CONFIG_MBASE 0x80000000
 #define CONFIG_MSIZE 0x8000000
 #define PG_ALIGN __attribute((aligned(4096)))
+#define PMEM_LEFT  ((uint32_t)CONFIG_MBASE)
+#define PMEM_RIGHT ((uint32_t)CONFIG_MBASE + CONFIG_MSIZE - 1)
+#define RESET_VECTOR (PMEM_LEFT + CONFIG_PC_RESET_OFFSET)
+
+static const uint32_t img [] = {
+  0x00000297,  // auipc t0,0
+  0x0002b823,  // sd  zero,16(t0)
+  0x0102b503,  // ld  a0,16(t0)
+  0x00100073,  // ebreak (used as nemu_trap)
+  0xdeadbeef,  // some data
+};
 
 static uint8_t pmem[CONFIG_MSIZE] PG_ALIGN = {};
+
+
 uint8_t* guest_to_host(uint32_t paddr) { return pmem + paddr - CONFIG_MBASE; }
 extern "C" void MEM_pmem_write(uint64_t waddr, uint64_t wdata, uint8_t wmask, bool w_en) {
     if(!w_en) return;
@@ -68,4 +81,8 @@ extern "C" void IF_inst_read(uint64_t pc, uint32_t* inst, bool inst_en) {
         printf("\033[1;33mcprintf:  IF stage\33[0m\nread from pc:     \33[1;34m0x%016lx\33[0m,  inst =          \33[1;32m0x%08x\33[0m\n", pc, *inst);
     } else assert(0);
 
+}
+
+extern "C" void isa_init() {
+    memcpy(guest_to_host(RESET_VECTOR), img, sizeof(img));
 }

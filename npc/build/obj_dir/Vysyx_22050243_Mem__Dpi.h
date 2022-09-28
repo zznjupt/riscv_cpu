@@ -19,6 +19,8 @@ extern "C" {
     extern void MEM_pmem_read(long long raddr, long long* rdata, svBit r_en);
     // DPI import at /home/admin1/ZZworkspace/git/ysyx-workbench/npc/vsrc/ysyx_22050243_Mem.v:23:34
     extern void MEM_pmem_write(long long waddr, long long wdata, char wmask, svBit w_en);
+    // DPI import at /home/admin1/ZZworkspace/git/ysyx-workbench/npc/vsrc/ysyx_22050243_Mem.v:25:34
+    extern void isa_init();
 
 #ifdef __cplusplus
 }

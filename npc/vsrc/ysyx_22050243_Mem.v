@@ -22,20 +22,21 @@ module ysyx_22050243_Mem # (
     import "DPI-C" function void IF_inst_read(input longint pc, output int inst, input bit inst_en);
     import "DPI-C" function void MEM_pmem_write(input longint waddr, input longint wdata, input byte wmask, input bit w_en);
     import "DPI-C" function void MEM_pmem_read(input longint raddr, output longint rdata, input bit r_en);
-
+    import "DPI-C" function void isa_init();
+    initial begin
+        isa_init();
+    end
+    
     always @(*) begin
         IF_inst_read(pc, inst, inst_en);
     end
 
     always @(posedge clk) begin
         MEM_pmem_write(data_addr, data_w, data_wmask, data_w_en);
-        // $display("vprintf: i_data_w     = 0x%x", data_w);
-        // $display("vprintf: i_data_wmask = 0x%x", data_wmask);
     end
 
     always @(*) begin
         MEM_pmem_read(data_addr, data_r, data_r_en);
-        // $display("vprintf: i_data_r_en = %d\n         o_data_r = 0x%x", data_r_en, data_r);
     end
 
 endmodule
