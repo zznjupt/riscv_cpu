@@ -26,7 +26,6 @@ module ysyx_22050243_Mem # (
     initial begin
         isa_init();
     end
-    
     always @(*) begin
         IF_inst_read(pc, inst, inst_en);
     end
