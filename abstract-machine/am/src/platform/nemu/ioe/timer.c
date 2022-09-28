@@ -21,10 +21,10 @@
 
 // static AM_TIMER_UPTIME_T *boot_time;
 
-static AM_TIMER_UPTIME_T boot_time;
+// static AM_TIMER_UPTIME_T boot_time;
 
 void __am_timer_init() {
-  boot_time.us = (uint64_t)inl(RTC_ADDR);
+//   boot_time.us = (uint64_t)inl(RTC_ADDR);
 }
 
 void __am_timer_uptime(AM_TIMER_UPTIME_T *uptime) {
