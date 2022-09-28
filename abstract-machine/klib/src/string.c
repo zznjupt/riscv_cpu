@@ -95,23 +95,23 @@ void *memmove(void *dst, const void *src, size_t n) {
   return dst;
 }
 
-// void *memcpy(void *out, const void *in, size_t n) {
-//   // panic("Not implemented");
-//   char *cin  = (char* )in;
-//   char *cout = (char* )out;
-//   for(int i = 0; i < n; i++) cout[i] = cin[i];
-//   return out; 
-// }
-
-int memcmp(const void *s1, const void *s2, size_t n) {
+void *memcpy(void *out, const void *in, size_t n) {
   // panic("Not implemented");
-  unsigned char *cs2  = (unsigned char* )s2;
-  unsigned char *cs1  = (unsigned char* )s1;
-  for(int i = 1; i < n; i++) {
-    if(cs2[i] < cs1[i]) return -1;
-    if(cs2[i] > cs1[i]) return 1;
-  }
-  return 0;
+  char *cin  = (char* )in;
+  char *cout = (char* )out;
+  for(int i = 0; i < n; i++) cout[i] = cin[i];
+  return out; 
 }
+
+// int memcmp(const void *s1, const void *s2, size_t n) {
+//   // panic("Not implemented");
+//   unsigned char *cs2  = (unsigned char* )s2;
+//   unsigned char *cs1  = (unsigned char* )s1;
+//   for(int i = 1; i < n; i++) {
+//     if(cs2[i] < cs1[i]) return -1;
+//     if(cs2[i] > cs1[i]) return 1;
+//   }
+//   return 0;
+// }
 
 #endif
