@@ -24,7 +24,7 @@
 void __am_timer_init() {
   
 }
-static uint32_t *rtc_tmp = NULL;
+static uint32_t *rtc_tmp;
 // static uint64_t boot_time = 0;
 
 void __am_timer_uptime(AM_TIMER_UPTIME_T *uptime) {
