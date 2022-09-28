@@ -29,7 +29,7 @@ static uint32_t *rtc_tmp = NULL;
 
 void __am_timer_uptime(AM_TIMER_UPTIME_T *uptime) {
   rtc_tmp[0] = (uint32_t)inl(RTC_ADDR);
-  rtc_tmp[1] = (uint32_t)inl(RTC_ADDR+4);
+  rtc_tmp[1] = (uint32_t)inl(RTC_ADDR);
 
   uptime->us = ((uint64_t)rtc_tmp[1]<<32)+(uint64_t)rtc_tmp[0];
 }
