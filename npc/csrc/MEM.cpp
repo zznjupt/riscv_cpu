@@ -39,6 +39,11 @@ static uint8_t pmem[CONFIG_MSIZE] PG_ALIGN = {};
 
 
 uint8_t* guest_to_host(uint32_t paddr) { return pmem + paddr - CONFIG_MBASE; }
+
+extern "C" void isa_init() {
+    memcpy(guest_to_host(RESET_VECTOR), img, sizeof(img));
+}
+
 extern "C" void MEM_pmem_write(uint64_t waddr, uint64_t wdata, uint8_t wmask, bool w_en) {
     if(!w_en) return;
     if(waddr >= CONFIG_MBASE) {
@@ -83,6 +88,3 @@ extern "C" void IF_inst_read(uint64_t pc, uint32_t* inst, bool inst_en) {
 
 }
 
-extern "C" void isa_init() {
-    memcpy(guest_to_host(RESET_VECTOR), img, sizeof(img));
-}
