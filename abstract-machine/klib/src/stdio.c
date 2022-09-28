@@ -214,26 +214,14 @@ int vsprintf(char *out, const char *fmt, va_list ap) {
         }
         continue;
 
-    case '%':
-        *str++ = '%';
-        continue;
-
-        /* integer number formats - set up the flags and "break" */
-    case 'o':
-        base = 8;
-        break;
-
-    case 'x':
-        flags |= LARGE;
-    case 'X':
-        base = 16;
-        break;
-
+    case '%': *str++ = '%'; continue;
+    /* integer number formats - set up the flags and "break" */
+    case 'o': base = 8; break;
+    case 'x': flags |= LARGE;
+    case 'X': base = 16; break;
     case 'd':
-    case 'i':
-        flags |= SIGN;
-    case 'u':
-        break;
+    case 'i': flags |= SIGN;
+    case 'u': break;
 
     default:
         *str++ = '%';
