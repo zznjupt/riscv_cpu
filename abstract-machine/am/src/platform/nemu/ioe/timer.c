@@ -24,14 +24,14 @@
 void __am_timer_init() {
   
 }
-static uint32_t *rtc_tmp;
+
 // static uint64_t boot_time = 0;
 
 void __am_timer_uptime(AM_TIMER_UPTIME_T *uptime) {
-  rtc_tmp[0] = 1;
-  rtc_tmp[1] = 2;
+  uint32_t a = (uint32_t)inl(RTC_ADDR);
+  uint32_t b = (uint32_t)inl(RTC_ADDR+4);
 
-  // uptime->us = ((uint64_t)rtc_tmp[1]<<32)+(uint64_t)rtc_tmp[0];
+  uptime->us = ((uint64_t)b << 32) + (uint64_t)a;
 }
 
 void __am_timer_rtc(AM_TIMER_RTC_T *rtc) {
