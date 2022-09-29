@@ -73,6 +73,10 @@ static inline void update_screen() {
 void vga_update_screen() {
   // TODO: call `update_screen()` when the sync register is non-zero,
   // then zero out the sync register
+  SDL_UpdateTexture(texture, NULL, vmem, SCREEN_W * sizeof(uint32_t));
+  SDL_RenderClear(renderer);
+  SDL_RenderCopy(renderer, texture, NULL, NULL);
+  SDL_RenderPresent(renderer);
 }
 
 void init_vga() {
