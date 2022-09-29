@@ -4,7 +4,6 @@
 #define SYNC_ADDR (VGACTL_ADDR + 4)
 
 void *memcpy_(void *out, const void *in, size_t n) {
-  // panic("Not implemented");
   char *cin  = (char* )in;
   char *cout = (char* )out;
   for(int i = 0; i < n; i++) cout[i] = cin[i];
@@ -24,7 +23,7 @@ void __am_gpu_config(AM_GPU_CONFIG_T *cfg) {
   *cfg = (AM_GPU_CONFIG_T) {
     .present = true, .has_accel = false,
     .width = 400, .height = 300,
-    .vmemsz = 0
+    .vmemsz = 32
   };
 }
 
