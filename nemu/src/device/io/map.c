@@ -57,9 +57,9 @@ word_t map_read(paddr_t addr, int len, IOMap *map) {
   check_bound(map, addr);
   paddr_t offset = addr - map->low;
   invoke_callback(map->callback, offset, len, false); // prepare data to read
-  printf("read the devivce:  name = %s , data lenth = %d\n", map->name, len);
-  printf("                   addr = 0x%016x, data lenth = %d\n", addr, len);
   word_t ret = host_read(map->space + offset, len);
+  printf("read the devivce:  name = %s , data lenth = %d\n", map->name, len);
+  printf("                   addr = 0x%016lx, data lenth = %d\n", (uint64_t )(map->space) + offset, len);
   return ret;
 }
 
@@ -67,8 +67,8 @@ void map_write(paddr_t addr, int len, word_t data, IOMap *map) {
   assert(len >= 1 && len <= 8);
   check_bound(map, addr);
   paddr_t offset = addr - map->low;
-  printf("Write the devivce: name = %s , data lenth = %d\n", map->name, len);
-  printf("                   addr = 0x%016x, data lenth = %d\n", addr, len);
   host_write(map->space + offset, len, data);
+  printf("Write the devivce: name = %s , data lenth = %d\n", map->name, len);
+  printf("                   addr = 0x%016lx, data lenth = %d\n", (uint64_t )(map->space) + offset, len);
   invoke_callback(map->callback, offset, len, true);
 }
