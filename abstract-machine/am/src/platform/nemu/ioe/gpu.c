@@ -21,7 +21,7 @@ void __am_gpu_init() {
 
 void __am_gpu_config(AM_GPU_CONFIG_T *cfg) {
   *cfg = (AM_GPU_CONFIG_T) {
-    .present = true, .has_accel = false,
+    .present = true, .has_accel = true,
     .width = 400, .height = 300,
     .vmemsz = 32
   };
@@ -39,9 +39,9 @@ void __am_gpu_fbdraw(AM_GPU_FBDRAW_T *ctl) {
   // for(int i = 0; i < h && y+i < H; i++) {
   //   memcpy_(&fb[(y+i) * W + x], pixels, cp_len);
   // }
-  // if (ctl->sync) {
-  //   outl(SYNC_ADDR, 1);
-  // }
+  if (ctl->sync) {
+    outl(SYNC_ADDR, 1);
+  }
 }
 
 void __am_gpu_status(AM_GPU_STATUS_T *status) {
