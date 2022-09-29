@@ -16,14 +16,14 @@ void __am_gpu_init() {
   int h = 300;  // TODO: get the correct height
   uint32_t *fb = (uint32_t *)(uintptr_t)FB_ADDR;
   for (i = 0; i < w * h; i ++) fb[i] = i;
-  // outl(SYNC_ADDR, 1);
+  outl(SYNC_ADDR, 0);
 }
 
 void __am_gpu_config(AM_GPU_CONFIG_T *cfg) {
   *cfg = (AM_GPU_CONFIG_T) {
     .present = true, .has_accel = false,
     .width = 400, .height = 300,
-    .vmemsz = 32
+    .vmemsz = 0
   };
 }
 
