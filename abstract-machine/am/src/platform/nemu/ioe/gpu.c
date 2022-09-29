@@ -13,8 +13,8 @@
 
 void __am_gpu_init() {
   int i;
-  int w = io_read(AM_GPU_CONFIG).width;  // TODO: get the correct width
-  int h = io_read(AM_GPU_CONFIG).height;  // TODO: get the correct height
+  int w = inl(VGACTL_ADDR) >> 16;  // TODO: get the correct width
+  int h = inl(VGACTL_ADDR) & 0xffff;  // TODO: get the correct height
   printf("%d, %d\n", w, h);
   uint32_t *fb = (uint32_t *)(uintptr_t)FB_ADDR;
   for (i = 0; i < w * h; i ++) fb[i] = i;
@@ -24,7 +24,7 @@ void __am_gpu_init() {
 void __am_gpu_config(AM_GPU_CONFIG_T *cfg) {
   uint32_t info = inl(VGACTL_ADDR);
   uint16_t width  = (uint16_t)(info >> 16);
-  uint16_t height = (uint16_t)(info & 0xFFFF);
+  uint16_t height = (uint16_t)(info & 0xffff);
   *cfg = (AM_GPU_CONFIG_T) {
     .present = true, .has_accel = false,
     .width = width, .height = height,
