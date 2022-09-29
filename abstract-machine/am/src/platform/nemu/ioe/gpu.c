@@ -16,7 +16,7 @@ void __am_gpu_init() {
   int h = 300;  // TODO: get the correct height
   uint32_t *fb = (uint32_t *)(uintptr_t)FB_ADDR;
   for (i = 0; i < w * h; i ++) fb[i] = i;
-  outl(SYNC_ADDR, 2);
+  outl(SYNC_ADDR, fb[i]);
 }
 
 void __am_gpu_config(AM_GPU_CONFIG_T *cfg) {
@@ -45,5 +45,5 @@ void __am_gpu_fbdraw(AM_GPU_FBDRAW_T *ctl) {
 }
 
 void __am_gpu_status(AM_GPU_STATUS_T *status) {
-  status->ready = false;
+  status->ready = true;
 }
