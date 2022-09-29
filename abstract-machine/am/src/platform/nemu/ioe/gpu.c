@@ -3,12 +3,12 @@
 
 #define SYNC_ADDR (VGACTL_ADDR + 4)
 
-void *memcpy_(void *out, const void *in, size_t n) {
-  char *cin  = (char* )in;
-  char *cout = (char* )out;
-  for(int i = 0; i < n; i++) cout[i] = cin[i];
-  return out; 
-}
+// void *memcpy_(void *out, const void *in, size_t n) {
+//   char *cin  = (char* )in;
+//   char *cout = (char* )out;
+//   for(int i = 0; i < n; i++) cout[i] = cin[i];
+//   return out; 
+// }
 
 void __am_gpu_init() {
   int i;
@@ -16,7 +16,7 @@ void __am_gpu_init() {
   int h = 300;  // TODO: get the correct height
   uint32_t *fb = (uint32_t *)(uintptr_t)FB_ADDR;
   for (i = 0; i < w * h; i ++) fb[i] = i;
-  outl(SYNC_ADDR, 0);
+  outl(SYNC_ADDR, 1);
 }
 
 void __am_gpu_config(AM_GPU_CONFIG_T *cfg) {
@@ -39,9 +39,9 @@ void __am_gpu_fbdraw(AM_GPU_FBDRAW_T *ctl) {
   // for(int i = 0; i < h && y+i < H; i++) {
   //   memcpy_(&fb[(y+i) * W + x], pixels, cp_len);
   // }
-  if (ctl->sync) {
-    outl(SYNC_ADDR, 1);
-  }
+  // if (ctl->sync) {
+  //   outl(SYNC_ADDR, 1);
+  // }
 }
 
 void __am_gpu_status(AM_GPU_STATUS_T *status) {
