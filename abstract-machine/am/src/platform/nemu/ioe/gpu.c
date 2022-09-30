@@ -19,7 +19,7 @@ void __am_gpu_config(AM_GPU_CONFIG_T *cfg) {
   uint16_t width_  = (uint16_t)(info >> 16);
   uint16_t height_ = (uint16_t)(info & 0xffff);
   *cfg = (AM_GPU_CONFIG_T) {
-    .present = true, .has_accel = true,
+    .present = true, .has_accel = false,
     .width = width_, .height = height_,
     .vmemsz = 0
   };
