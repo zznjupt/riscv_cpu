@@ -29,7 +29,7 @@ typedef struct diff_context_t {
 void diff_set_regs(void *diff_context) {
   diff_context_t *ctx = (diff_context_t *)diff_context;
   for (int i = 0; i < 32; i++) {
-    // cpu.gpr[i] = ctx->gpr[i];
+    cpu.gpr[i] = ctx->gpr[i];
   }
   cpu.pc = ctx->pc;
 }
