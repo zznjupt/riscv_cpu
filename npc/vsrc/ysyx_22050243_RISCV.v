@@ -486,7 +486,7 @@ module ysyx_22050243_RISCV # (
             imm_ls_ex_stage,    pc_id_2_ex_ff,     alu_out_ex_stage,   result_ex_stage,
             gpr_r1_data_id_2_ex_ff, store_r2_data_ex_stage
         }),
-        .dout  ({
+        .dout  ({m
             mem2reg_ex_2_mem_ff, reg_w_ex_2_mem_ff, mem_r_ex_2_mem_ff, mem_w_ex_2_mem_ff,
             csr_r_ex_2_mem_ff,   data_wmask_o,   adder_s_ex_2_mem_ff, inst_ex_2_mem_ff,
             imm_ls_ex_2_mem_ff, pc_ex_2_mem_ff,   alu_out_ex_2_mem_ff, result_ex_2_mem_ff,
@@ -628,10 +628,5 @@ module ysyx_22050243_RISCV # (
             default: w_csr_data =   64'd0;
         endcase
     end
-
-
-
-    
-
 
 endmodule

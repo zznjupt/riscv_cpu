@@ -22,22 +22,22 @@ module ysyx_22050243_top (
     wire            data_r_valid;
     wire            data_w_ready;
 
-    // wire		    w_dmem_data_w_en;
-    // wire		    w_dmem_data_r_en;
-    // wire  [7:0]	    w_dmem_data_wmask;
-    // wire  [63:0]	w_dmem_data_addr;
-    // wire  [63:0]	w_dmem_data_w;
-    // wire  [63:0]	w_dmem_data_r;
-    // wire		    w_dmem_data_r_valid;
-    // wire		    w_dmem_data_w_ready;
+    wire		    w_dmem_data_w_en;
+    wire		    w_dmem_data_r_en;
+    wire  [7:0]	    w_dmem_data_wmask;
+    wire  [63:0]	w_dmem_data_addr;
+    wire  [63:0]	w_dmem_data_w;
+    wire  [63:0]	w_dmem_data_r;
+    wire		    w_dmem_data_r_valid;
+    wire		    w_dmem_data_w_ready;
 
-    // // Memctrl
-    // wire		    data_wr_en_ram;
-    // wire		    data_rd_en_ram;
-    // wire  [63:0]	data_wmask_ram;
-    // wire  [63:0]	data_addr_ram;
-    // wire  [63:0]	data_wr_ram;
-    // wire  [63:0]	data_rd_ram;
+    // Memctrl
+    wire		    data_wr_en_ram;
+    wire		    data_rd_en_ram;
+    wire  [63:0]	data_wmask_ram;
+    wire  [63:0]	data_addr_ram;
+    wire  [63:0]	data_wr_ram;
+    wire  [63:0]	data_rd_ram;
 
     ysyx_22050243_RISCV # (
         .IBUS_DATA_WIDTH(32),
@@ -48,42 +48,47 @@ module ysyx_22050243_top (
     ) ysyx_22050243_RISCV_ (
         .clk                (clk),              // clock
         .rst                (rst),              // reset
-        // INST port <-> mem_ctrl
+        // INST port <-> mem
         .i_inst             (inst),             // I <- Mem
 
-        .i_inst_valid       (inst_valid),       // I 
+        .i_inst_valid       (inst_valid),       // I <- Mem
 
         .inst_addr_o        (inst_addr),        // O -> Mem
         .inst_en_o          (inst_en),          // O -> Mem
 
         .inst_addr_valid_o  (inst_addr_valid),  // O
         // DATA port <-> mem_ctrl
-        .data_w_en_o        (data_w_en),        // O -> Mem
-        .data_r_en_o        (data_r_en),        // O -> Mem
-        .data_wmask_o       (data_wmask),       // O -> Mem
-        .data_addr_o        (data_addr),        // O -> Mem
-        .data_w_o           (data_w),           // O -> Mem
+        .data_w_en_o        (data_w_en),        // O -> Mem_ctrl
+        .data_r_en_o        (data_r_en),        // O -> Mem_ctrl
+        .data_wmask_o       (data_wmask),       // O -> Mem_ctrl
+        .data_addr_o        (data_addr),        // O -> Mem_ctrl
+        .data_w_o           (data_w),           // O -> Mem_ctrl
 
-        .i_data_r           (data_r),           // I <- Mem
-        .i_data_r_valid     (data_r_valid),     // I
-        .i_data_w_ready     (data_w_ready),     // I
+        .i_data_r           (data_r),           // I <- Mem_ctrl
+        .i_data_r_valid     (data_r_valid),     // I <- Mem_ctrl
+        .i_data_w_ready     (data_w_ready),     // I <- Mem_ctrl
         // IRQ
         .i_clint_timer_irq  (w_clint_timer_irq),
         .timer_irq_ready_o  (w_timer_irq_ready)
     );
 
-    // ysyx_22050243_Memctrl ysyx_22050243_Memctrl_(
-    //     .rst            (rst),
+    ysyx_22050243_Memctrl ysyx_22050243_Memctrl_(
+        .rst            (rst),
 
-    //     .mem_byte_en    (w_dmem_data_wmask),
-    //     .mem_addr       (w_dmem_data_addr),
-    //     .mem_r_en       (w_dmem_data_r_en),
-    //     .mem_w_en       (w_dmem_data_w_en),
-    //     .mem_w_data     (w_dmem_data_w),
-    //     .mem_r_data     (w_dmem_data_r),
+        // CPU port
+        .mem_byte_en    (w_dmem_data_wmask), // I <- CPU
+        .mem_addr       (w_dmem_data_addr),  // I <- CPU
+        .mem_r_en       (w_dmem_data_r_en),  // I <- CPU
+        .mem_w_en       (w_dmem_data_w_en),  // I <- CPU
+        .mem_w_data     (w_dmem_data_w),     // I <- CPU
+
+        .mem_r_data     (w_dmem_data_r),     // O -> Mem
         
-    //     .ram_addr       (data_addr_ram)
-    // );
+        .ram_addr       (data_addr_ram),
+        .ram_w_en       (data_w_en),
+
+
+    );
 
     ysyx_22050243_Mem # (
         .IBUS_DATA_WIDTH(32),
@@ -93,8 +98,8 @@ module ysyx_22050243_top (
     ) ysyx_22050243_Mem_ (
         .clk                (clk),          // clock
 
-        .inst_addr          (inst_addr),    // I
-        .inst_en            (inst_en),      // I
+        .pc                 (inst_addr),    // I <- CPU
+        .inst_en            (inst_en),      // I <- CPU
 
         .inst               (inst),         // O
 
