@@ -28,14 +28,18 @@ typedef struct diff_context_t {
 
 void diff_set_regs(void *diff_context) {
   diff_context_t *ctx = (diff_context_t *)diff_context;
-  for (int i = 0; i < 32; i++) cpu.gpr[i] = ctx->gpr[i];
-                               cpu.pc = ctx->pc;
+  for (int i = 0; i < 32; i++) {
+    // cpu.gpr[i] = ctx->gpr[i];
+  }
+  cpu.pc = ctx->pc;
 }
 
 void diff_get_regs(void *diff_context) {
   diff_context_t *ctx = (diff_context_t *)diff_context;
-  for (int i = 0; i < 32; i++) ctx->gpr[i] = cpu.gpr[i];
-                               ctx->pc = cpu.pc;
+  for (int i = 0; i < 32; i++) {
+    // ctx->gpr[i] = cpu.gpr[i];
+  }
+  ctx->pc = cpu.pc;
 }
 
 void difftest_memcpy(paddr_t addr, void *buf, size_t n, bool direction) {
@@ -46,7 +50,6 @@ void difftest_memcpy(paddr_t addr, void *buf, size_t n, bool direction) {
 
 void difftest_regcpy(void *dut, bool direction) {
   // assert(0);
-  diff_context_t *ctx = (diff_context_t *)dut;
 
   if(direction == DIFFTEST_TO_REF) {
     diff_set_regs(dut);
