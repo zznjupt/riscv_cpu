@@ -2,9 +2,9 @@ module ysyx_22050243_if (
     input  wire             clk,
     input  wire             rst,
     input  wire [5:0]       stall,        // stall_bus
-    input  wire [64:0]      br_bus,       // br_to_if
+    input  wire [64:0]      br_bus,       // br_2_if
 
-    output wire [128:0]     if_to_id_bus, // if_to_id
+    output wire [128:0]     if_2_id_bus, // if_2_id
     output wire             isram_e,
     output wire [63:0]      isram_addr
 );
@@ -32,8 +32,8 @@ module ysyx_22050243_if (
 
     wire [63:0] if_pc;
     assign if_pc = (pc_reg == 64'h0000_0000_7fff_fffc) ? 64'b0 : pc_reg;
-
-    assign if_to_id_bus = {ce_reg, if_pc, next_pc}; // 1+64+64 = 128:0
+// ************************output*********************************
+    assign if_2_id_bus = {ce_reg, if_pc, next_pc}; // 1+64+64 = 128:0
     assign isram_e      = ce_reg;
     assign isram_addr   = if_pc;
        

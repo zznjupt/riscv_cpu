@@ -50,13 +50,13 @@ VL_INLINE_OPT void Vysyx_22050243_if___024root___combo__TOP__3(Vysyx_22050243_if
                                                                     vlSelf->br_bus[0U])))
                                                : (4ULL 
                                                   + vlSelf->ysyx_22050243_if__DOT__pc_reg));
-    vlSelf->if_to_id_bus[0U] = (IData)(vlSelf->ysyx_22050243_if__DOT__next_pc);
-    vlSelf->if_to_id_bus[1U] = (IData)((vlSelf->ysyx_22050243_if__DOT__next_pc 
-                                        >> 0x20U));
-    vlSelf->if_to_id_bus[2U] = (IData)(vlSelf->ysyx_22050243_if__DOT__if_pc);
-    vlSelf->if_to_id_bus[3U] = (IData)((vlSelf->ysyx_22050243_if__DOT__if_pc 
-                                        >> 0x20U));
-    vlSelf->if_to_id_bus[4U] = vlSelf->ysyx_22050243_if__DOT__ce_reg;
+    vlSelf->if_2_id_bus[0U] = (IData)(vlSelf->ysyx_22050243_if__DOT__next_pc);
+    vlSelf->if_2_id_bus[1U] = (IData)((vlSelf->ysyx_22050243_if__DOT__next_pc 
+                                       >> 0x20U));
+    vlSelf->if_2_id_bus[2U] = (IData)(vlSelf->ysyx_22050243_if__DOT__if_pc);
+    vlSelf->if_2_id_bus[3U] = (IData)((vlSelf->ysyx_22050243_if__DOT__if_pc 
+                                       >> 0x20U));
+    vlSelf->if_2_id_bus[4U] = vlSelf->ysyx_22050243_if__DOT__ce_reg;
 }
 
 void Vysyx_22050243_if___024root___eval(Vysyx_22050243_if___024root* vlSelf) {

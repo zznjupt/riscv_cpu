@@ -26,14 +26,14 @@ void Vysyx_22050243_if___024root__traceInitSub0(Vysyx_22050243_if___024root* vlS
         tracep->declBit(c+7,"rst", false,-1);
         tracep->declBus(c+8,"stall", false,-1, 5,0);
         tracep->declArray(c+9,"br_bus", false,-1, 64,0);
-        tracep->declArray(c+12,"if_to_id_bus", false,-1, 128,0);
+        tracep->declArray(c+12,"if_2_id_bus", false,-1, 128,0);
         tracep->declBit(c+17,"isram_e", false,-1);
         tracep->declQuad(c+18,"isram_addr", false,-1, 63,0);
         tracep->declBit(c+6,"ysyx_22050243_if clk", false,-1);
         tracep->declBit(c+7,"ysyx_22050243_if rst", false,-1);
         tracep->declBus(c+8,"ysyx_22050243_if stall", false,-1, 5,0);
         tracep->declArray(c+9,"ysyx_22050243_if br_bus", false,-1, 64,0);
-        tracep->declArray(c+12,"ysyx_22050243_if if_to_id_bus", false,-1, 128,0);
+        tracep->declArray(c+12,"ysyx_22050243_if if_2_id_bus", false,-1, 128,0);
         tracep->declBit(c+17,"ysyx_22050243_if isram_e", false,-1);
         tracep->declQuad(c+18,"ysyx_22050243_if isram_addr", false,-1, 63,0);
         tracep->declQuad(c+1,"ysyx_22050243_if pc_reg", false,-1, 63,0);
@@ -85,7 +85,7 @@ void Vysyx_22050243_if___024root__traceFullSub0(Vysyx_22050243_if___024root* vlS
         tracep->fullBit(oldp+7,(vlSelf->rst));
         tracep->fullCData(oldp+8,(vlSelf->stall),6);
         tracep->fullWData(oldp+9,(vlSelf->br_bus),65);
-        tracep->fullWData(oldp+12,(vlSelf->if_to_id_bus),129);
+        tracep->fullWData(oldp+12,(vlSelf->if_2_id_bus),129);
         tracep->fullBit(oldp+17,(vlSelf->isram_e));
         tracep->fullQData(oldp+18,(vlSelf->isram_addr),64);
         tracep->fullQData(oldp+20,(vlSelf->ysyx_22050243_if__DOT__next_pc),64);

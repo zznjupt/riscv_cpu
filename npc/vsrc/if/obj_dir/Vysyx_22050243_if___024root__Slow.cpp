@@ -45,13 +45,13 @@ void Vysyx_22050243_if___024root___settle__TOP__2(Vysyx_22050243_if___024root* v
                                              ? 0ULL
                                              : vlSelf->ysyx_22050243_if__DOT__pc_reg);
     vlSelf->isram_addr = vlSelf->ysyx_22050243_if__DOT__if_pc;
-    vlSelf->if_to_id_bus[0U] = (IData)(vlSelf->ysyx_22050243_if__DOT__next_pc);
-    vlSelf->if_to_id_bus[1U] = (IData)((vlSelf->ysyx_22050243_if__DOT__next_pc 
-                                        >> 0x20U));
-    vlSelf->if_to_id_bus[2U] = (IData)(vlSelf->ysyx_22050243_if__DOT__if_pc);
-    vlSelf->if_to_id_bus[3U] = (IData)((vlSelf->ysyx_22050243_if__DOT__if_pc 
-                                        >> 0x20U));
-    vlSelf->if_to_id_bus[4U] = vlSelf->ysyx_22050243_if__DOT__ce_reg;
+    vlSelf->if_2_id_bus[0U] = (IData)(vlSelf->ysyx_22050243_if__DOT__next_pc);
+    vlSelf->if_2_id_bus[1U] = (IData)((vlSelf->ysyx_22050243_if__DOT__next_pc 
+                                       >> 0x20U));
+    vlSelf->if_2_id_bus[2U] = (IData)(vlSelf->ysyx_22050243_if__DOT__if_pc);
+    vlSelf->if_2_id_bus[3U] = (IData)((vlSelf->ysyx_22050243_if__DOT__if_pc 
+                                       >> 0x20U));
+    vlSelf->if_2_id_bus[4U] = vlSelf->ysyx_22050243_if__DOT__ce_reg;
 }
 
 void Vysyx_22050243_if___024root___eval_initial(Vysyx_22050243_if___024root* vlSelf) {
@@ -87,7 +87,7 @@ void Vysyx_22050243_if___024root___ctor_var_reset(Vysyx_22050243_if___024root* v
     vlSelf->rst = 0;
     vlSelf->stall = 0;
     VL_ZERO_RESET_W(65, vlSelf->br_bus);
-    VL_ZERO_RESET_W(129, vlSelf->if_to_id_bus);
+    VL_ZERO_RESET_W(129, vlSelf->if_2_id_bus);
     vlSelf->isram_e = 0;
     vlSelf->isram_addr = 0;
     vlSelf->ysyx_22050243_if__DOT__pc_reg = 0;

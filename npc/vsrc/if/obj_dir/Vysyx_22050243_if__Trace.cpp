@@ -32,7 +32,7 @@ void Vysyx_22050243_if___024root__traceChgSub0(Vysyx_22050243_if___024root* vlSe
         tracep->chgBit(oldp+6,(vlSelf->rst));
         tracep->chgCData(oldp+7,(vlSelf->stall),6);
         tracep->chgWData(oldp+8,(vlSelf->br_bus),65);
-        tracep->chgWData(oldp+11,(vlSelf->if_to_id_bus),129);
+        tracep->chgWData(oldp+11,(vlSelf->if_2_id_bus),129);
         tracep->chgBit(oldp+16,(vlSelf->isram_e));
         tracep->chgQData(oldp+17,(vlSelf->isram_addr),64);
         tracep->chgQData(oldp+19,(vlSelf->ysyx_22050243_if__DOT__next_pc),64);

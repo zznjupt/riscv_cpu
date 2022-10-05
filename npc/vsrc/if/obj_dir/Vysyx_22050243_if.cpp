@@ -14,7 +14,7 @@ Vysyx_22050243_if::Vysyx_22050243_if(VerilatedContext* _vcontextp__, const char*
     , rst{vlSymsp->TOP.rst}
     , stall{vlSymsp->TOP.stall}
     , br_bus{vlSymsp->TOP.br_bus}
-    , if_to_id_bus{vlSymsp->TOP.if_to_id_bus}
+    , if_2_id_bus{vlSymsp->TOP.if_2_id_bus}
     , isram_e{vlSymsp->TOP.isram_e}
     , isram_addr{vlSymsp->TOP.isram_addr}
     , rootp{&(vlSymsp->TOP)}

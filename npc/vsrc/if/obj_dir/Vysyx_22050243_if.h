@@ -31,7 +31,7 @@ class Vysyx_22050243_if VL_NOT_FINAL {
     VL_IN8(&rst,0,0);
     VL_IN8(&stall,5,0);
     VL_INW((&br_bus),64,0,3);
-    VL_OUTW((&if_to_id_bus),128,0,5);
+    VL_OUTW((&if_2_id_bus),128,0,5);
     VL_OUT8(&isram_e,0,0);
     VL_OUT64(&isram_addr,63,0);
 
