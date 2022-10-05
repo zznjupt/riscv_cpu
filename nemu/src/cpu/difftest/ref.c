@@ -17,53 +17,20 @@
 #include <cpu/cpu.h>
 #include <difftest-def.h>
 #include <memory/paddr.h>
-#ifdef _STDIO_H
-#include <stdio.h>
-#endif
-
-typedef struct diff_context_t {
-  uint64_t gpr[32];
-  uint32_t pc;
-} diff_context_t;
-
-void diff_set_regs(void *diff_context) {
-  diff_context_t *ctx = (diff_context_t *)diff_context;
-  for (int i = 0; i < 32; i++) {
-    cpu.gpr[i] = ctx->gpr[i];
-  }
-  cpu.pc = ctx->pc;
-}
-
-void diff_get_regs(void *diff_context) {
-  diff_context_t *ctx = (diff_context_t *)diff_context;
-  for (int i = 0; i < 32; i++) {
-    ctx->gpr[i] = cpu.gpr[i];
-  }
-  ctx->pc = cpu.pc;
-}
 
 void difftest_memcpy(paddr_t addr, void *buf, size_t n, bool direction) {
-  // assert(0);
-  if(direction == DIFFTEST_TO_REF) memcpy(guest_to_host(addr), buf, n);
-  else assert(0);
+  assert(0);
 }
 
 void difftest_regcpy(void *dut, bool direction) {
-  // assert(0);
-
-  if(direction == DIFFTEST_TO_REF) {
-    diff_set_regs(dut);
-  } else {
-    diff_get_regs(dut);
-  }
+  assert(0);
 }
 
 void difftest_exec(uint64_t n) {
-  // assert(0);
-  cpu_exec(-1);
+  assert(0);
 }
 
-void difftest_raise_intr(word_t NO) { // clint
+void difftest_raise_intr(word_t NO) {
   assert(0);
 }
 
