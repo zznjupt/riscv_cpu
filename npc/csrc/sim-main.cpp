@@ -233,7 +233,7 @@ int main(int argc, char **argv) {
     Verilated::commandArgs(argc, argv);
     sim_init();
 
-    while (1) {
+    while(true) {
         cmd_c();
         if (isebreak || is_exit)  {
             if(cpu_s.gpr[10] != 0) printf("\033[1;31mHIT BAD TRAP\33[0m\n");
