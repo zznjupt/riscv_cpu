@@ -1,3 +1,6 @@
+#ifndef SIM_MAIN_H__
+#define SIM_MAIN_H__
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <iostream>
@@ -18,4 +21,6 @@ extern struct CPU_state {
     uint64_t mstatus;
     uint64_t mcause;
     uint64_t mtvec;
-} cpuu; 
+} cpu_s; 
+
+#endif

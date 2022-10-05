@@ -7,28 +7,31 @@
 #include <fstream>
 #include <assert.h>
 #include <getopt.h>
-#include "difftest-def.h"
+
 #include "verilated.h"
 #include "verilated_vcd_c.h"
-#include "svdpi.h"
 #include "Vtop__Dpi.h"
 #include "verilated_dpi.h"
-#include "device.h"
+#include "svdpi.h"
+
+#include "./include/difftest-def.h"
+#include "./include/io.h"
 
 using namespace std;
-#define CONFIG_MBASE 0x80000000
-#define CONFIG_MSIZE 0x8000000
-#define CONFIG_RTC_MMIO 0xa0000048
-#define CONFIG_SERIAL_MMIO 0xa00003f8
+
+#define CONFIG_MBASE        0x80000000
+#define CONFIG_MSIZE        0x8000000
+#define CONFIG_RTC_MMIO     0xa0000048
+#define CONFIG_SERIAL_MMIO  0xa00003f8
 
 typedef uint64_t paddr_t;
 
-uint64_t pmem_read(paddr_t addr, int len);
-void pmem_write(paddr_t addr, int len, uint64_t data);
+uint64_t pmem_read (paddr_t addr, int len);
+void     pmem_write(paddr_t addr, int len, uint64_t data);
 
-long load_image(char *filename);
-void difftest_step(paddr_t pc, paddr_t npc);
-void init_difftest(char *ref_so_file, long img_size, int port);
+long     load_image   (char *filename);
+void     difftest_step(paddr_t pc, paddr_t npc);
+void     init_difftest(char *ref_so_file, long img_size, int port);
 
 VerilatedContext *contextp = NULL;
 VerilatedVcdC *tfp = NULL;
@@ -49,7 +52,7 @@ struct CPU_state {
     uint64_t mstatus;
     uint64_t mcause;
     uint64_t mtvec;
-}cpuu;
+} cpu_s;
 
 
 // DPI-C
@@ -59,7 +62,7 @@ extern "C" void ebreak() {
 
 extern "C" void set_gpr_ptr(const svOpenArrayHandle r) {
   cpu_gpr = (uint64_t *)(((VerilatedDpiOpenVar *)r)->datap());
-  //cpuu.pc = top->pc;
+  //cpu_s.pc = top->pc;
 }
 
 // extern "C" void mmio_read(paddr_t addr, int len) {
@@ -113,7 +116,7 @@ extern "C" void mem_write(long long waddr, long long wdata, char wmask) {
 
 
 extern "C" void pc_print(long long pc) {
-  printf(" store pc 0x%08llx\n", pc);
+    printf(" store pc 0x%08llx\n", pc);
 }
 
 //pc_print use example
@@ -142,124 +145,106 @@ static int parse_args(int argc, char *argv[]) {
 }
 
 void sim_exit() {
-  tfp->close();
-  delete top;
-  // delete contextp;
+    tfp->close();
+    delete top;
+    // delete contextp;
 }
 
 void exit_now() {
-  is_exit = true;
+    is_exit = true;
 }
 
 void sim_init() {
-  contextp = new VerilatedContext;
-  contextp->traceEverOn(true);
-  top = new Vtop;
-  tfp = new VerilatedVcdC;
+    contextp = new VerilatedContext;
+    contextp->traceEverOn(true);
+    top = new Vtop;
+    tfp = new VerilatedVcdC;
 
-  top->trace(tfp, 99);
-  // tfp->open("wave.vcd");
+    top->trace(tfp, 99);
+    // tfp->open("wave.vcd");
 }
 
 // CMD
 void isa_reg_display() {
-	for(int i=0; i<32; i=i+2){				//64->16,4 but 8 seem looks better
-		printf("%s\t0x%08lx\t", regs[i], cpu_gpr[i]);
-		printf("%s\t0x%08lx\n", regs[i+1], cpu_gpr[i+1]);
-	}
-	printf("pc\t0x%08lx\n", cpuu.pc);
-
+    for(int i=0; i<32; i=i+2){				
+        printf("%s\t0x%016lx\t", regs[i], cpu_gpr[i]);
+        printf("%s\t0x%016lx\n", regs[i+1], cpu_gpr[i+1]);
+    }
+    printf("pc\t0x%016lx\n", cpu_s.pc);
 }
 
 static uint64_t refpc = 0;
 static uint64_t pc;
 static uint64_t npc;
 bool bubble;
-static int cmd_c()
-{
-  while (!contextp->gotFinish()) //&& main_time < sim_time) 
-  { 
-    if(main_time < 10) {
-      top->rst = 1; top->eval();
-    }
-    if(main_time >= 10) {
-      top->rst = 0; top->eval();
-      
-      if (main_time % 10 == 1) {
-        if(top->clk == 1) {
-          if (top->isram_e == 1) {
-            top->isram_rdata = pmem_read(top->isram_addr, 4);
-          }
-          if(main_time >= 60) {
-            if(pc >= CONFIG_MBASE && pc <= (CONFIG_MBASE + CONFIG_MSIZE) ) {
-              for(int i = 0; i < 32; i++) cpuu.gpr[i] = cpu_gpr[i];
-              // sp regs are used for addtion
-              if(bubble != 1) {
-                // printf("     pc 0x%08lx \n", pc);
-                // difftest_step(pc, npc);
-              }
+static int cmd_c() {
+    while (!contextp->gotFinish()) { //&& main_time < sim_time)  
+        if(main_time < 10) top->rst = 1; top->eval();
+        if(main_time >= 10) {
+            top->rst = 0; top->eval();
+            if (main_time % 10 == 1) {
+                if(top->clk == 1) {
+                    if(top->isram_e == 1) top->isram_rdata = pmem_read(top->isram_addr, 4);
+                    if(main_time >= 60) {
+                        if(pc >= CONFIG_MBASE && pc <= (CONFIG_MBASE + CONFIG_MSIZE) ) {
+                            for(int i = 0; i < 32; i++) cpu_s.gpr[i] = cpu_gpr[i];
+                            // sp regs are used for addtion
+                            if(bubble != 1) {
+                                // printf("     pc 0x%016lx \n", pc);
+                                // difftest_step(pc, npc);
+                            }
+                        }
+                    }
+                    pc = top->debug_wb_pc;
+                    npc = top->debug_wb_npc;
+                    bubble = top->bubble;
+                    cpu_s.pc = pc;
+                }
             }
-          }
-          pc = top->debug_wb_pc;
-          npc = top->debug_wb_npc;
-          bubble = top->bubble;
-          cpuu.pc = pc;
         }
-      }
-    }
+        if (isebreak || is_exit) {
+            if(isebreak) printf("\033[1;32mebreak \33[0m\n");
+            break;
+        }
 
-    if (isebreak || is_exit) {
-      if(isebreak)
-        printf("\033[1;32mebreak \33[0m\n");
-      break;
+        if(main_time % 10 == 0) top->clk = 1;
+        if(main_time % 10 == 5) top->clk = 0;
+      
+        contextp->timeInc(1);
+        top->eval();
+        tfp->dump(main_time);
+        main_time++;
+        // printf("top->debug_if_pc: %016lx\n", top->debug_if_pc);
     }
-
-    if(main_time % 10 == 0) {
-      top->clk = 1;
-    }
-    if(main_time % 10 == 5) {
-      top->clk = 0;
-    }
-    contextp->timeInc(1);
-    top->eval();
-    tfp->dump(main_time);
-    main_time++;
-    // printf("top->debug_if_pc: %08lx\n", top->debug_if_pc);
-  }
-
-  return 0;
+    return 0;
 }
 
 char str[10];
 
-int main(int argc, char **argv)
-{
-  parse_args(argc, argv);
-  long img_size = load_image(img_file);
-  printf("\033[1;31mWelcome to ZZ-NPC\033[0m\n");
-  printf("\033[1;32mimg_size %lx\33[0m\n", img_size);
+int main(int argc, char **argv) {
+    parse_args(argc, argv);
+    long img_size = load_image(img_file);
+    printf("\033[1;31mWelcome to ZZ-NPC\033[0m\n");
+    printf("\033[1;32mimg_size %lx\33[0m\n", img_size);
+    char str[] = "/home/admin1/ZZworkspace/git/ysyx-workbench/nemu/build/riscv64-nemu-interpreter-so";
+    static char *diff_so_file = str;
+    static int difftest_port = 1234;
+    init_difftest(diff_so_file, img_size, difftest_port);
+    Verilated::commandArgs(argc, argv);
+    sim_init();
 
-  char str[] = "/home/admin1/ZZworkspace/git/ysyx-workbench/nemu/build/riscv64-nemu-interpreter-so";
-  static char *diff_so_file = str;
-  static int difftest_port = 1234;
-  init_difftest(diff_so_file, img_size, difftest_port);
-  Verilated::commandArgs(argc, argv);
-  sim_init();
-
-  while (1) {
-    cmd_c();
-    if (isebreak || is_exit)  {
-      if(cpuu.gpr[10] != 0) printf("\033[1;31mHIT BAD TRAP\33[0m\n");
-      else  printf("\033[1;32mHIT GOOD TRAP\33[0m\n");
-      break;
+    while (1) {
+        cmd_c();
+        if (isebreak || is_exit)  {
+            if(cpu_s.gpr[10] != 0) printf("\033[1;31mHIT BAD TRAP\33[0m\n");
+            else                   printf("\033[1;32mHIT GOOD TRAP\33[0m\n");
+            break;
+        }
+        else {
+            printf("\033[1;31mLOOP!\33[0m\n");
+            assert(0);
+        }
     }
-    else {
-      printf("\033[1;31mLOOP!\33[0m\n");
-      assert(0);
-    }
-    
-  }
-
-  sim_exit();
-  return 0;
+    sim_exit();
+    return 0;
 }

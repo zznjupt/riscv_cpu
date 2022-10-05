@@ -21,7 +21,6 @@ BIN = $(BUILD_DIR)/$(TOP_NAME)
 default: $(BIN)
 	$(shell mkdir -p $(BUILD_DIR))
 
-
 VERILATOR_FLAGS += -MMD --build -cc --exe --trace \
 				-O3 --x-assign fast --x-initial fast --noassert \
 				--timescale "1ns/1ns"  
@@ -33,7 +32,6 @@ LDFLAGS += -ldl -lSDL2 -lSDL2_image
 
 
 sim: $(VSRCS) $(CSRCS)
-	$(call git_commit, "sim RTL") # DO NOT REMOVE THIS LINE!!!
 	verilator $(VERILATOR_FLAGS) --top-module $(TOP_NAME) \
 	-I$(VDIR) $(VSRCS) $(CSRCS) $(addprefix -LDFLAGS , $(LLVM_LIBS)) \
 	$(addprefix -LDFLAGS , $(LLVM_CXXFLAGS)) -LDFLAGS -ldl
@@ -44,6 +42,9 @@ $(BIN): $(VSRCS) $(CSRCS) $(HSRCS)
 		--top-module $(TOP_NAME) $(VSRCS) $(CSRCS) \
 		$(addprefix -CFLAGS , $(VCFLAGS)) $(addprefix -LDFLAGS , $(LDFLAGS)) \
 		--Mdir $(OBJ_DIR) -I$(VDIR) --exe -o $(abspath $(BIN))
+
+commit:
+	$(call git_commit, "sim RTL") # DO NOT REMOVE THIS LINE!!!
 
 run: $(BIN) $(IMAGE) $(ARGS)
 	@$^
