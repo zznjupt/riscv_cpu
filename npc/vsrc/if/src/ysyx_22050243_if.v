@@ -32,7 +32,7 @@ module ysyx_22050243_if (
 
     wire [63:0] if_pc;
     assign if_pc = (pc_reg == 64'h0000_0000_7fff_fffc) ? 64'b0 : pc_reg;
-// ************************output*********************************
+// ************************ output *********************************
     assign if_2_id_bus = {ce_reg, if_pc, next_pc}; // 1+64+64 = 128:0
     assign isram_e      = ce_reg;
     assign isram_addr   = if_pc;
