@@ -21,8 +21,8 @@ int main(int argc,char **argv) {
 
     while(sc_time_stamp() < 20 && !Verilated::gotFinish()) {
         if(sc_time_stamp() >= 4) top->rst = 0; // rst on
-        top->clk = 0; top->eval(); 
-        top->clk = 1; top->eval(); printf("pc = 0x%016lx\n", top->isram_addr);
+        top->clk = 0; top->eval(); printf("clock down\n");
+        top->clk = 1; top->eval(); printf("clock up\n"); printf("pc = 0x%016lx\n", top->isram_addr);
 
         tfp->dump(main_time);
         main_time++;
