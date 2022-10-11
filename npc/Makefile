@@ -1,59 +1,49 @@
-.PHONY:clean
+TOP_NAME  = top
+INC_PATH ?=
+RM        = rm -rf
 
+# build
+BUILD_DIR = $(NPC_HOME)/build
+OBJ_DIR = $(BUILD_DIR)/obj_dir
+BIN = $(BUILD_DIR)/$(TOP_NAME)
+
+# verilator
+VERILATOR = verilator
+VERILATOR_CFLAGS += -MMD --build -cc --exe --trace \
+				-O3 --x-assign fast --x-initial fast --noassert \
+				--timescale "1ns/1ns"
+INCFLAGS = $(addprefix -I, $(INC_PATH))
+CFLAGS  += $(INCFLAGS) -DTOP_NAME="\"V$(TOP_NAME)\""
+CFLAGS += $(shell llvm-config-11 --cxxflags)
+LDFLAGS += $(shell llvm-config-11 --libs) 
+LDFLAGS += -lSDL2  -lreadline -ldl 
+
+# src
 VSRCS = $(shell find $(abspath $(NPC_HOME)/vsrc) -name "*.v")
 CSRCS = $(shell find $(abspath $(NPC_HOME)/csrc) -name "*.cpp" -or -name "*.cc") 
 HSRCS += $(shell find $(abspath $(NPC_HOME)/csrc) -name "*.h")
 
-LLVM_CXXFLAGS = $(shell llvm-config-11 --cxxflags)
-LLVM_LIBS = $(shell llvm-config-11 --libs)
-
-TOP_NAME = top
-VDIR = $(NPC_HOME)/vsrc
-CDIR = $(NPC_HOME)/csrc
-IMG ?=
-ARGS ?=
-
-BUILD_DIR = $(NPC_HOME)/build
-OBJ_DIR = $(BUILD_DIR)/obj_dir
-
-BIN = $(BUILD_DIR)/$(TOP_NAME)
-
 default: $(BIN)
 	$(shell mkdir -p $(BUILD_DIR))
 
-VERILATOR_FLAGS += -MMD --build -cc --exe --trace \
-				-O3 --x-assign fast --x-initial fast --noassert \
-				--timescale "1ns/1ns"  
-
-INC_PATH = $(NPC_HOME)/vsrc
-INCFLAGS = $(addprefix -I , $(INC_PATH))
-VCFLAGS += $(INCFLAGS) -DTOP_NAME="\"V$(TOP_NAME)\""
-LDFLAGS += -ldl -lSDL2 -lSDL2_image
-
-
-sim: $(VSRCS) $(CSRCS)
-	verilator $(VERILATOR_FLAGS) --top-module $(TOP_NAME) \
-	-I$(VDIR) $(VSRCS) $(CSRCS) $(addprefix -LDFLAGS , $(LLVM_LIBS)) \
-	$(addprefix -LDFLAGS , $(LLVM_CXXFLAGS)) -LDFLAGS -ldl
-
 $(BIN): $(VSRCS) $(CSRCS) $(HSRCS)
-	@rm -rf $(OBJ_DIR)
-	verilator $(VERILATOR_FLAGS) \
-		--top-module $(TOP_NAME) $(VSRCS) $(CSRCS) \
-		$(addprefix -CFLAGS , $(VCFLAGS)) $(addprefix -LDFLAGS , $(LDFLAGS)) \
-		--Mdir $(OBJ_DIR) -I$(VDIR) --exe -o $(abspath $(BIN))
+	@$(RM) $(OBJ_DIR)
+	$(VERILATOR) $(VERILATOR_FLAGS) \
+		--top-module $(TOP_NAME) $^ \
+		$(addprefix -CFLAGS , $(CFLAGS)) $(addprefix -LDFLAGS , $(LDFLAGS)) \
+		--Mdir $(OBJ_DIR) --exe -o $(abspath $(BIN))
 
 commit:
 	$(call git_commit, "sim RTL") # DO NOT REMOVE THIS LINE!!!
 
-run: $(BIN) $(IMAGE) $(ARGS)
+run: $(BIN) $(ARGS)
 	@$^
 
 wave:
 	gitwave $(WAVE).vcd
 
 clean:
-	@rm -rf $(BUILD_DIR)
-	@rm -rf wave.vcd
+	@$(RM) $(BUILD_DIR)
+	@$(RM) wave.vcd
 
-include ../Makefile
+.PHONY: default commit run wave clean
