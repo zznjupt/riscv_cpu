@@ -28,6 +28,7 @@ void (*ref_difftest_raise_intr)(uint64_t NO) = NULL;
 
 #ifdef CONFIG_DIFFTEST
 
+extern char *regs[];
 static bool is_skip_ref = false;
 static int skip_dut_nr_inst = 0;
 
@@ -99,10 +100,43 @@ static void checkregs(CPU_state *ref, vaddr_t pc) {
   }
 }
 
+static void checkregs(CPU_state *ref, vaddr_t pc) {
+  if (!isa_difftest_checkregs(ref, pc)) {
+    nemu_state.state = NEMU_ABORT;
+    nemu_state.halt_pc = pc;
+    for(int i = 0;i < 32; i++){
+      if(ref->gpr[i] != cpu.gpr[i])
+        printf("\033[1;31m %s: ref:%lx our:%lx \033[0m\n",regs[i],ref->gpr[i],cpu.gpr[i]);
+      else printf("\033[1;32m %s: ref:%lx our:%lx \033[0m\n",regs[i],ref->gpr[i],cpu.gpr[i]);
+    }
+    printf("ref mepc:%lx our:%lx refpc:%lx mypc:%lx\n",
+    ref->mepc, cpu.mepc, ref->pc, pc);
+    printf("ref mcause:%lx our:%lx refpc:%lx mypc:%lx\n",
+    ref->mcause, cpu.mcause, ref->pc, pc);
+    printf("ref mtvec:%lx our:%lx refpc:%lx mypc:%lx\n",
+    ref->mtvec, cpu.mtvec, ref->pc, pc);
+    printf("ref mstatus:%lx our:%lx refpc:%lx mypc:%lx\n",
+    ref->mstatus, cpu.mstatus, ref->pc, pc);
+    printf("ref mie:%lx our:%lx refpc:%lx mypc:%lx\n",
+    ref->mie, cpu.mie, ref->pc, pc);
+    printf("ref mip:%lx our:%lx refpc:%lx mypc:%lx\n",
+    ref->mip, cpu.mip, ref->pc, pc);
+    printf("ref mtval:%lx our:%lx refpc:%lx mypc:%lx\n",
+    ref->mtval, cpu.mtval, ref->pc, pc);
+    printf("ref mscratch:%lx our:%lx refpc:%lx mypc:%lx\n",
+    ref->mscratch, cpu.mscratch, ref->pc, pc);
+    #ifdef CONFIG_ITRACE
+    print_surrounding_inst();
+    #endif
+    //isa_reg_display();
+  }
+}
+
 void difftest_step(vaddr_t pc, vaddr_t npc) {
   CPU_state ref_r;
 
   if (skip_dut_nr_inst > 0) {
+    printf("qemu skipped\n");
     ref_difftest_regcpy(&ref_r, DIFFTEST_TO_DUT);
     if (ref_r.pc == npc) {
       skip_dut_nr_inst = 0;
@@ -117,15 +151,16 @@ void difftest_step(vaddr_t pc, vaddr_t npc) {
 
   if (is_skip_ref) {
     // to skip the checking of an instruction, just copy the reg state to reference design
-    ref_difftest_regcpy(&cpu, DIFFTEST_TO_REF);
+    ref_difftest_regcpy(&cpu, DIFFTEST_TO_REF);//cpu is dut(nemu)
     is_skip_ref = false;
     return;
   }
-
+  //printf("before exec\n");
   ref_difftest_exec(1);
-  ref_difftest_regcpy(&ref_r, DIFFTEST_TO_DUT);
+  //printf("ref exec 1\n");
+  ref_difftest_regcpy(&ref_r, DIFFTEST_TO_DUT);//ref_r is ref(spike)
 
-  checkregs(&ref_r, pc);
+  checkregs(&ref_r, npc);//pc->npc
 }
 #else
 void init_difftest(char *ref_so_file, long img_size, int port) { }

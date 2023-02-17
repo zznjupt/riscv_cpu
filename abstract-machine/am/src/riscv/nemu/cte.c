@@ -1,6 +1,7 @@
 #include <am.h>
 #include <riscv/riscv.h>
 #include <klib.h>
+#include <syscall.h>
 
 static Context* (*user_handler)(Event, Context*) = NULL;
 
@@ -8,7 +9,8 @@ Context* __am_irq_handle(Context *c) {
   if (user_handler) {
     Event ev = {0};
     switch (c->mcause) {
-      default: ev.event = EVENT_ERROR; break;
+      case(11): ev.event = EVENT_SYSCALL; break; 
+      default:  ev.event = EVENT_ERROR;  break;
     }
 
     c = user_handler(ev, c);
@@ -35,7 +37,7 @@ Context *kcontext(Area kstack, void (*entry)(void *), void *arg) {
 }
 
 void yield() {
-  asm volatile("li a7, -1; ecall");
+  asm volatile("li a7, -1; ecall"); // ecall
 }
 
 bool ienabled() {

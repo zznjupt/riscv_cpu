@@ -17,6 +17,7 @@
 #include <cpu/difftest.h>
 #include "../local-include/reg.h"
 
+extern const char *regs[];
 bool isa_difftest_checkregs(CPU_state *ref_r, vaddr_t pc) {
   if(cpu.pc != ref_r->pc) {
     printf("input pc 0x%016lx\n", cpu.pc);
@@ -30,6 +31,10 @@ bool isa_difftest_checkregs(CPU_state *ref_r, vaddr_t pc) {
       return false;
     }
   }
+  if(ref_r->mepc != cpu.mepc || ref_r->mtvec != cpu.mtvec     || ref_r->mcause   != cpu.mcause 
+   || ref_r->pc  != pc       || ref_r->mstatus != cpu.mstatus || ref_r->mtval    != cpu.mtval 
+   || ref_r->mie != cpu.mie  || ref_r->mip != cpu.mip         || ref_r->mscratch != cpu.mscratch) return false;
+   
   return true;
 }
 
